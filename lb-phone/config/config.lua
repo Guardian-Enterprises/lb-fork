@@ -6,7 +6,7 @@ Config.DatabaseChecker.Enabled = true -- if true, the phone will check the datab
 Config.DatabaseChecker.AutoFix = true
 
 --[[ FRAMEWORK OPTIONS ]] --
-Config.Framework = "auto"
+Config.Framework = "standalone"
 --[[
     Supported frameworks:
         * auto: auto-detect framework (ONLY WORKS WITH THE ONES LISTED BELOW)
@@ -16,13 +16,13 @@ Config.Framework = "auto"
         * vrp2: vrp 2.0 (ONLY THE OFFICIAL vRP 2.0, NOT CUSTOM VERSIONS)
         * standalone: no framework, note that framework specific apps will not work unless you implement the functions
 ]]
-Config.CustomFramework = false -- if set to true and you use standalone, you will be able to use framework specific apps
+Config.CustomFramework = true -- if set to true and you use standalone, you will be able to use framework specific apps
 Config.QBMailEvent = true -- if you want this script to listen for qb email events, enable this.
 Config.QBOldJobMethod = false -- use the old method to check job in qb-core? this is slower, and only needed if you use an outdated version of qb-core.
 
 Config.Item = {}
 Config.Item.Require = true -- require a phone item to use the phone
-Config.Item.Name = "phone" -- name of the phone item
+Config.Item.Name = "cellphone" -- name of the phone item
 
 Config.Item.Unique = false -- should each phone be unique? https://docs.lbscripts.com/phone/configuration/#unique-phones
 Config.Item.Inventory = "auto" --[[
@@ -174,14 +174,14 @@ Config.Companies.Management = {
 Config.CustomApps = {} -- https://docs.lbscripts.com/phone/custom-apps/
 
 Config.Valet = {}
-Config.Valet.Enabled = true -- allow players to get their vehicles from the phone
+Config.Valet.Enabled = false -- allow players to get their vehicles from the phone
 Config.Valet.Price = 100 -- price to get your vehicle
 Config.Valet.Model = `S_M_Y_XMech_01`
 Config.Valet.Drive = true -- should a ped bring the car, or should it just spawn in front of the player?
 Config.Valet.DisableDamages = false -- disable vehicle damages (engine & body health) on esx
 Config.Valet.FixTakeOut = false -- repair the vehicle after taking it out?
 
-Config.HouseScript = "auto" --[[
+Config.HouseScript = "guardian-houses" --[[
     The housing script you use on your server
     Supported:
         * loaf_housing - https://store.loaf-scripts.com/package/4310850
@@ -308,21 +308,17 @@ Config.Locales = { -- languages that the player can choose from when setting up 
     }
 }
 
-Config.DefaultLocale = "en"
-Config.DateLocale = "en-US" -- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat
+Config.DefaultLocale = "pt-br"
+Config.DateLocale = "pt-BR" -- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat
 
 Config.FrameColor = "#39334d" -- This is the color of the phone frame. Default (#39334d) is SILVER.
 Config.AllowFrameColorChange = true -- Allow players to change the color of their phone frame?
 
 Config.PhoneNumber = {}
-Config.PhoneNumber.Format = "({3}) {3}-{4}" -- Don't touch unless you know what you're doing. IMPORTANT: The sum of the numbers needs to be equal to the phone number length + prefix length
-Config.PhoneNumber.Length = 7 -- This is the length of the phone number WITHOUT the prefix.
+Config.PhoneNumber.Format = "{3}-{3}" -- Don't touch unless you know what you're doing. IMPORTANT: The sum of the numbers needs to be equal to the phone number length + prefix length
+Config.PhoneNumber.Length = 6 -- This is the length of the phone number WITHOUT the prefix.
 Config.PhoneNumber.Prefixes = { -- These are the first numbers of the phone number, usually the area code. They all need to be the same length
-    "205",
-    "907",
-    "480",
-    "520",
-    "602"
+"",
 }
 
 Config.Battery = {} -- WITH THESE SETTINGS, A FULL CHARGE WILL LAST AROUND 2 HOURS.
@@ -346,7 +342,7 @@ Config.CityName = "Los Santos" -- The name that's being used in the weather app 
 Config.RealTime = true -- if true, the time will use real life time depending on where the user lives, if false, the time will be the ingame time.
 Config.CustomTime = false -- NOTE: disable Config.RealTime if using this. you can set this to a function that returns custom time, as a table: { hour = 0-24, minute = 0-60 }
 
-Config.EmailDomain = "lbphone.com"
+Config.EmailDomain = "r2rp.com"
 Config.AutoCreateEmail = false -- should the phone automatically create an email for the player when they set up the phone?
 Config.DeleteMail = true -- allow players to delete mails in the mail app?
 
@@ -356,16 +352,16 @@ Config.SyncFlash = true -- should flashlights be synced across all players? May 
 Config.EndLiveClose = false -- should InstaPic live end when you close the phone?
 
 Config.AllowExternal = { -- allow people to upload external images? (note: this means they can upload nsfw / gore etc)
-    Gallery = false, -- allow importing external links to the gallery?
-    Birdy = false, -- set to true to enable external images on that specific app, set to false to disable it.
-    InstaPic = false,
-    Tinder = false,
-    Trendy = false,
-    Pages = false,
-    MarketPlace = false,
-    Mail = false,
-    Messages = false,
-    Other = false, -- other apps that don't have a specific setting (ex: setting a profile picture for a contact, backgrounds for the phone etc)
+    Gallery = true, -- allow importing external links to the gallery?
+    Twitter = true, -- set to true to enable external images on that specific app, set to false to disable it.
+    Instagram = true,
+    Tinder = true,
+    TikTok = true,
+    YellowPages = true,
+    MarketPlace = true,
+    Mail = true,
+    Messages = true,
+    Other = true, -- other apps that don't have a specific setting (ex: setting a profile picture for a contact, backgrounds for the phone etc)
 }
 
 -- Blacklisted domains for external images. You will not be able to upload from these domains.
@@ -510,7 +506,7 @@ Config.TrendyTTS = {
 -- }
 
 Config.Crypto = {}
-Config.Crypto.Enabled = true
+Config.Crypto.Enabled = false
 Config.Crypto.Coins = {"bitcoin","ethereum","tether","binancecoin","usd-coin","ripple","binance-usd","cardano","dogecoin","solana","shiba-inu","polkadot","litecoin","bitcoin-cash"}
 Config.Crypto.Currency = "usd" -- currency to use for crypto prices. https://api.coingecko.com/api/v3/simple/supported_vs_currencies
 Config.Crypto.Refresh = 5 * 60 * 1000 -- how often should the crypto prices be refreshed (client cache)? (Default 5 minutes)
@@ -520,13 +516,13 @@ Config.KeyBinds = {
     -- Find keybinds here: https://docs.fivem.net/docs/game-references/input-mapper-parameter-ids/keyboard/
     Open = { -- toggle the phone
         Command = "phone",
-        Bind = "F1",
-        Description = "Open your phone"
+        Bind = "K",
+        Description = "Abrir celular"
     },
     Focus = { -- keybind to toggle the mouse cursor.
         Command = "togglePhoneFocus",
         Bind = "LMENU",
-        Description = "Toggle cursor on your phone"
+        Description = "Ativar cursor do celular"
     },
     StopSounds = { -- in case the sound would bug out, you can use this command to stop all sounds.
         Command = "stopSounds",

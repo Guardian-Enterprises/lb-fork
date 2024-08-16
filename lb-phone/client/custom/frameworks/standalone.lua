@@ -2,7 +2,21 @@ if Config.Framework ~= "standalone" then
     return
 end
 
+Tunnel = module("vrp","lib/Tunnel")
+Proxy = module("vrp","lib/Proxy")
+vRP = Proxy.getInterface("vRP")
+vRPC = Tunnel.getInterface("vRP")
+
+cRP = {}
+Tunnel.bindInterface(GetCurrentResourceName(),cRP)
+vSERVER = Tunnel.getInterface(GetCurrentResourceName())
+
+
 while not NetworkIsSessionStarted() do
+    Wait(500)
+end
+
+while not LocalPlayer["state"]["Active"] and not LocalPlayer["state"]["onCreate"] do
     Wait(500)
 end
 
@@ -17,11 +31,7 @@ function HasPhoneItem(number)
         return HasPhoneNumber(number)
     end
 
-    if GetResourceState("ox_inventory") == "started" and Config.Item.Inventory == "ox_inventory" then
-        return (exports.ox_inventory:Search("count", Config.Item.Name) or 0) > 0
-    end
-
-    return true
+    return vSERVER.hasPhone()
 end
 
 function HasJob(jobs)
