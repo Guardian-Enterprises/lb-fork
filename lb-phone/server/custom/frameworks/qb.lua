@@ -319,6 +319,22 @@ QB.Commands.Add("changepassword", "Change a user's password", {
     ChangePassword(app, username, password)
 end, "admin")
 
+QB.Commands.Add("resetphonesecurity", "Reset a user's phone security (pin code, face unlock)", {
+    {
+        name = "id",
+        help = "The player id (source)"
+    }
+}, true, function(_, args)
+    local id = args[1] and tonumber(args[1])
+    local phoneNumber = id and GetEquippedPhoneNumber(id)
+
+    if not phoneNumber then
+        return
+    end
+
+    ResetSecurity(phoneNumber)
+end)
+
 -- Company / services app
 
 ---@param source number
