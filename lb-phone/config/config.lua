@@ -305,6 +305,10 @@ Config.Locales = { -- languages that the player can choose from when setting up 
     {
         locale = "it",
         name = "Italiano"
+    },
+    {
+        locale = "ua",
+        name = "Українська"
     }
 }
 
@@ -356,10 +360,10 @@ Config.SyncFlash = true -- should flashlights be synced across all players? May 
 Config.EndLiveClose = false -- should InstaPic live end when you close the phone?
 
 Config.AllowExternal = { -- allow people to upload external images? (note: this means they can upload nsfw / gore etc)
-    Gallery = false, -- allow importing external links to the gallery?
+    Gallery = true, -- allow importing external links to the gallery?
     Birdy = false, -- set to true to enable external images on that specific app, set to false to disable it.
     InstaPic = false,
-    Tinder = false,
+    Spark = false,
     Trendy = false,
     Pages = false,
     MarketPlace = false,
@@ -378,11 +382,13 @@ Config.ExternalBlacklistedDomains = {
 -- Whitelisted domains for external images. If this is not empty/nil/false, you will only be able to upload images from these domains.
 Config.ExternalWhitelistedDomains = {
     -- "fivemanage.com"
+    "cdn.guardianstore.com.br"
 }
 
 -- Set to false/empty to disable
 Config.UploadWhitelistedDomains = { -- domains that are allowed to upload images to the phone (prevent using devtools to upload images)
     "fivemanage.com",
+    "upload.guardianstore.com.br",
     "cfx.re" -- lb-upload
 }
 
@@ -586,9 +592,9 @@ Config.UploadMethod = {}
 -- A video tutorial for how to set up Fivemanage can be found here: https://www.youtube.com/watch?v=y3bCaHS6Moc
 -- If you want to host uploads yourself, you can use LBUpload: https://github.com/lbphone/lb-upload
 -- We STRONGLY discourage using Discord as an upload method, as uploaded files may become inaccessible after a while.
-Config.UploadMethod.Video = "Fivemanage" -- "Fivemanage" or "LBUpload" or "Custom"
-Config.UploadMethod.Image = "Fivemanage" -- "Fivemanage" or "LBUpload" or "Custom
-Config.UploadMethod.Audio = "Fivemanage" -- "Fivemanage" or "LBUpload" or "Custom"
+Config.UploadMethod.Video = "Custom" -- "Fivemanage" or "LBUpload" or "Custom"
+Config.UploadMethod.Image = "Custom" -- "Fivemanage" or "LBUpload" or "Custom
+Config.UploadMethod.Audio = "Custom" -- "Fivemanage" or "LBUpload" or "Custom"
 
 Config.Video = {}
 Config.Video.Bitrate = 400 -- video bitrate (kbps), increase to improve quality, at the cost of file size

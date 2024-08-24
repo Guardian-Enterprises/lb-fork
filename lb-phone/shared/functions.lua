@@ -317,6 +317,10 @@ function ConvertJSTimestamp(timestamp)
     return os.time(date) * 1000
 end
 
+exports("GetConfig", function()
+    return Config
+end)
+
 if IsDuplicityVersion() then
     ---@param event string
     ---@param callback fun(source: number, phoneNumber: string, ...) : any
