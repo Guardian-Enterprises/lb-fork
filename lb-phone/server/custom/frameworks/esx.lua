@@ -416,6 +416,26 @@ if ESX.RegisterCommand then
             }
         }
     })
+
+    ESX.RegisterCommand("resetphonesecurity", "admin", function(xPlayer, args, showError)
+        local id = args.id
+        local phoneNumber = GetEquippedPhoneNumber(id)
+
+        if not phoneNumber then
+            return showError("No phone number found for player " .. id)
+        end
+
+        ResetSecurity(phoneNumber)
+    end, false, {
+        help = "Reset a user's phone security (pin code, face unlock)",
+        arguments = {
+            {
+                name = "id",
+                help = "The player id (source)",
+                type = "number"
+            }
+        }
+    })
 else
     infoprint("warning", "ESX.RegisterCommand not found, admin commands not registered. If you wish to use commands, update your ESX. The phone will still work. Do not ask us for help about this.")
 end

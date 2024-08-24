@@ -2,7 +2,7 @@ fx_version "cerulean"
 game "gta5"
 lua54 "yes"
 
-version "2.0.2"
+version "2.0.3"
 
 shared_script {
     "config/*.lua",
@@ -49,7 +49,9 @@ escrow_ignore {
 
     "server/apiKeys.lua",
 
-    "types.lua"
+    "types.lua",
+
+    "client/apps/default/weather.lua",
 }
 
 dependency '/assetpacks'
