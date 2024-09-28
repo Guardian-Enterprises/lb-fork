@@ -17,8 +17,7 @@ UploadMethods = {
             },
             success = {
                 path = "link" -- The path to the video file (res.url)
-            },
-            suffix = "webm", -- Add a suffix to the url (not needed if you return the correct name)
+            }
         },
         Image = {
             url = "https://upload.guardianstore.com.br/upload",
@@ -33,7 +32,6 @@ UploadMethods = {
             success = {
                 path = "link" -- The path to the image file (res.url)
             },
-            suffix = "png", -- Add a suffix to the url (not needed if you return the correct name)
         },
         Audio = {
             url = "https://upload.guardianstore.com.br/upload",
@@ -47,8 +45,7 @@ UploadMethods = {
             },
             success = {
                 path = "link" -- The path to the audio file (res.url)
-            },
-            suffix = "mp3", -- Add a suffix to the url (not needed if you return the correct name)
+            }
         },
     },
     Discord = {
@@ -117,7 +114,7 @@ UploadMethods = {
             },
         },
     },
-    OldFivemanage = {
+    Fivemanage = {
         Video = {
             url = "https://api.fivemanage.com/api/video",
             field = "video",
@@ -125,7 +122,7 @@ UploadMethods = {
                 ["Authorization"] = "API_KEY"
             },
             success = {
-                path = "link"
+                path = "url"
             },
         },
         Image = {
@@ -135,7 +132,7 @@ UploadMethods = {
                 ["Authorization"] = "API_KEY"
             },
             success = {
-                path = "link"
+                path = "url"
             }
         },
         Audio = {
@@ -145,7 +142,7 @@ UploadMethods = {
                 ["Authorization"] = "API_KEY"
             },
             success = {
-                path = "link"
+                path = "url"
             }
         },
     },
