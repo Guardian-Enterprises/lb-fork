@@ -378,15 +378,11 @@ Config.ExternalBlacklistedDomains = {
 -- Whitelisted domains for external images. If this is not empty/nil/false, you will only be able to upload images from these domains.
 Config.ExternalWhitelistedDomains = {
     -- "fivemanage.com"
-    "cdn.guardianstore.com.br"
+    "guardianstore.com.br"
 }
 
 -- Set to false/empty to disable
-Config.UploadWhitelistedDomains = { -- domains that are allowed to upload images to the phone (prevent using devtools to upload images)
-    "fivemanage.com",
-    "upload.guardianstore.com.br",
-    "cfx.re" -- lb-upload
-}
+Config.UploadWhitelistedDomains = false
 
 Config.WordBlacklist = {}
 Config.WordBlacklist.Enabled = false
