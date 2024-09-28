@@ -470,12 +470,282 @@ local function validateV2()
 	end
 end
 
-validatePhotoAlbums()
-validateNotificationsId()
-validateMessages()
-validateDeleteMail()
-validateMessageForeignKeyNumbers()
-validateV2()
+local function validateAutoIncrementUpdate()
+	if tables.phone_notes.id.type ~= "INT" then
+		MySQL.rawExecute.await([[
+			ALTER TABLE phone_notes
+			DROP PRIMARY KEY,
+			DROP COLUMN `id`,
+			ADD COLUMN `id` INT UNSIGNED NOT NULL AUTO_INCREMENT FIRST,
+			ADD PRIMARY KEY (`id`)
+		]])
+
+		updateChanges = true
+		infoprint("info", "Changed id from VARCHAR to INT for phone_notes.")
+	end
+
+	if tables.phone_phone_calls.id.type ~= "INT" then
+		MySQL.rawExecute.await([[
+			ALTER TABLE phone_phone_calls
+			DROP PRIMARY KEY,
+			DROP COLUMN `id`,
+			ADD COLUMN `id` INT UNSIGNED NOT NULL AUTO_INCREMENT FIRST,
+			ADD PRIMARY KEY (`id`)
+		]])
+
+		updateChanges = true
+		infoprint("info", "Changed id from VARCHAR to INT for phone_phone_calls.")
+	end
+
+	if tables.phone_phone_voicemail.id.type ~= "INT" then
+		MySQL.rawExecute.await([[
+			ALTER TABLE phone_phone_voicemail
+			DROP PRIMARY KEY,
+			DROP COLUMN `id`,
+			ADD COLUMN `id` INT UNSIGNED NOT NULL AUTO_INCREMENT FIRST,
+			ADD PRIMARY KEY (`id`)
+		]])
+
+		updateChanges = true
+		infoprint("info", "Changed id from VARCHAR to INT for phone_phone_voicemail.")
+	end
+
+	if tables.phone_clock_alarms.id.type ~= "INT" then
+		MySQL.rawExecute.await([[
+			ALTER TABLE phone_clock_alarms
+			DROP PRIMARY KEY,
+			DROP COLUMN `id`,
+			ADD COLUMN `id` INT UNSIGNED NOT NULL AUTO_INCREMENT FIRST,
+			ADD PRIMARY KEY (`id`)
+		]])
+
+		updateChanges = true
+		infoprint("info", "Changed id from VARCHAR to INT for phone_clock_alarms.")
+	end
+
+	if tables.phone_maps_locations.id.type ~= "INT" then
+		MySQL.rawExecute.await([[
+			ALTER TABLE phone_maps_locations
+			DROP PRIMARY KEY,
+			DROP COLUMN `id`,
+			ADD COLUMN `id` INT UNSIGNED NOT NULL AUTO_INCREMENT FIRST,
+			ADD PRIMARY KEY (`id`)
+		]])
+
+		updateChanges = true
+		infoprint("info", "Changed id from VARCHAR to INT for phone_maps_locations.")
+	end
+
+	if tables.phone_yellow_pages_posts.id.type ~= "INT" then
+		MySQL.rawExecute.await([[
+			ALTER TABLE phone_yellow_pages_posts
+			DROP PRIMARY KEY,
+			DROP COLUMN `id`,
+			ADD COLUMN `id` INT UNSIGNED NOT NULL AUTO_INCREMENT FIRST,
+			ADD PRIMARY KEY (`id`)
+		]])
+
+		updateChanges = true
+		infoprint("info", "Changed id from VARCHAR to INT for phone_yellow_pages_posts.")
+	end
+
+	if tables.phone_services_channels.id.type ~= "INT" then
+		local messagesChannelForeignKey = MySQL.scalar.await([[
+			SELECT `CONSTRAINT_NAME` FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+			WHERE `TABLE_SCHEMA` = ? AND `TABLE_NAME` = "phone_services_messages" AND `COLUMN_NAME` = "channel_id" AND `CONSTRAINT_NAME` != "PRIMARY"
+		]], { database })
+
+		if messagesChannelForeignKey then
+			MySQL.rawExecute.await("ALTER TABLE `phone_services_messages` DROP FOREIGN KEY `" .. messagesChannelForeignKey .. "`")
+			infoprint("info", "Found & removed foreign key phone_services_messages(channel_id) - " .. messagesChannelForeignKey)
+		end
+
+		MySQL.rawExecute.await([[
+			ALTER TABLE phone_services_channels
+			DROP PRIMARY KEY,
+			RENAME COLUMN `id` TO `old_id`,
+			ADD UNIQUE KEY `old_id` (`old_id`),
+			ADD COLUMN `id` INT UNSIGNED NOT NULL AUTO_INCREMENT FIRST,
+			ADD PRIMARY KEY (`id`)
+		]])
+
+		MySQL.rawExecute.await([[
+			ALTER TABLE phone_services_messages
+			RENAME COLUMN `channel_id` TO `old_channel_id`
+		]])
+
+		MySQL.rawExecute.await([[
+			ALTER TABLE phone_services_messages
+			ADD COLUMN `channel_id` INT UNSIGNED NOT NULL AFTER `id`
+		]])
+
+		MySQL.rawExecute.await([[
+			UPDATE `phone_services_messages` m
+			JOIN `phone_services_channels` c ON m.old_channel_id = c.old_id
+			SET m.channel_id = c.id
+		]])
+
+		MySQL.rawExecute.await("DELETE FROM phone_services_messages WHERE channel_id = 0")
+
+		MySQL.rawExecute.await([[
+			ALTER TABLE phone_services_messages
+			ADD FOREIGN KEY (`channel_id`) REFERENCES `phone_services_channels`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+		]])
+
+		MySQL.rawExecute.await("ALTER TABLE phone_services_messages DROP COLUMN `old_channel_id`")
+		MySQL.rawExecute.await("ALTER TABLE phone_services_channels DROP COLUMN `old_id`")
+
+		updateChanges = true
+		infoprint("info", "Changed id from VARCHAR to INT for phone_services_channels.")
+	end
+
+	if tables.phone_services_messages.id.type ~= "INT" then
+		MySQL.rawExecute.await([[
+			ALTER TABLE phone_services_messages
+			DROP PRIMARY KEY,
+			DROP COLUMN `id`,
+			ADD COLUMN `id` INT UNSIGNED NOT NULL AUTO_INCREMENT FIRST,
+			ADD PRIMARY KEY (`id`)
+		]])
+
+		updateChanges = true
+		infoprint("info", "Changed id from VARCHAR to INT for phone_services_messages.")
+	end
+
+	if tables.phone_mail_messages.id.type ~= "INT" then
+		local deletedMailForeignKey = MySQL.scalar.await([[
+			SELECT `CONSTRAINT_NAME` FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+			WHERE `TABLE_SCHEMA` = ? AND `TABLE_NAME` = "phone_mail_deleted" AND `COLUMN_NAME` = "message_id" AND `CONSTRAINT_NAME` != "PRIMARY"
+		]], { database })
+
+		if deletedMailForeignKey then
+			MySQL.rawExecute.await("ALTER TABLE `phone_mail_deleted` DROP FOREIGN KEY `" .. deletedMailForeignKey .. "`")
+		end
+
+		MySQL.rawExecute.await([[
+			ALTER TABLE phone_mail_messages
+			DROP PRIMARY KEY,
+			RENAME COLUMN `id` TO `old_id`,
+			ADD UNIQUE KEY `old_id` (`old_id`),
+			ADD COLUMN `id` INT UNSIGNED NOT NULL AUTO_INCREMENT FIRST,
+			ADD PRIMARY KEY (`id`)
+		]])
+
+		MySQL.rawExecute.await([[
+			ALTER TABLE phone_mail_deleted
+			DROP PRIMARY KEY,
+			RENAME COLUMN `message_id` TO `old_message_id`,
+			ADD COLUMN `message_id` INT UNSIGNED NOT NULL FIRST
+		]])
+
+		MySQL.rawExecute.await([[
+			UPDATE `phone_mail_deleted` m
+			JOIN `phone_mail_messages` c ON m.old_message_id = c.old_id
+			SET m.message_id = c.id
+		]])
+
+		MySQL.rawExecute.await("DELETE FROM phone_mail_deleted WHERE message_id = 0")
+
+		MySQL.rawExecute.await([[
+			ALTER TABLE phone_mail_deleted
+			ADD FOREIGN KEY (`message_id`) REFERENCES `phone_mail_messages`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+		]])
+
+		MySQL.rawExecute.await("ALTER TABLE phone_mail_messages DROP COLUMN `old_id`")
+		MySQL.rawExecute.await("ALTER TABLE phone_mail_deleted DROP COLUMN `old_message_id`")
+		MySQL.rawExecute.await("ALTER TABLE phone_mail_deleted ADD PRIMARY KEY (`message_id`, `address`)")
+
+		updateChanges = true
+		infoprint("info", "Changed id from VARCHAR to INT for phone_mail_messages.")
+	end
+
+	if tables.phone_music_playlists.id.type ~= "INT" then
+		local savedPlaylistsForeignKey = MySQL.scalar.await([[
+			SELECT `CONSTRAINT_NAME` FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+			WHERE `TABLE_SCHEMA` = ? AND `TABLE_NAME` = "phone_music_saved_playlists" AND `COLUMN_NAME` = "playlist_id" AND `CONSTRAINT_NAME` != "PRIMARY"
+		]], { database })
+
+		local savedSongsForeignKey = MySQL.scalar.await([[
+			SELECT `CONSTRAINT_NAME` FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+			WHERE `TABLE_SCHEMA` = ? AND `TABLE_NAME` = "phone_music_songs" AND `COLUMN_NAME` = "playlist_id" AND `CONSTRAINT_NAME` != "PRIMARY"
+		]], { database })
+
+		if savedPlaylistsForeignKey then
+			MySQL.rawExecute.await("ALTER TABLE `phone_music_saved_playlists` DROP FOREIGN KEY `" .. savedPlaylistsForeignKey .. "`")
+		end
+
+		if savedSongsForeignKey then
+			MySQL.rawExecute.await("ALTER TABLE `phone_music_songs` DROP FOREIGN KEY `" .. savedSongsForeignKey .. "`")
+		end
+
+		MySQL.rawExecute.await([[
+			ALTER TABLE phone_music_playlists
+			DROP PRIMARY KEY,
+			RENAME COLUMN `id` TO `old_id`,
+			ADD UNIQUE KEY `old_id` (`old_id`),
+			ADD COLUMN `id` INT UNSIGNED NOT NULL AUTO_INCREMENT FIRST,
+			ADD PRIMARY KEY (`id`)
+		]])
+
+		MySQL.rawExecute.await([[
+			ALTER TABLE phone_music_saved_playlists
+			DROP PRIMARY KEY,
+			RENAME COLUMN `playlist_id` TO `old_playlist_id`,
+			ADD COLUMN `playlist_id` INT UNSIGNED NOT NULL FIRST
+		]])
+
+		MySQL.rawExecute.await([[
+			UPDATE `phone_music_saved_playlists` m
+			JOIN `phone_music_playlists` c ON m.old_playlist_id = c.old_id
+			SET m.playlist_id = c.id
+		]])
+
+		MySQL.rawExecute.await([[
+			ALTER TABLE phone_music_songs
+			DROP PRIMARY KEY,
+			RENAME COLUMN `playlist_id` TO `old_playlist_id`,
+			ADD COLUMN `playlist_id` INT UNSIGNED NOT NULL
+		]])
+
+		MySQL.rawExecute.await([[
+			UPDATE `phone_music_songs` m
+			JOIN `phone_music_playlists` c ON m.old_playlist_id = c.old_id
+			SET m.playlist_id = c.id
+		]])
+
+		MySQL.rawExecute.await("DELETE FROM phone_music_saved_playlists WHERE playlist_id = 0")
+		MySQL.rawExecute.await("DELETE FROM phone_music_songs WHERE playlist_id = 0")
+
+		MySQL.rawExecute.await([[
+			ALTER TABLE phone_music_saved_playlists
+			ADD FOREIGN KEY (`playlist_id`) REFERENCES `phone_music_playlists`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+			ADD PRIMARY KEY (`playlist_id`, `phone_number`)
+		]])
+
+		MySQL.rawExecute.await([[
+			ALTER TABLE phone_music_songs
+			ADD FOREIGN KEY (`playlist_id`) REFERENCES `phone_music_playlists`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+			ADD PRIMARY KEY (`song_id`, `playlist_id`)
+		]])
+
+		MySQL.rawExecute.await("ALTER TABLE phone_music_playlists DROP COLUMN `old_id`")
+		MySQL.rawExecute.await("ALTER TABLE phone_music_saved_playlists DROP COLUMN `old_playlist_id`")
+		MySQL.rawExecute.await("ALTER TABLE phone_music_songs DROP COLUMN `old_playlist_id`")
+
+		updateChanges = true
+		infoprint("info", "Changed id from VARCHAR to INT for phone_music_playlists.")
+	end
+end
+
+if Config.DatabaseChecker.AutoFix then
+	validatePhotoAlbums()
+	validateNotificationsId()
+	validateMessages()
+	validateDeleteMail()
+	validateMessageForeignKeyNumbers()
+	validateV2()
+	validateAutoIncrementUpdate()
+end
 
 if updateChanges then
 	fetchTables()

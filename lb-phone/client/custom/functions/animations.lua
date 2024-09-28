@@ -1,3 +1,4 @@
+local loadedDicts = {}
 local phoneModel = Config.PhoneModel or `prop_amb_phone`
 local currentAction, phone
 
@@ -25,7 +26,7 @@ local phoneAnimations = {
                 dict = "cellphone@",
                 anim = "cellphone_text_read_base",
                 flag = 50,
-                blendInSpeed = 999.0,
+                blendInSpeed = 1000.0,
             },
             close = {
                 dict = "cellphone@",
@@ -43,7 +44,7 @@ local phoneAnimations = {
                 dict = "cellphone@in_car@ds",
                 anim = "cellphone_text_read_base",
                 flag = 50,
-                blendInSpeed = 999.0,
+                blendInSpeed = 1000.0,
             },
             close = {
                 dict = "cellphone@in_car@ds",
@@ -97,8 +98,10 @@ local phoneAnimations = {
             },
             base = {
                 dict = "cellphone@self",
-                anim = "selfie",
+                anim = "selfie_in",
                 flag = 50,
+                blendInSpeed = 1000.0,
+                blendOutSpeed = -1000.0,
             },
             close = {
                 dict = "cellphone@self",
@@ -132,6 +135,8 @@ local function LoadDict(dict)
     while not HasAnimDictLoaded(dict) do
         Wait(0)
     end
+
+    loadedDicts[dict] = true
 
     return dict
 end
@@ -209,6 +214,17 @@ local function PlayOpenAnim(action)
     return GetAnimDuration(dict, anim) * 1000
 end
 
+local function CleanUpAssets()
+    for dict, loaded in pairs(loadedDicts) do
+        if loaded then
+            RemoveAnimDict(dict)
+            loadedDicts[dict] = nil
+        end
+    end
+
+    SetModelAsNoLongerNeeded(phoneModel)
+end
+
 function PlayCloseAnim()
     if IsInCall() or InExportCall or not currentAction then
         return
@@ -218,11 +234,12 @@ function PlayCloseAnim()
     local animData = phoneAnimations[currentAction][inCar and "inCar" or "onFoot"].close
 
     if animData then
-        TaskPlayAnim(PlayerPedId(), LoadDict(animData.dict), animData.anim, 8.0, -8.0, -1, animData.flag | 1048576, 0, false, false, false)
+        TaskPlayAnim(PlayerPedId(), LoadDict(animData.dict), animData.anim, 8.0, -8.0, 950, animData.flag | 1048576, 0, false, false, false)
         Wait(300)
     end
 
     DeletePhone()
+    CleanUpAssets()
 end
 
 function SetPhoneAction(action)
@@ -242,14 +259,19 @@ function SetPhoneAction(action)
         end
     end
 
-    if playOpen then
-        PlayOpenAnim(action)
+    if not playOpen then
         currentAction = action
-        Wait(300)
-        CreateThread(CreatePhone)
-    else
-        currentAction = action
+        return
     end
+
+    CreateThread(function()
+        PlayOpenAnim(action)
+
+        currentAction = action
+
+        Wait(300)
+        CreatePhone()
+    end)
 end
 
 function GetPhoneObject()
@@ -273,7 +295,7 @@ while true do
             local baseData = animData.base
 
             if not IsEntityPlayingAnim(playerPed, animData.open.dict, animData.open.anim, 3) and not IsEntityPlayingAnim(playerPed, baseData.dict, baseData.anim, 3) then
-                TaskPlayAnim(playerPed, LoadDict(baseData.dict), baseData.anim, baseData.blendInSpeed or 8.0, -8.0, -1, baseData.flag | 1048576, 0, false, false, false)
+                TaskPlayAnim(playerPed, LoadDict(baseData.dict), baseData.anim, baseData.blendInSpeed or 8.0, baseData.blendOutSpeed or -8.0, -1, baseData.flag | 1048576, 0, false, false, false)
             end
         end
 

@@ -27,18 +27,13 @@ function HasPhoneItem(source, number)
 
     if GetResourceState("ox_inventory") == "started" then
         return (exports.ox_inventory:Search(source, "count", Config.Item.Name) or 0) > 0
-    elseif GetResourceState("qs-inventory") then
-        local exportExists, result = pcall(function()
-            return exports["qs-inventory"]:GetItemTotalAmount(source, Config.Item.Name)
-        end)
-
-        if exportExists then
-            return (result or 0) > 0
-        end
+    elseif GetResourceState("qs-inventory") == "started" then
+        return (exports["qs-inventory"]:GetItemTotalAmount(source, Config.Item.Name) or 0) > 0
     end
 
     local qPlayer = QB.Functions.GetPlayer(source)
     local hasPhone = (qPlayer.Functions.GetItemByName(Config.Item.Name)?.amount or 0) > 0
+
     if not hasPhone then
         return false
     end

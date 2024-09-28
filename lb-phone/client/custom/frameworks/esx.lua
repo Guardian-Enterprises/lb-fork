@@ -66,24 +66,22 @@ function HasPhoneItem(number)
 
     if GetResourceState("ox_inventory") == "started" then
         return (exports.ox_inventory:Search("count", Config.Item.Name) or 0) > 0
-    elseif GetResourceState("qs-inventory") then
-        local exportExists, result = pcall(function()
-            return exports["qs-inventory"]:Search(Config.Item.Name)
-        end)
-
-        if exportExists then
-            return (result or 0) > 0
-        end
+    elseif GetResourceState("qs-inventory") == "started" then
+        return (exports["qs-inventory"]:Search(Config.Item.Name) or 0) > 0
     end
 
     local inventory = ESX.GetPlayerData()?.inventory
+
     if not inventory then
         infoprint("warning", "Unsupported inventory, tell the inventory author to add support for it.")
         return false
     end
 
+    debugprint("inventory", inventory)
+
     for i = 1, #inventory do
         local item = inventory[i]
+
         if item.name == Config.Item.Name and item.count > 0 then
             return true
         end

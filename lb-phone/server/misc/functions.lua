@@ -154,10 +154,7 @@ function Log(app, source, type, title, message, avatar, image)
 end
 
 function GetTimestampISO()
-    ---@diagnostic disable-next-line: param-type-mismatch
-    local currentTime = os.time(os.date("!*t")) -- Get the current time in UTC
-
-    return os.date("%Y-%m-%dT%H:%M:%S.000Z", currentTime)
+    return os.date("!%Y-%m-%dT%H:%M:%S.000Z")
 end
 
 local anyExternalAllowed = false

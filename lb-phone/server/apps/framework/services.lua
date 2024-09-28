@@ -25,11 +25,7 @@ local function getChannel(company, phoneNumber)
         return channel
     end
 
-    local id = GenerateId("phone_services_channels", "id")
-
-    MySQL.update.await("INSERT INTO phone_services_channels (id, company, phone_number) VALUES (?, ?, ?)", { id, company, phoneNumber })
-
-    return id
+    return MySQL.insert.await("INSERT INTO phone_services_channels (company, phone_number) VALUES (?, ?)", { company, phoneNumber })
 end
 
 ---@param job string
@@ -69,12 +65,10 @@ BaseCallback("services:sendMessage", function(source, phoneNumber, channelId, co
         y = coords.y
     end
 
-    local messageId = GenerateId("phone_services_messages", "id")
-    MySQL.update.await([[
-        INSERT INTO phone_services_messages (id, channel_id, sender, message, x_pos, y_pos)
-        VALUES (@id, @channelId, @sender, @message, @xPos, @yPos)
+    local messageId = MySQL.insert.await([[
+        INSERT INTO phone_services_messages (channel_id, sender, message, x_pos, y_pos)
+        VALUES (@channelId, @sender, @message, @xPos, @yPos)
     ]], {
-        ["@id"] = messageId,
         ["@channelId"] = channelId,
         ["@sender"] = phoneNumber,
         ["@message"] = message,

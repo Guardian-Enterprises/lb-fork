@@ -356,16 +356,16 @@ Config.SyncFlash = true -- should flashlights be synced across all players? May 
 Config.EndLiveClose = false -- should InstaPic live end when you close the phone?
 
 Config.AllowExternal = { -- allow people to upload external images? (note: this means they can upload nsfw / gore etc)
-    Gallery = true, -- allow importing external links to the gallery?
-    Birdy = true, -- set to true to enable external images on that specific app, set to false to disable it.
-    InstaPic = true,
-    Tinder = true,
-    Trendy = true,
-    Pages = true,
-    MarketPlace = true,
-    Mail = true,
-    Messages = true,
-    Other = true, -- other apps that don't have a specific setting (ex: setting a profile picture for a contact, backgrounds for the phone etc)
+    Gallery = false, -- allow importing external links to the gallery?
+    Birdy = false, -- set to true to enable external images on that specific app, set to false to disable it.
+    InstaPic = false,
+    Spark = false,
+    Trendy = false,
+    Pages = false,
+    MarketPlace = false,
+    Mail = false,
+    Messages = false,
+    Other = false, -- other apps that don't have a specific setting (ex: setting a profile picture for a contact, backgrounds for the phone etc)
 }
 
 -- Blacklisted domains for external images. You will not be able to upload from these domains.
@@ -378,11 +378,13 @@ Config.ExternalBlacklistedDomains = {
 -- Whitelisted domains for external images. If this is not empty/nil/false, you will only be able to upload images from these domains.
 Config.ExternalWhitelistedDomains = {
     -- "fivemanage.com"
-    "guardianstore.com.br"
 }
 
 -- Set to false/empty to disable
-Config.UploadWhitelistedDomains = false
+Config.UploadWhitelistedDomains = { -- domains that are allowed to upload images to the phone (prevent using devtools to upload images)
+    "fivemanage.com",
+    "cfx.re" -- lb-upload
+}
 
 Config.WordBlacklist = {}
 Config.WordBlacklist.Enabled = false
@@ -577,6 +579,23 @@ Config.KeyBinds = {
 Config.KeepInput = true -- keep input when nui is focused (meaning you can walk around etc)
 
 --[[ PHOTO / VIDEO OPTIONS ]] --
+Config.Camera = {}
+Config.Camera.Enabled = true -- use a custom camera that allows you to walk around while taking photos?
+Config.Camera.AllowRunning = true
+Config.Camera.MaxFOV = 60.0 -- higher = zoomed out
+Config.Camera.MinFOV = 10.0 -- lower = zoomed in
+Config.Camera.MaxLookUp = 80.0
+Config.Camera.MaxLookDown = -80.0
+
+Config.Camera.Vehicle = {}
+Config.Camera.Vehicle.Zoom = true -- allow zooming in vehicles?
+Config.Camera.Vehicle.MaxFOV = 80.0
+Config.Camera.Vehicle.MinFOV = 10.0
+Config.Camera.Vehicle.MaxLookUp = 50.0
+Config.Camera.Vehicle.MaxLookDown = -30.0
+Config.Camera.Vehicle.MaxLeftRight = 120.0
+Config.Camera.Vehicle.MinLeftRight = -120.0
+
 -- Set your api keys in lb-phone/server/apiKeys.lua
 Config.UploadMethod = {}
 -- You can edit the upload methods in lb-phone/shared/upload.lua
@@ -584,9 +603,9 @@ Config.UploadMethod = {}
 -- A video tutorial for how to set up Fivemanage can be found here: https://www.youtube.com/watch?v=y3bCaHS6Moc
 -- If you want to host uploads yourself, you can use LBUpload: https://github.com/lbphone/lb-upload
 -- We STRONGLY discourage using Discord as an upload method, as uploaded files may become inaccessible after a while.
-Config.UploadMethod.Video = "Custom" -- "Fivemanage" or "LBUpload" or "Custom"
-Config.UploadMethod.Image = "Custom" -- "Fivemanage" or "LBUpload" or "Custom
-Config.UploadMethod.Audio = "Custom" -- "Fivemanage" or "LBUpload" or "Custom"
+Config.UploadMethod.Video = "Fivemanage" -- "Fivemanage" or "LBUpload" or "Custom"
+Config.UploadMethod.Image = "Fivemanage" -- "Fivemanage" or "LBUpload" or "Custom
+Config.UploadMethod.Audio = "Fivemanage" -- "Fivemanage" or "LBUpload" or "Custom"
 
 Config.Video = {}
 Config.Video.Bitrate = 400 -- video bitrate (kbps), increase to improve quality, at the cost of file size

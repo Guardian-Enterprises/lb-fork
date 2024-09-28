@@ -69,14 +69,6 @@ function HasPhoneItem(number)
 
     if GetResourceState("ox_inventory") == "started" then
         return (exports.ox_inventory:Search("count", Config.Item.Name) or 0) > 0
-    elseif GetResourceState("qs-inventory") then
-        local exportExists, result = pcall(function()
-            return exports["qs-inventory"]:Search(Config.Item.Name)
-        end)
-
-        if exportExists then
-            return (result or 0) > 0
-        end
     end
 
     return QB.Functions.HasItem(Config.Item.Name)
@@ -258,15 +250,14 @@ function ToggleDuty()
     TriggerServerEvent("QBCore:ToggleDuty")
 end
 
--- since qb has custom code for death, we need to override the IsPedDeadOrDying native
-local isPedDeadOrDying = IsPedDeadOrDying
-function IsPedDeadOrDying(ped, p1)
+function CanOpenPhone()
     local metadata = QB.Functions.GetPlayerData().metadata
+
     if metadata.ishandcuffed or metadata.isdead or metadata.inlaststand then
-        return true
+        return false
     end
 
-    return isPedDeadOrDying(ped, p1)
+    return true
 end
 
 if Config.Crypto.QBit then
