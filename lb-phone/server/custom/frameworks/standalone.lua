@@ -45,6 +45,8 @@ function HasPhoneItem(source, number)
             return true
         end
     end
+
+    TriggerClientEvent("Notify",source,"error","Você não possui um <b>"..vRP.itemName(Config.Item.Name).."</b>.",8000)
     return false
 end
 
