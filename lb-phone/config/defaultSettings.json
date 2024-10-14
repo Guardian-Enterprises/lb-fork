@@ -27,7 +27,7 @@
         "silent": false
     },
     "weather": {
-        "celcius": false
+        "celcius": true
     },
     "notifications": {},
     "storage": {
@@ -44,6 +44,6 @@
     },
     "apps": [
         ["Phone", "Messages", "Camera", "Photos"],
-        ["Settings", "AppStore", "Clock", "Mail", "Weather", "Garage", "Home", "Maps", "Notes", "Calculator", "VoiceMemo", "Music" ]
+        ["Settings", "AppStore", "Clock", "Mail", "Weather", "Garage", "Home", "Notes", "Calculator", "VoiceMemo" ]
     ]
 }

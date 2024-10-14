@@ -129,11 +129,6 @@
             "removable": false,
             "size": 1200
         },
-        "Maps": {
-            "name": "Maps",
-            "removable": false,
-            "size": 63400
-        },
         "YellowPages": {
             "name": "Pages",
             "description": "Find local businesses and services",
@@ -148,11 +143,6 @@
             "size": 84400,
             "images": ["1.webp", "2.webp", "3.webp", "4.webp"]
         },
-        "Wallet": {
-            "name": "Wallet",
-            "removable": false,
-            "size": 2000
-        },
         "Home": {
             "name": "Home",
             "removable": false,
@@ -162,13 +152,6 @@
             "name": "Garage",
             "removable": false,
             "size": 17400
-        },
-        "Music": {
-            "name": "Music",
-            "description": "Listen to your favorite music",
-            "removable": true,
-            "size": 17400,
-            "images": ["1.webp", "2.webp"]
         },
         "DarkChat": {
             "name": "Dark Chat",
@@ -194,11 +177,6 @@
         },
         "Mail": {
             "name": "Mail",
-            "removable": false,
-            "size": 23200
-        },
-        "Services": {
-            "name": "Services",
             "removable": false,
             "size": 23200
         },

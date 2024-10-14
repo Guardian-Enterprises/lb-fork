@@ -356,16 +356,16 @@ Config.SyncFlash = true -- should flashlights be synced across all players? May 
 Config.EndLiveClose = false -- should InstaPic live end when you close the phone?
 
 Config.AllowExternal = { -- allow people to upload external images? (note: this means they can upload nsfw / gore etc)
-    Gallery = false, -- allow importing external links to the gallery?
-    Birdy = false, -- set to true to enable external images on that specific app, set to false to disable it.
-    InstaPic = false,
-    Spark = false,
-    Trendy = false,
-    Pages = false,
-    MarketPlace = false,
-    Mail = false,
-    Messages = false,
-    Other = false, -- other apps that don't have a specific setting (ex: setting a profile picture for a contact, backgrounds for the phone etc)
+    Gallery = true, -- allow importing external links to the gallery?
+    Birdy = true, -- set to true to enable external images on that specific app, set to true to disable it.
+    InstaPic = true,
+    Spark = true,
+    Trendy = true,
+    Pages = true,
+    MarketPlace = true,
+    Mail = true,
+    Messages = true,
+    Other = true, -- other apps that don't have a specific setting (ex: setting a profile picture for a contact, backgrounds for the phone etc)
 }
 
 -- Blacklisted domains for external images. You will not be able to upload from these domains.
@@ -376,9 +376,7 @@ Config.ExternalBlacklistedDomains = {
 }
 
 -- Whitelisted domains for external images. If this is not empty/nil/false, you will only be able to upload images from these domains.
-Config.ExternalWhitelistedDomains = {
-    "guardianstore.com.br"
-}
+Config.ExternalWhitelistedDomains = false
 
 -- Set to false/empty to disable
 Config.UploadWhitelistedDomains = false
@@ -600,9 +598,9 @@ Config.UploadMethod = {}
 -- A video tutorial for how to set up Fivemanage can be found here: https://www.youtube.com/watch?v=y3bCaHS6Moc
 -- If you want to host uploads yourself, you can use LBUpload: https://github.com/lbphone/lb-upload
 -- We STRONGLY discourage using Discord as an upload method, as uploaded files may become inaccessible after a while.
-Config.UploadMethod.Video = "Custom" -- "Fivemanage" or "LBUpload" or "Custom"
-Config.UploadMethod.Image = "Custom" -- "Fivemanage" or "LBUpload" or "Custom
-Config.UploadMethod.Audio = "Custom" -- "Fivemanage" or "LBUpload" or "Custom"
+Config.UploadMethod.Video = "Fivemanage" -- "Fivemanage" or "LBUpload" or "Custom"
+Config.UploadMethod.Image = "Fivemanage" -- "Fivemanage" or "LBUpload" or "Custom
+Config.UploadMethod.Audio = "Fivemanage" -- "Fivemanage" or "LBUpload" or "Custom"
 
 Config.Video = {}
 Config.Video.Bitrate = 400 -- video bitrate (kbps), increase to improve quality, at the cost of file size
