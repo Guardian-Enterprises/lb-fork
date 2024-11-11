@@ -1,6 +1,7 @@
 local loadedDicts = {}
 local phoneModel = Config.PhoneModel or `prop_amb_phone`
 local currentAction, phone
+local disableAnimation = false
 
 CreateThread(function()
     while not loaded do
@@ -278,6 +279,16 @@ function GetPhoneObject()
     return phone
 end
 
+function TogglePhoneAnimation(enabled, action)
+    disableAnimation = enabled == false
+
+    if enabled then
+        SetPhoneAction(action or "default")
+    else
+        PlayCloseAnim()
+    end
+end
+
 AddEventHandler("onResourceStop", function(resource)
     if resource == GetCurrentResourceName() then
         DeletePhone()
@@ -287,7 +298,7 @@ end)
 while true do
     local playerPed = PlayerPedId()
 
-    if (phoneOpen or (IsInCall() and not InExportCall)) and not (cameraOpen and not IsWalkingCamEnabled()) and currentAction then
+    if (phoneOpen or (IsInCall() and not InExportCall)) and not (cameraOpen and not IsWalkingCamEnabled()) and currentAction and not disableAnimation then
         local inCar = IsPedInAnyVehicle(playerPed, true)
         local animData = phoneAnimations[currentAction][inCar and "inCar" or "onFoot"]
 

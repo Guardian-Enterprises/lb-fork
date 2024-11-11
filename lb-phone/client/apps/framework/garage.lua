@@ -154,6 +154,7 @@ end
 
 RegisterNUICallback("Garage", function(data, cb)
     local action = data.action
+    debugprint("Garage:" .. (action or ""))
 
     if action == "getVehicles" then
         lib.TriggerCallback("phone:garage:getVehicles", function(cars)

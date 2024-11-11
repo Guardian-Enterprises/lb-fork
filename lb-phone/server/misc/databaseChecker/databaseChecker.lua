@@ -5,18 +5,35 @@ if not Config.DatabaseChecker?.Enabled and not shouldGenerateTables then
 	return
 end
 
-local readyPromise = promise.new()
-
-MySQL.ready(function()
-	readyPromise:resolve()
-end)
-
-Citizen.Await(readyPromise)
+MySQL.ready.await()
 
 local database = MySQL.scalar.await("SELECT DATABASE()")
 
 if not database then
 	infoprint("error", "Database checker: Failed to get database name. The script will still work, but database changes will not apply automatically. To disable this warning, set Config.DatabaseChecker.Enabled to false")
+	return
+end
+
+local databaseVersion = MySQL.scalar.await("SELECT VERSION()") or ""
+
+if not databaseVersion:find("MariaDB") then
+	infoprint("error", "Database checker: Your database is not MariaDB. The script may not work as expected, and database changes will not apply automatically. To disable this warning, set Config.DatabaseChecker.Enabled to false")
+	return
+end
+
+local major, minor, patch = databaseVersion:match("(%d+)%.(%d+)%.(%d+)")
+
+major = major and tonumber(major)
+minor = minor and tonumber(minor)
+patch = patch and tonumber(patch)
+
+if not major or not minor or not patch then
+	infoprint("error", "Database checker: Failed to get database version. The script will still work, but database changes will not apply automatically. To disable this warning, set Config.DatabaseChecker.Enabled to false")
+	return
+end
+
+if major < 10 or (major == 10 and minor < 11) then
+	infoprint("error", "Database checker: Your database version is outdated. Please update to MariaDB 10.11 or newer. The script may not work as expected, and database changes will not apply automatically. To disable this warning, set Config.DatabaseChecker.Enabled to false")
 	return
 end
 

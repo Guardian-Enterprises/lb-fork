@@ -6,7 +6,7 @@
 UploadMethods = {
     Custom = {
         Video = {
-            url = "https://upload.guardianstore.com.br/upload",
+            url = "https://your-custom-url.com/upload?api=API_KEY",
             field = "file", -- The field name (formData)
             headers = { -- headers to send when uploading
                 ["Authorization"] = "Key API_KEY"
@@ -16,11 +16,12 @@ UploadMethods = {
                 value = false -- If the path is equal to this value, it's an error
             },
             success = {
-                path = "link" -- The path to the video file (res.url)
-            }
+                path = "url" -- The path to the video file (res.url)
+            },
+            suffix = "webm", -- Add a suffix to the url (not needed if you return the correct name)
         },
         Image = {
-            url = "https://upload.guardianstore.com.br/upload",
+            url = "https://your-custom-url.com/upload?api=API_KEY",
             field = "file", -- The field name (formData)
             headers = { -- headers to send when uploading
                 ["Authorization"] = "Key API_KEY"
@@ -30,11 +31,12 @@ UploadMethods = {
                 value = false -- If the path is equal to this value, it's an error
             },
             success = {
-                path = "link" -- The path to the image file (res.url)
+                path = "url" -- The path to the image file (res.url)
             },
+            suffix = "png", -- Add a suffix to the url (not needed if you return the correct name)
         },
         Audio = {
-            url = "https://upload.guardianstore.com.br/upload",
+            url = "https://your-custom-url.com/upload?api=API_KEY",
             field = "file", -- The field name (formData)
             headers = { -- headers to send when uploading
                 ["Authorization"] = "Key API_KEY"
@@ -44,8 +46,9 @@ UploadMethods = {
                 value = false -- If the path is equal to this value, it's an error
             },
             success = {
-                path = "link" -- The path to the audio file (res.url)
-            }
+                path = "url" -- The path to the audio file (res.url)
+            },
+            suffix = "mp3", -- Add a suffix to the url (not needed if you return the correct name)
         },
     },
     Discord = {
@@ -114,7 +117,7 @@ UploadMethods = {
             },
         },
     },
-    Fivemanage = {
+    OldFivemanage = {
         Video = {
             url = "https://api.fivemanage.com/api/video",
             field = "video",

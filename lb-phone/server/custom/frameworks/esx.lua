@@ -16,8 +16,8 @@ else
 end
 debugprint("ESX loaded")
 
---- @param source number
---- @return string | nil
+---@param source number
+---@return string | nil
 function GetIdentifier(source)
     return ESX.GetPlayerFromId(source)?.identifier
 end
