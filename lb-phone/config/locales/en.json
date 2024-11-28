@@ -397,6 +397,7 @@
             "REMOVE_FROM_ALBUM": "Remove from Album",
             "ADD_TO_ALBUM": "Add to Album",
             "ADD_TO_FAVOURITES": "Add to Favourites",
+            "REMOVE_FROM_FAVOURITES": "Remove from Favourites",
             "VIDEOS": "Videos",
             "SELFIES": "Selfies",
             "SCREENSHOTS": "Screenshots",

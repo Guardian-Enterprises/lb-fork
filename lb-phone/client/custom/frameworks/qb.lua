@@ -39,7 +39,7 @@ RegisterNetEvent("QBCore:Player:SetPlayerData", function(newData)
 
     Wait(500)
 
-    if not HasPhoneItem() then
+    if currentPhone and not HasPhoneItem() then
         OnDeath()
     end
 end)
@@ -56,6 +56,16 @@ RegisterNetEvent("QBCore:Client:OnMoneyChange", function(moneyType)
     SendReactMessage("wallet:setBalance", math.floor(PlayerData.money.bank))
 end)
 
+local phoneVariation
+
+local function HasItem(itemName)
+    if GetResourceState("ox_inventory") == "started" then
+        return (exports.ox_inventory:Search("count", itemName) or 0) > 0
+    end
+
+    return QB.Functions.HasItem(itemName)
+end
+
 ---Check if a player has a phone
 ---@return boolean
 function HasPhoneItem(number)
@@ -67,12 +77,46 @@ function HasPhoneItem(number)
         return HasPhoneNumber(number)
     end
 
-    if GetResourceState("ox_inventory") == "started" then
-        return (exports.ox_inventory:Search("count", Config.Item.Name) or 0) > 0
+    if Config.Item.Name then
+        return HasItem(Config.Item.Name)
     end
 
-    return QB.Functions.HasItem(Config.Item.Name)
+    if not phoneVariation then
+        local storedVariation = GetResourceKvpInt("phone_variation")
+
+        if storedVariation and Config.Item.Names[storedVariation] and HasItem(Config.Item.Names[storedVariation].name) then
+            phoneVariation = storedVariation
+            SetPhoneVariation(storedVariation)
+            return true
+        end
+    end
+
+    if phoneVariation and HasItem(Config.Item.Names[phoneVariation].name) then
+        return true
+    end
+
+    for i = 1, #Config.Item.Names do
+        local item = Config.Item.Names[i]
+
+        if HasItem(item.name) then
+            phoneVariation = i
+            SetPhoneVariation(i)
+            return true
+        end
+    end
+
+    return false
 end
+
+RegisterNetEvent("phone:usedPhoneVariation", function(variation)
+    if not variation or not Config.Item.Names[variation] then
+        return
+    end
+
+    phoneVariation = variation
+    SetPhoneVariation(variation)
+    ToggleOpen(true)
+end)
 
 ---Check if the player has a job
 ---@param jobs table
@@ -142,7 +186,7 @@ function GetCompanyData()
             jobData.balance = money
         end, jobData.job)
     else
-        jobData.balance = lib.TriggerCallbackSync("phone:services:getAccount")
+        jobData.balance = AwaitCallback("services:getAccount")
     end
 
     QB.Functions.TriggerCallback("qb-bossmenu:server:GetEmployees", function(employees)
@@ -197,7 +241,7 @@ end
 
 function DepositMoney(amount, cb)
     if GetResourceState("qb-management") == "started" then
-        return lib.TriggerCallbackSync("phone:services:addMoney", amount)
+        return AwaitCallback("services:addMoney", amount)
     end
 
     TriggerServerEvent("qb-bossmenu:server:depositMoney", amount)
@@ -208,7 +252,7 @@ end
 
 function WithdrawMoney(amount, cb)
     if GetResourceState("qb-management") == "started" then
-        return lib.TriggerCallbackSync("phone:services:removeMoney", amount)
+        return AwaitCallback("services:removeMoney", amount)
     end
 
     TriggerServerEvent("qb-bossmenu:server:withdrawMoney", amount)
@@ -220,7 +264,7 @@ end
 function HireEmployee(source)
     TriggerServerEvent("qb-bossmenu:server:HireEmployee", source)
 
-    return lib.TriggerCallbackSync("phone:services:getPlayerData", source)
+    return AwaitCallback("services:getPlayerData", source)
 end
 
 function FireEmployee(source)
@@ -305,7 +349,7 @@ if Config.Crypto.QBit then
     end
 
     function TransferQBit(amount, toNumber)
-        local otherWallet = lib.TriggerCallbackSync("phone:crypto:getOtherQBitWallet", toNumber)
+        local otherWallet = AwaitCallback("crypto:getOtherQBitWallet", toNumber)
         if not otherWallet then
             return { success = false }
         end

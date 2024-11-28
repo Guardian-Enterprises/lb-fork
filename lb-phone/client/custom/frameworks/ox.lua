@@ -100,8 +100,8 @@ function GetCompanyData()
         return companyData
     end
 
-    companyData.balance = lib.TriggerCallbackSync("phone:services:getBalance")
-    companyData.employees = lib.TriggerCallbackSync("phone:services:getManagementEmployees")
+    companyData.balance = AwaitCallback("services:getBalance")
+    companyData.employees = AwaitCallback("services:getManagementEmployees")
     companyData.grades = {}
 
     for i = 1, amountGrades do
@@ -121,21 +121,21 @@ function GetCompanyData()
 end
 
 function DepositMoney(amount)
-    return lib.TriggerCallbackSync("phone:services:depositMoney", amount)
+    return AwaitCallback("services:depositMoney", amount)
 end
 
 function WithdrawMoney(amount)
-    return lib.TriggerCallbackSync("phone:services:withdrawMoney", amount)
+    return AwaitCallback("services:withdrawMoney", amount)
 end
 
 function HireEmployee(source)
-    return lib.TriggerCallbackSync("phone:services:hireEmployee", source)
+    return AwaitCallback("services:hireEmployee", source)
 end
 
 function FireEmployee(id)
-    return lib.TriggerCallbackSync("phone:services:fireEmployee", id)
+    return AwaitCallback("services:fireEmployee", id)
 end
 
 function SetGrade(id, grade)
-    return lib.TriggerCallbackSync("phone:services:setGrade", id, grade)
+    return AwaitCallback("services:setGrade", id, grade)
 end

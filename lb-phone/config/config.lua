@@ -38,7 +38,7 @@ Config.Item.Inventory = "auto" --[[
         * codem-inventory - https://codem.tebex.io/package/5900973
 ]]
 
-Config.ServerSideSpawn = false -- should entities be spawned on the server? (phone prop, vehicles)
+Config.ServerSideSpawn = true -- should entities be spawned on the server? (phone prop, vehicles)
 
 Config.PhoneModel = `lb_phone_prop` -- the prop of the phone, if you want to use a custom phone model, you can change this here
 Config.PhoneRotation = vector3(0.0, 0.0, 180.0) -- the rotation of the phone when attached to a player
@@ -79,78 +79,13 @@ Config.DeleteAccount = {
 }
 
 Config.Companies = {}
-Config.Companies.Enabled = true -- allow players to call companies?
+Config.Companies.Enabled = false -- allow players to call companies?
 Config.Companies.MessageOffline = true -- if true, players can message companies even if no one in the company is online
 Config.Companies.DefaultCallsDisabled = false -- should receiving company calls be disabled by default?
 Config.Companies.AllowAnonymous = false -- allow players to call companies with "hide caller id" enabled?
 Config.Companies.SeeEmployees = "everyone" -- who should be able to see employees? they will see name, online status & phone number. options are: "everyone", "employees" or "none"
 Config.Companies.DeleteConversations = true -- allow employees to delete conversations?
-Config.Companies.Services = {
-    {
-        job = "police",
-        name = "Police",
-        icon = "https://cdn-icons-png.flaticon.com/512/7211/7211100.png",
-        canCall = true, -- if true, players can call the company
-        canMessage = true, -- if true, players can message the company
-        bossRanks = {"boss", "lieutenant"}, -- ranks that can manage the company
-        location = {
-            name = "Mission Row",
-            coords = {
-                x = 428.9,
-                y = -984.5,
-            }
-        }
-        -- customIcon = "IoShield", -- if you want to use a custom icon for the company, set it here: https://react-icons.github.io/react-icons/icons?name=io5
-        -- onCustomIconClick = function()
-        --    print("Clicked")
-        -- end
-    },
-    {
-        job = "ambulance",
-        name = "Ambulance",
-        icon = "https://cdn-icons-png.flaticon.com/128/1032/1032989.png",
-        canCall = true, -- if true, players can call the company
-        canMessage = true, -- if true, players can message the company
-        bossRanks = {"boss", "doctor"}, -- ranks that can manage the company
-        location = {
-            name = "Pillbox",
-            coords = {
-                x = 304.2,
-                y = -587.0
-            }
-        }
-    },
-    {
-        job = "mechanic",
-        name = "Mechanic",
-        icon = "https://cdn-icons-png.flaticon.com/128/10281/10281554.png",
-        canCall = true, -- if true, players can call the company
-        canMessage = true, -- if true, players can message the company
-        bossRanks = {"boss", "worker"}, -- ranks that can manage the company
-        location = {
-            name = "LS Customs",
-            coords = {
-                x = -336.6,
-                y = -134.3
-            }
-        }
-    },
-    {
-        job = "taxi",
-        name = "Taxi",
-        icon = "https://cdn-icons-png.flaticon.com/128/433/433449.png",
-        canCall = true, -- if true, players can call the company
-        canMessage = true, -- if true, players can message the company
-        bossRanks = {"boss", "driver"}, -- ranks that can manage the company
-        location = {
-            name = "Taxi HQ",
-            coords = {
-                x =984.2,
-                y = -219.0
-            }
-        }
-    },
-}
+Config.Companies.Services = {}
 
 Config.Companies.Contacts = { -- not needed if you use the services app, this will add the contact to the contacts app
     -- ["police"] = {
@@ -334,6 +269,7 @@ Config.Battery.DischargeWhenInactive = true -- Should the phone remove battery w
 
 Config.CurrencyFormat = "$%s" -- ($100) Choose the formatting of the currency. %s will be replaced with the amount.
 Config.MaxTransferAmount = 1000000 -- The maximum amount of money that can be transferred at once via wallet / messages.
+Config.TransferOffline = false -- Allow players to transfer money to offline players via the wallet app?
 
 Config.TransferLimits = {}
 Config.TransferLimits.Daily = false -- The maximum amount of money that can be transferred in a day. Set to false for unlimited.
@@ -341,6 +277,7 @@ Config.TransferLimits.Weekly = false -- The maximum amount of money that can be 
 
 Config.EnableMessagePay = true -- Allow players to pay other players via messages?
 Config.EnableVoiceMessages = true -- Allow players to send voice messages?
+Config.EnableGIFs = true
 
 Config.CityName = "Los Santos" -- The name that's being used in the weather app etc.
 Config.RealTime = true -- if true, the time will use real life time depending on where the user lives, if false, the time will be the ingame time.
@@ -357,7 +294,7 @@ Config.EndLiveClose = false -- should InstaPic live end when you close the phone
 
 Config.AllowExternal = { -- allow people to upload external images? (note: this means they can upload nsfw / gore etc)
     Gallery = true, -- allow importing external links to the gallery?
-    Birdy = true, -- set to true to enable external images on that specific app, set to true to disable it.
+    Birdy = true, -- set to true to enable external images on that specific app, set to false to disable it.
     InstaPic = true,
     Spark = true,
     Trendy = true,
@@ -376,10 +313,15 @@ Config.ExternalBlacklistedDomains = {
 }
 
 -- Whitelisted domains for external images. If this is not empty/nil/false, you will only be able to upload images from these domains.
-Config.ExternalWhitelistedDomains = false
+Config.ExternalWhitelistedDomains = {
+    -- "fivemanage.com"
+}
 
 -- Set to false/empty to disable
-Config.UploadWhitelistedDomains = false
+Config.UploadWhitelistedDomains = { -- domains that are allowed to upload images to the phone (prevent using devtools to upload images)
+    "fivemanage.com",
+    "cfx.re" -- lb-upload
+}
 
 Config.WordBlacklist = {}
 Config.WordBlacklist.Enabled = false
@@ -554,6 +496,21 @@ Config.KeyBinds = {
         Bind = "RIGHT",
         Description = "Change mode"
     },
+    RollLeft = {
+        Command = "cameraRollLeft",
+        Bind = "Z",
+        Description = "Roll camera to the left"
+    },
+    RollRight = {
+        Command = "cameraRollRight",
+        Bind = "C",
+        Description = "Roll camera to the right"
+    },
+    FreezeCamera = {
+        Command = "cameraFreeze",
+        Bind = "X",
+        Description = "Freeze camera"
+    },
 
     AnswerCall = {
         Command = "answerCall",
@@ -576,6 +533,7 @@ Config.KeepInput = true -- keep input when nui is focused (meaning you can walk 
 --[[ PHOTO / VIDEO OPTIONS ]] --
 Config.Camera = {}
 Config.Camera.Enabled = true -- use a custom camera that allows you to walk around while taking photos?
+Config.Camera.Roll = true -- allow rolling the camera to the left & right?
 Config.Camera.AllowRunning = true
 Config.Camera.MaxFOV = 60.0 -- higher = zoomed out
 Config.Camera.MinFOV = 10.0 -- lower = zoomed in
@@ -590,6 +548,17 @@ Config.Camera.Vehicle.MaxLookUp = 50.0
 Config.Camera.Vehicle.MaxLookDown = -30.0
 Config.Camera.Vehicle.MaxLeftRight = 120.0
 Config.Camera.Vehicle.MinLeftRight = -120.0
+
+Config.Camera.Selfie = {}
+Config.Camera.Selfie.Offset = vector3(0.05, 0.55, 0.6)
+Config.Camera.Selfie.Rotation = vector3(10.0, 0.0, -180.0)
+Config.Camera.Selfie.MaxFov = 90.0
+Config.Camera.Selfie.MinFov = 50.0
+
+Config.Camera.Freeze = {}
+Config.Camera.Freeze.Enabled = false -- allow players to freeze the camera when taking photos? (this will make it so they can take photos in 3rd person)
+Config.Camera.Freeze.MaxDistance = 10.0 -- max distance the camera can be from the player when frozen
+Config.Camera.Freeze.MaxTime = 60 -- max time the camera can be frozen for (in seconds)
 
 -- Set your api keys in lb-phone/server/apiKeys.lua
 Config.UploadMethod = {}

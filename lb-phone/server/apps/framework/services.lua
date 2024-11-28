@@ -2,7 +2,7 @@
 local lastRefresh = 0
 local refreshInterval = 60 -- refresh at most once every 60 seconds
 
-lib.RegisterCallback("phone:services:getOnline", function(_, cb)
+RegisterLegacyCallback("services:getOnline", function(_, cb)
     if (lastRefresh + refreshInterval) < os.time() and RefreshCompanies then
         RefreshCompanies()
         lastRefresh = os.time()

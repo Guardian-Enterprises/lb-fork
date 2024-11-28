@@ -22,6 +22,19 @@ function GetIdentifier(source)
     return ESX.GetPlayerFromId(source)?.identifier
 end
 
+local function HasItem(source, itemName)
+    if GetResourceState("ox_inventory") == "started" then
+        return (exports.ox_inventory:Search(source, "count", itemName) or 0) > 0
+    elseif GetResourceState("qs-inventory") == "started" then
+        return (exports["qs-inventory"]:GetItemTotalAmount(source, itemName) or 0) > 0
+    end
+
+    local xPlayer = ESX.GetPlayerFromId(source)
+    local hasItem = xPlayer.getInventoryItem(itemName).count > 0
+
+    return hasItem
+end
+
 ---Check if a player has a phone with a specific number
 ---@param source any
 ---@param number string
@@ -35,30 +48,35 @@ function HasPhoneItem(source, number)
         return HasPhoneNumber(source, number)
     end
 
-    if GetResourceState("ox_inventory") == "started" then
-        return (exports.ox_inventory:Search(source, "count", Config.Item.Name) or 0) > 0
-    elseif GetResourceState("qs-inventory") == "started" then
-        return (exports["qs-inventory"]:GetItemTotalAmount(source, Config.Item.Name) or 0) > 0
-    end
+    local hasItem
 
-    local xPlayer = ESX.GetPlayerFromId(source)
-    local hasItem = xPlayer.getInventoryItem(Config.Item.Name).count > 0
+    if Config.Item.Name then
+        hasItem = HasItem(source, Config.Item.Name)
+    elseif Config.Item.Names then
+        for i = 1, #Config.Item.Names do
+            if HasItem(source, Config.Item.Names[i].name) then
+                hasItem = true
+                break
+            end
+        end
+    end
 
     if not hasItem then
         return false
     end
 
-    return MySQL.Sync.fetchScalar("SELECT 1 FROM phone_phones WHERE id=@id AND phone_number=@number", {
-        ["@id"] = GetIdentifier(source),
-        ["@number"] = number
-    }) ~= nil
+    if not number then
+        return hasItem
+    end
+
+    return MySQL.scalar.await("SELECT 1 FROM phone_phones WHERE id=? AND phone_number=?", { GetIdentifier(source), number }) ~= nil
 end
 
 ---Register an item as usable
 ---@param item string
 ---@param cb function
 function CreateUsableItem(item, cb)
-	ESX.RegisterUsableItem(item, cb)
+    ESX.RegisterUsableItem(item, cb)
 end
 
 ---Get a player's character name
@@ -140,7 +158,7 @@ end
 ---Add money to a player's bank account
 ---@param source any
 ---@param amount integer
----@return boolean # Success
+---@return boolean
 function AddMoney(source, amount)
     local xPlayer = ESX.GetPlayerFromId(source)
 
@@ -152,10 +170,23 @@ function AddMoney(source, amount)
     return true
 end
 
+---@param identifier string
+---@param amount number
+---@return boolean
+function AddMoneyOffline(identifier, amount)
+    if amount <= 0 then
+        return false
+    end
+
+    amount = math.floor(amount + 0.5)
+
+    return MySQL.update.await("UPDATE users SET accounts = JSON_SET(accounts, '$.bank', JSON_EXTRACT(accounts, '$.bank') + ?) WHERE identifier = ?", { amount, identifier }) > 0
+end
+
 ---Remove money from a player's bank account
 ---@param source any
 ---@param amount integer
----@return boolean # Success
+---@return boolean
 function RemoveMoney(source, amount)
     local xPlayer = ESX.GetPlayerFromId(source)
 
@@ -435,6 +466,15 @@ else
 end
 
 -- Company / services app
+
+RegisterNetEvent("phone:services:toggleDuty", function()
+    local xPlayer = ESX.GetPlayerFromId(source)
+    local job = xPlayer?.job
+
+    if job then
+        xPlayer.setJob(job.name, job.grade, not job.onDuty)
+    end
+end)
 
 ---@param source number
 ---@return string

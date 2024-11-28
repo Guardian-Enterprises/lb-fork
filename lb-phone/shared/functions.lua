@@ -1,5 +1,3 @@
-lib = exports.loaf_lib:GetLib()
-
 local phoneVersion = GetResourceMetadata(GetCurrentResourceName(), "version", 0) or ""
 
 local function IsResourceStartedOrStarting(resource)
@@ -9,21 +7,21 @@ end
 
 local infoLevels = {
     success = "^2[SUCCESS]",
-	info = "^5[INFO]",
-	warning = "^3[WARNING]",
-	error = "^1[ERROR]"
+    info = "^5[INFO]",
+    warning = "^3[WARNING]",
+    error = "^1[ERROR]"
 }
 
 ---@param level "success" | "info" | "warning" | "error"
 ---@param text string
 function infoprint(level, text, ...)
-	local prefix = infoLevels[level]
+    local prefix = infoLevels[level]
 
-	if not prefix then
-		prefix = "^5[INFO]^7:"
-	end
+    if not prefix then
+        prefix = "^5[INFO]^7:"
+    end
 
-	print("^6[LB Phone " .. phoneVersion .. "] " .. prefix .. "^7: " .. text, ...)
+    print("^6[LB Phone " .. phoneVersion .. "] " .. prefix .. "^7: " .. text, ...)
 end
 
 function debugprint(...)
@@ -183,6 +181,16 @@ function table.compare(t1, t2)
     return true
 end
 
+function clamp(value, min, max)
+    if value < min then
+        return min
+    elseif value > max then
+        return max
+    end
+
+    return value
+end
+
 local function GenerateLocales(localesFile)
     local tempLocals = {}
 
@@ -241,17 +249,6 @@ function L(path, args)
     end
 
     return translation
-end
-
-if not IsDuplicityVersion() then
-    local lastInteraction = 0
-    function CanInteract()
-        if lastInteraction + 500 > GetGameTimer() then
-            return false
-        end
-        lastInteraction = GetGameTimer()
-        return true
-    end
 end
 
 function SeperateNumber(number)
@@ -322,35 +319,3 @@ end
 exports("GetConfig", function()
     return Config
 end)
-
-if IsDuplicityVersion() then
-    ---@param event string
-    ---@param callback fun(source: number, phoneNumber: string, ...) : any
-    ---@param defaultReturn any
-    function BaseCallback(event, callback, defaultReturn)
-        event = "phone:" .. event
-
-        lib.RegisterCallback(event, function(source, cb, ...)
-            local phoneNumber = GetEquippedPhoneNumber(source)
-
-            if not phoneNumber then
-                return cb(defaultReturn)
-            end
-
-            if not Config.Debug then
-                local result = callback(source, phoneNumber, ...)
-
-                return cb(result)
-            end
-
-            local startTime = os.nanotime()
-            local result = callback(source, phoneNumber, ...)
-            local finishTime = os.nanotime()
-            local ms = (finishTime - startTime) / 1e6
-
-            debugprint(("Callback ^5%s^7 took %.4fms"):format(event, ms))
-
-            return cb(result)
-        end)
-    end
-end

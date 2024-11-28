@@ -41,12 +41,12 @@ local function formatKeyholders(keyholders)
     return formatted
 end
 
-lib.RegisterCallback("phone:home:getOwnedHouses", function(source, cb)
+RegisterLegacyCallback("home:getOwnedHouses", function(source, cb)
     local identifier = GetIdentifier(source)
     local identifierColumn = Config.Framework == "esx" and "identifier" or "citizenid"
     local formattedHouses = {}
     local houses = MySQL.Sync.fetchAll(([[
-        SELECT 
+        SELECT
             ph.house, ph.houseId, ph.keyholders, hl.label, hl.coords
         FROM player_houses ph
         JOIN houselocations hl ON hl.houseID = ph.houseID
@@ -75,7 +75,7 @@ lib.RegisterCallback("phone:home:getOwnedHouses", function(source, cb)
     cb(formattedHouses)
 end)
 
-lib.RegisterCallback("phone:home:getKeyholders", function(source, cb, house)
+RegisterLegacyCallback("home:getKeyholders", function(source, cb, house)
     local identifierColumn = Config.Framework == "esx" and "identifier" or "citizenid"
     local keyholders = MySQL.Sync.fetchScalar("SELECT keyholders FROM player_houses WHERE house = @house AND " .. identifierColumn .. " = @identifier", {
         ["@house"] = house,
@@ -91,7 +91,7 @@ lib.RegisterCallback("phone:home:getKeyholders", function(source, cb, house)
     cb(formatKeyholders(keyholders))
 end)
 
-lib.RegisterCallback("phone:home:removeKeyholder", function(source, cb, house, identifier)
+RegisterLegacyCallback("home:removeKeyholder", function(source, cb, house, identifier)
     if identifier == GetIdentifier(source) or not house then
         return cb(false)
     end
@@ -130,7 +130,7 @@ lib.RegisterCallback("phone:home:removeKeyholder", function(source, cb, house, i
     cb(formatKeyholders(keyholders))
 end)
 
-lib.RegisterCallback("phone:home:addKeyholder", function(source, cb, house, addSource)
+RegisterLegacyCallback("home:addKeyholder", function(source, cb, house, addSource)
     if addSource == source or not house then
         return cb(false)
     end

@@ -9,7 +9,7 @@ RegisterNUICallback("Home", function(data, cb)
     debugprint("Home:" .. (action or ""))
 
     if action == "getHomes" then
-        lib.TriggerCallback("phone:home:getOwnedHouses", cb)
+        TriggerCallback("home:getOwnedHouses", cb)
     elseif action == "removeKeyholder" then
         -- if waitKeysPromise then
         --     return cb(false)
@@ -26,9 +26,9 @@ RegisterNUICallback("Home", function(data, cb)
 
         -- Citizen.Await(waitKeysPromise)
 
-        -- lib.TriggerCallback("phone:home:getKeyholders", cb, houseData.uniqueId)
+        -- TriggerCallback("home:getKeyholders", cb, houseData.uniqueId)
 
-        lib.TriggerCallback("phone:home:removeKeyholder", cb, houseData.uniqueId, data.identifier)
+        TriggerCallback("home:removeKeyholder", cb, houseData.uniqueId, data.identifier)
     elseif action == "addKeyholder" then
         -- if waitKeysPromise then
         --     return cb(false)
@@ -41,11 +41,11 @@ RegisterNUICallback("Home", function(data, cb)
 
         -- Citizen.Await(waitKeysPromise)
 
-        -- lib.TriggerCallback("phone:home:getKeyholders", cb, houseData.uniqueId)
+        -- TriggerCallback("home:getKeyholders", cb, houseData.uniqueId)
 
-        -- lib.TriggerCallback("phone:home:addKeyholder", cb, houseData.uniqueId, data.source)
+        -- TriggerCallback("home:addKeyholder", cb, houseData.uniqueId, data.source)
 
-        lib.TriggerCallback("phone:home:addKeyholder", cb, houseData.uniqueId, data.identifier)
+        TriggerCallback("home:addKeyholder", cb, houseData.uniqueId, data.identifier)
     elseif action == "setWaypoint" then
         cb("ok")
 

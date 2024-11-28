@@ -53,21 +53,17 @@ end)
 debugprint("ESX loaded")
 loaded = true
 
----Check if the player has a phone
----@return boolean
-function HasPhoneItem(number)
-    if not Config.Item.Require then
-        return true
-    end
+local phoneVariation
 
-    if Config.Item.Unique then
-        return HasPhoneNumber(number)
-    end
-
+local function HasItem(itemName)
     if GetResourceState("ox_inventory") == "started" then
-        return (exports.ox_inventory:Search("count", Config.Item.Name) or 0) > 0
+        return (exports.ox_inventory:Search("count", itemName) or 0) > 0
     elseif GetResourceState("qs-inventory") == "started" then
-        return (exports["qs-inventory"]:Search(Config.Item.Name) or 0) > 0
+        return (exports["qs-inventory"]:Search(itemName) or 0) > 0
+    end
+
+    if ESX.SearchInventory then
+        return (ESX.SearchInventory(itemName, 1) or 0) > 0
     end
 
     local inventory = ESX.GetPlayerData()?.inventory
@@ -82,13 +78,65 @@ function HasPhoneItem(number)
     for i = 1, #inventory do
         local item = inventory[i]
 
-        if item.name == Config.Item.Name and item.count > 0 then
+        if item.name == itemName and item.count > 0 then
             return true
         end
     end
 
     return false
 end
+
+---Check if the player has a phone
+---@return boolean
+function HasPhoneItem(number)
+    if not Config.Item.Require then
+        return true
+    end
+
+    if Config.Item.Unique then
+        return HasPhoneNumber(number)
+    end
+
+    if Config.Item.Name then
+        return HasItem(Config.Item.Name)
+    end
+
+    if not phoneVariation then
+        local storedVariation = GetResourceKvpInt("phone_variation")
+
+        if storedVariation and Config.Item.Names[storedVariation] and HasItem(Config.Item.Names[storedVariation].name) then
+            phoneVariation = storedVariation
+            SetPhoneVariation(storedVariation)
+            return true
+        end
+    end
+
+    if phoneVariation and HasItem(Config.Item.Names[phoneVariation].name) then
+        return true
+    end
+
+    for i = 1, #Config.Item.Names do
+        local item = Config.Item.Names[i]
+
+        if HasItem(item.name) then
+            phoneVariation = i
+            SetPhoneVariation(i)
+            return true
+        end
+    end
+
+    return false
+end
+
+RegisterNetEvent("phone:usedPhoneVariation", function(variation)
+    if not variation or not Config.Item.Names[variation] then
+        return
+    end
+
+    phoneVariation = variation
+    SetPhoneVariation(variation)
+    ToggleOpen(true)
+end)
 
 ---Check if the player has a job
 ---@param jobs table
@@ -156,7 +204,8 @@ function GetCompanyData()
     local companyData = {
         job = ESX.PlayerData.job.name,
         jobLabel = ESX.PlayerData.job.label,
-        isBoss = ESX.PlayerData.job.grade_name == "boss"
+        isBoss = ESX.PlayerData.job.grade_name == "boss",
+        duty = ESX.PlayerData.job.onDuty
     }
 
     if not companyData.isBoss then
@@ -307,9 +356,9 @@ function SetGrade(identifier, newGrade, cb)
     return Citizen.Await(promotePromise)
 end
 
---IMPLEMENT DUTY SYSTEM FOR ESX HERE
--- function ToggleDuty()
--- end
+function ToggleDuty()
+    TriggerServerEvent("phone:services:toggleDuty")
+end
 
 --#endregion
 

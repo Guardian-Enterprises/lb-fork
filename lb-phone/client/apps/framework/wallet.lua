@@ -3,13 +3,13 @@ RegisterNUICallback("Wallet", function(data, cb)
     debugprint("Wallet:" .. (action or ""))
 
     if action == "getBalance" then
-        lib.TriggerCallback("phone:wallet:getBalance", cb)
+        TriggerCallback("wallet:getBalance", cb)
     elseif action == "getTransactions" then
-        lib.TriggerCallback("phone:wallet:getTransactions", cb, data.page, data.recent)
+        TriggerCallback("wallet:getTransactions", cb, data.page, data.recent)
     elseif action == "doesNumberExist" then
-        lib.TriggerCallback("phone:wallet:doesNumberExist", cb, data.number)
+        TriggerCallback("wallet:doesNumberExist", cb, data.number)
     elseif action == "sendPayment" then
-        lib.TriggerCallback("phone:wallet:sendPayment", cb, {
+        TriggerCallback("wallet:sendPayment", cb, {
             amount = data.amount,
             phoneNumber = data.number
         })

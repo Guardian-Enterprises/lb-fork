@@ -61,7 +61,7 @@ RegisterNUICallback("Services", function(data, cb)
     end
 
     if action == "getCompanies" then
-        lib.TriggerCallback("phone:services:getOnline", cb)
+        TriggerCallback("services:getOnline", cb)
     elseif action == "getCompany" then
         local companyData = GetCompanyData(function(data)
             data.receiveCalls = not callsDisabled
@@ -115,24 +115,24 @@ RegisterNUICallback("Services", function(data, cb)
             jobData.onCustomIconClick()
         end
     elseif action == "getEmployees" then
-        lib.TriggerCallback("phone:services:getEmployees", cb, data.company)
+        TriggerCallback("services:getEmployees", cb, data.company)
     end
 
     if action == "sendMessage" then
         -- company, number, content
-        lib.TriggerCallback("phone:services:sendMessage", cb, data.id, data.company, data.content)
+        TriggerCallback("services:sendMessage", cb, data.id, data.company, data.content)
     elseif action == "getRecentMessages" then
-        lib.TriggerCallback("phone:services:getRecentMessages", function(messages)
+        TriggerCallback("services:getRecentMessages", function(messages)
             cb(formatRecentMessages(messages))
         end, data.page)
     elseif action == "getChannelId" then
-        lib.TriggerCallback("phone:services:getChannelId", cb, data.company)
+        TriggerCallback("services:getChannelId", cb, data.company)
     elseif action == "getMessages" then
-        lib.TriggerCallback("phone:services:getMessages", function(messages)
+        TriggerCallback("services:getMessages", function(messages)
             cb(FormatMessages(messages))
         end, data.id, data.page)
     elseif action == "deleteChannel" then
-        lib.TriggerCallback("phone:services:deleteChannel", cb, data.id)
+        TriggerCallback("services:deleteChannel", cb, data.id)
     end
 
     if Config.Framework == "qb" then
@@ -160,7 +160,7 @@ exports("SendCompanyMessage", function(company, message, anonymous)
     assert(type(message) == "string", "Expected string for message")
 
     debugprint("SendCompanyMessage triggered")
-    return lib.TriggerCallbackSync("phone:services:sendMessage", nil, company, message, anonymous == true)
+    return AwaitCallback("services:sendMessage", nil, company, message, anonymous == true)
 end)
 
 exports("SendCompanyCoords", function(company, coords, anonymous)
@@ -173,9 +173,22 @@ exports("SendCompanyCoords", function(company, coords, anonymous)
     assert(type(coords) == "vector3", "Coords is not defined")
 
     debugprint("SendCompanyCoords triggered")
-    return lib.TriggerCallbackSync("phone:services:sendMessage", nil, company, ("<!SENT-LOCATION-X=%.2fY=%.2f!>"):format(coords.x, coords.y), anonymous == true)
+    return AwaitCallback("services:sendMessage", nil, company, ("<!SENT-LOCATION-X=%.2fY=%.2f!>"):format(coords.x, coords.y), anonymous == true)
 end)
 
 RegisterNetEvent("phone:services:channelDeleted", function(channelId)
     SendReactMessage("services:channelDeleted", channelId)
+end)
+
+exports("GetCompanyCallsStatus", function()
+    return not callsDisabled
+end)
+
+exports("ToggleCompanyCalls", function(enable)
+    local shouldEnable = enable == nil and not callsDisabled or enable
+
+    callsDisabled = shouldEnable == false
+    TriggerServerEvent("phone:phone:disableCompanyCalls", callsDisabled)
+
+    return not callsDisabled
 end)
