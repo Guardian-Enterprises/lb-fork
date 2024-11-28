@@ -23,6 +23,11 @@ end
 loaded = true
 
 function HasPhoneItem(number)
+    local Ped = PlayerPedId()
+    if GetEntityHealth(Ped) <= 101 then
+        return false
+    end
+
     if not Config.Item.Require then
         return true
     end

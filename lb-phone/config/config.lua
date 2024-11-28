@@ -75,7 +75,7 @@ Config.DeleteAccount = {
     ["Birdy"] = false,
     ["DarkChat"] = false,
     ["Mail"] = false,
-    ["Spark"] = false,
+    ["Spark"] = true,
 }
 
 Config.Companies = {}
