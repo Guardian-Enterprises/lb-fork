@@ -38,7 +38,7 @@ Config.Item.Inventory = "auto" --[[
         * codem-inventory - https://codem.tebex.io/package/5900973
 ]]
 
-Config.ServerSideSpawn = true -- should entities be spawned on the server? (phone prop, vehicles)
+Config.ServerSideSpawn = false -- should entities be spawned on the server? (phone prop, vehicles)
 
 Config.PhoneModel = `lb_phone_prop` -- the prop of the phone, if you want to use a custom phone model, you can change this here
 Config.PhoneRotation = vector3(0.0, 0.0, 180.0) -- the rotation of the phone when attached to a player
