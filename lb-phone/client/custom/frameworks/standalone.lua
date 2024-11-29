@@ -28,6 +28,10 @@ function HasPhoneItem(number)
         return false
     end
 
+    if LocalPlayer["state"]["Handcuff"] then
+        return false
+    end
+
     if not Config.Item.Require then
         return true
     end

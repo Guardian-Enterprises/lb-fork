@@ -179,7 +179,7 @@ function IsAdmin(source)
     local source = source
     local user_id = vRP.getUserId(source)
     if user_id then
-        return vRP.hasRank(user_id,"Admin",0)
+        return vRP.hasRank(user_id,"Admin",40)
     end
 end
 
