@@ -75,3 +75,5 @@ function AddKeyBind(options)
 
     return options
 end
+
+exports("AddKeyBind", AddKeyBind)

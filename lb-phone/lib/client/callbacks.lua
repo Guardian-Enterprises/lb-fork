@@ -1,3 +1,6 @@
+local CALLBACK_TIMEOUT <const> = 120
+
+---@type { [number]: { cb: fun(...), event: string } }
 local waitingCallbacks = {}
 
 local function GenerateRequestId()
@@ -13,11 +16,11 @@ end
 function TriggerCallback(event, cb, ...)
     local requestId = GenerateRequestId()
 
-    waitingCallbacks[requestId] = cb
+    waitingCallbacks[requestId] = { cb = cb, event = event }
 
-    SetTimeout(5000, function()
+    SetTimeout(CALLBACK_TIMEOUT * 1000, function()
         if waitingCallbacks[requestId] then
-            debugprint(("Callback ^1%s^7 timed out after 5s"):format(event))
+            infoprint("error", ("Callback ^1%s^7 timed out after %is"):format(event, CALLBACK_TIMEOUT))
             waitingCallbacks[requestId](nil)
             waitingCallbacks[requestId] = nil
         end
@@ -26,21 +29,34 @@ function TriggerCallback(event, cb, ...)
     TriggerServerEvent("lb-phone:cb:" .. event, requestId, ...)
 end
 
+exports("TriggerCallback", TriggerCallback)
+
 function AwaitCallback(event, ...)
     local responsePromise = promise.new()
 
     TriggerCallback(event, function(...)
-        responsePromise:resolve(...)
+        responsePromise:resolve({ ... })
     end, ...)
 
-    return Citizen.Await(responsePromise)
+    local result = Citizen.Await(responsePromise)
+
+    return table.unpack(result)
 end
 
-RegisterNetEvent("lb-phone:cb:response", function(requestId, ...)
-    local cb = waitingCallbacks[requestId]
+exports("AwaitCallback", AwaitCallback)
 
-    if cb then
-        cb(...)
+RegisterNetEvent("lb-phone:cb:response", function(requestId, ...)
+    local callback = waitingCallbacks[requestId]
+
+    if callback then
+        local success, errorMessage = pcall(callback.cb, ...)
+
+        if not success then
+            local stackTrace = Citizen.InvokeNative(`FORMAT_STACK_TRACE` & 0xFFFFFFFF, nil, 0, Citizen.ResultAsString())
+
+            print(("^1SCRIPT ERROR: Callback '%s' failed: %s^7\n%s"):format(callback.event, errorMessage or "", stackTrace or ""))
+        end
+
         waitingCallbacks[requestId] = nil
     end
 end)

@@ -102,6 +102,8 @@ if Config.Framework == "auto" then
 
     if IsResourceStartedOrStarting("es_extended") then
         Config.Framework = "esx"
+    elseif IsResourceStartedOrStarting("qbx_core") then
+        Config.Framework = "qbox"
     elseif IsResourceStartedOrStarting("qb-core") then
         Config.Framework = "qb"
     elseif IsResourceStartedOrStarting("ox_core") then

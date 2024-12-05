@@ -131,6 +131,10 @@ local function BringCar(data, cb)
     TaskLeaveVehicle(ped, vehicle, 0)
     TaskWanderStandard(ped, 10.0, 10)
     SetEntityAsNoLongerNeeded(ped)
+
+    Wait(1000)
+
+    SetVehicleDoorsLocked(vehicle, 0)
 end
 
 ---Function to find a car

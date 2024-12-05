@@ -218,7 +218,7 @@ function GetPlayerVehicles(source)
     for i = 1, #vehicles do
         local vehicle = vehicles[i] or {}
 
-        if vehicle.stored == nil or GetResourceState("qs-advancedgarages") == "started" then
+        if vehicle.stored == nil then
             vehicle.stored = vehicle.state
         end
 
@@ -256,7 +256,12 @@ function GetPlayerVehicles(source)
             end
         end
 
+        if GetResourceState("qs-advancedgarages") == "started" then
+            vehicle.stored = vehicle.garage ~= "OUT"
+        end
+
         local location = vehicle.stored and (vehicle.garage or "Garage") or "out"
+
         if impounded and vehicle.pound then
             location = vehicle.pound
         end
@@ -299,18 +304,28 @@ end
 ---@param plate string
 ---@return table? vehicleData
 function GetVehicle(source, plate)
-    local storedColumn, storedValue, outValue = "stored", 1, 0
+    local storedCheck = "`%s`=@stored"
+    local storedColumn = "stored"
+    ---@type any
+    local storedValue = 1
+    ---@type any
+    local outValue = 1
 
     if GetResourceState("cd_garage") == "started" or GetResourceState("jg-advancedgarages") == "started" then
         storedColumn = "in_garage"
     elseif GetResourceState("qs-advancedgarages") == "started" then
-        storedColumn = "state"
+        storedCheck = "`%s`!=@stored"
+        storedColumn = "garage"
+        storedValue = "OUT"
+        outValue = "OUT"
     end
+
+    storedCheck = storedCheck:format(storedColumn)
 
     local res = MySQL.Sync.fetchAll(([[
         SELECT * FROM owned_vehicles
-        WHERE owner=@owner AND plate=@plate AND `%s`=@stored
-    ]]):format(storedColumn), {
+        WHERE owner=@owner AND plate=@plate AND %s
+    ]]):format(storedCheck), {
         ["@owner"] = GetIdentifier(source),
         ["@plate"] = plate,
         ["@stored"] = storedValue

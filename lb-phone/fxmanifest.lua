@@ -2,21 +2,21 @@ fx_version "cerulean"
 game "gta5"
 lua54 "yes"
 
-version "2.1.6"
+version "2.1.7"
 
 shared_script {
     "config/*.lua",
-    "shared/**/*.lua",
-    "@vrp/lib/utils.lua"
+    "shared/**/*.lua"
 }
 
 client_script {
+    "@vrp/lib/utils.lua",
     "lib/client/**.lua",
-    "client/**.lua",
-    "@vrp/lib/utils.lua"
+    "client/**.lua"
 }
 
 server_scripts {
+    "@vrp/lib/utils.lua",
     "@oxmysql/lib/MySQL.lua",
     "lib/server/**.lua",
     "server/**/*.lua",
