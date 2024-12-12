@@ -1,4 +1,4 @@
-import{r as u,s as r,q as l,p as S,a as n,m as T,j as c,S as P,L as i,w,J as f,aw as L,ag as D,I,d as b,R as k,C as v,n as x}from"./index-77274291.js";import{T as F}from"./Textarea-2aae3848.js";const _=[{id:"123",title:"Shopping List",content:"Milk, eggs, bread, butter",timestamp:Date.now()-1e3*60*60*2},{id:"1414",title:"To Do List",content:`- Finish the UI
+import{r as u,s as r,q as l,p as S,a as n,m as T,j as c,S as P,L as i,w,J as f,aw as L,ag as D,I,d as b,R as k,C as v,n as x}from"./index-98dfac83.js";import{T as F}from"./Textarea-a77d92b3.js";const _=[{id:"123",title:"Shopping List",content:"Milk, eggs, bread, butter",timestamp:Date.now()-1e3*60*60*2},{id:"1414",title:"To Do List",content:`- Finish the UI
 - Implement the backend
 - Deploy the app`,timestamp:Date.now()-1e3*60*60*5},{id:"51515",title:"another list",content:`this is yet another list, it functions as a test for the notes app.
 

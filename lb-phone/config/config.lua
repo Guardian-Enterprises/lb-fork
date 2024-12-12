@@ -9,12 +9,13 @@ Config.DatabaseChecker.AutoFix = true
 Config.Framework = "standalone"
 --[[
     Supported frameworks:
-        * auto: auto-detect framework (ONLY WORKS WITH THE ONES LISTED BELOW)
-        * esx: es_extended, https://github.com/esx-framework/esx-legacy
-        * qb: qb-core, https://github.com/qbcore-framework/qb-core
-        * ox: ox_core, https://github.com/overextended/ox_core
+        * auto: auto-detect framework
+        * esx: es_extended - https://github.com/esx-framework/esx-legacy
+        * qb: qb-core - https://github.com/qbcore-framework/qb-core
+        * qbox: qbx_core - https://github.com/Qbox-project/qbx_core
+        * ox: ox_core - https://github.com/overextended/ox_core
         * vrp2: vrp 2.0 (ONLY THE OFFICIAL vRP 2.0, NOT CUSTOM VERSIONS)
-        * standalone: no framework, note that framework specific apps will not work unless you implement the functions
+        * standalone: no framework. note that framework specific apps will not work unless you implement the functions
 ]]
 Config.CustomFramework = true -- if set to true and you use standalone, you will be able to use framework specific apps
 Config.QBMailEvent = true -- if you want this script to listen for qb email events, enable this.
@@ -43,6 +44,8 @@ Config.ServerSideSpawn = false -- should entities be spawned on the server? (pho
 Config.PhoneModel = `lb_phone_prop` -- the prop of the phone, if you want to use a custom phone model, you can change this here
 Config.PhoneRotation = vector3(0.0, 0.0, 180.0) -- the rotation of the phone when attached to a player
 Config.PhoneOffset = vector3(0.0, -0.005, 0.0) -- the offset of the phone when attached to a player
+
+Config.DisableOpenNUI = true -- disable the phone from opening if another script has NUI focus?
 
 Config.DynamicIsland = true -- if enabled, the phone will have a Iphone 14 Pro inspired Dynamic Island.
 Config.SetupScreen = true -- if enabled, the phone will have a setup screen when the player first uses the phone.

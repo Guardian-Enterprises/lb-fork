@@ -21,7 +21,7 @@ function TriggerCallback(event, cb, ...)
     SetTimeout(CALLBACK_TIMEOUT * 1000, function()
         if waitingCallbacks[requestId] then
             infoprint("error", ("Callback ^1%s^7 timed out after %is"):format(event, CALLBACK_TIMEOUT))
-            waitingCallbacks[requestId](nil)
+            waitingCallbacks[requestId].cb(nil)
             waitingCallbacks[requestId] = nil
         end
     end)

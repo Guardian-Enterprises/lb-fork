@@ -454,7 +454,7 @@ AddEventHandler('QBCore:Server:PlayerLoaded', function(Player)
     debugprint("qb jobs: player loaded update (src, job, duty)", src, job.name, job.onduty)
 end)
 
-AddEventHandler("QBCore:Server:OnJobUpdate", function(src, job)
+local function OnPlayerJobUpdate(src, job)
     local shouldRefresh = false
     local lastJob = playerJobs[src]
     local lastName = lastJob and lastJob.name
@@ -462,8 +462,7 @@ AddEventHandler("QBCore:Server:OnJobUpdate", function(src, job)
     local jobName = job.name
     local onDuty = job.onduty
 
-    Wait(0)
-    debugprint("qb jobs: job update (src, job, duty)", src, job.name, job.onduty)
+    debugprint("qb jobs: job/duty update (src, job, duty)", src, job.name, job.onduty)
 
     if lastJob and lastName == jobName then
         if lastJob.onduty == onDuty then
@@ -505,6 +504,21 @@ AddEventHandler("QBCore:Server:OnJobUpdate", function(src, job)
     end
 
     debugprint(playerJobs, jobCounts, jobDutyCounts)
+end
+
+AddEventHandler("QBCore:Server:SetDuty", function(src, duty)
+    Wait(0) -- makes it print in server console instead of chat when using commands
+
+    OnPlayerJobUpdate(src, {
+        name = playerJobs[src].name,
+        onduty = duty
+    })
+end)
+
+AddEventHandler("QBCore:Server:OnJobUpdate", function(src, job)
+    Wait(0) -- makes it print in server console instead of chat when using commands
+
+    OnPlayerJobUpdate(src, job)
 end)
 
 local function unloadJob(src)

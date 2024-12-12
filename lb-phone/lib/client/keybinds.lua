@@ -2,9 +2,11 @@
 ---@field name string
 ---@field description string
 ---@field defaultKey string
+---@field defaultMapper? string
+---@field secondaryKey? string
+---@field secondaryMapper? string
 ---@field onPress? function
 ---@field onRelease? fun(timePressed: integer)
----@field defaultMapper? string
 
 ---@class KeyBind : KeyBindOptions
 ---@field defaultMapper string
@@ -67,6 +69,10 @@ function AddKeyBind(options)
     end, false)
 
     RegisterKeyMapping("+" .. name, options.description, options.defaultMapper, options.defaultKey)
+
+    if options.secondaryKey then
+        RegisterKeyMapping("~!+" .. name, options.description, options.secondaryMapper or options.defaultMapper, options.secondaryKey)
+    end
 
     SetTimeout(500, function()
         TriggerEvent("chat:removeSuggestion", ("/+%s"):format(name))

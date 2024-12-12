@@ -47,6 +47,10 @@ RegisterNetEvent("QBCore:Player:SetPlayerData", function(newData)
     end
 end)
 
+RegisterNetEvent("QBCore:Client:SetDuty", function(onDuty)
+    PlayerJob.onduty = onDuty
+end)
+
 RegisterNetEvent("QBCore:Client:OnJobUpdate", function(jobInfo)
     PlayerJob = jobInfo
 end)
