@@ -205,3 +205,7 @@ function cRP.hasPhone()
     TriggerClientEvent("Notify",source,"error","Você possui um <b>"..vRP.itemName(Config.Item.Name).."</b>.")
     return false    
 end
+
+function cRP.getVehicleName(model)
+    return vRP.vehicleHashName(model)
+end

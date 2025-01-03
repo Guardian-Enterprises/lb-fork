@@ -49,7 +49,7 @@ end
 ---@param phoneNumber string
 ---@param page? number
 ---@param perPage? number
-local function getTransactions(phoneNumber, page, perPage)
+local function GetTransactions(phoneNumber, page, perPage)
     page = math.max(page or 0, 0)
     perPage = math.max(perPage or 5, 1)
 
@@ -71,7 +71,7 @@ end)
 ---@param page number
 ---@param recent? true
 BaseCallback("wallet:getTransactions", function(source, phoneNumber, page, recent)
-    return getTransactions(phoneNumber, page, recent and 5 or 25)
+    return GetTransactions(phoneNumber, page, recent and 5 or 25)
 end)
 
 BaseCallback("wallet:doesNumberExist", function(source, phoneNumber, number)

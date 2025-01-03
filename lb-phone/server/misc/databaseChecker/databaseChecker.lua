@@ -40,7 +40,7 @@ end
 local defaultTables = GetDefaultDatabaseTables()
 local tables = {}
 
-local function fetchTables()
+local function FetchTables()
     table.wipe(tables)
 
     local rows = MySQL.query.await("SELECT TABLE_NAME, COLUMN_NAME, DATA_TYPE, COLLATION_NAME, CHARACTER_MAXIMUM_LENGTH, IS_NULLABLE, COLUMN_DEFAULT, COLUMN_KEY FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = ? AND TABLE_NAME LIKE ?", {
@@ -76,7 +76,7 @@ local function fetchTables()
     return tables
 end
 
-fetchTables()
+FetchTables()
 
 if shouldGenerateTables then
     local luaTable = "local defaultTables = {\n"
@@ -120,7 +120,7 @@ local missingTables = {}
 local updateChanges = false
 
 -- Photo albums update
-local function validatePhotoAlbums()
+local function ValidatePhotoAlbums()
     if not tables.phone_photo_albums then
         MySQL.rawExecute.await([[
             CREATE TABLE IF NOT EXISTS `phone_photo_albums` (
@@ -177,7 +177,7 @@ local function validatePhotoAlbums()
     end
 end
 
-local function validateNotificationsId()
+local function ValidateNotificationsId()
     local idColumn = tables.phone_notifications?.id
 
     if idColumn.type == "VARCHAR" then
@@ -199,7 +199,7 @@ local function validateNotificationsId()
     end
 end
 
-local function validateMessages()
+local function ValidateMessages()
     local channels = tables.phone_message_channels
 
     if not channels then
@@ -305,7 +305,7 @@ local function validateMessages()
 end
 
 -- Delete mails update
-local function validateDeleteMail()
+local function ValidateDeleteMail()
     if not tables.phone_mail_deleted then
         MySQL.rawExecute.await([[
             CREATE TABLE IF NOT EXISTS `phone_mail_deleted` (
@@ -323,7 +323,7 @@ local function validateDeleteMail()
 end
 
 -- Remove phone_number foreign keys from phone_message_x
-local function validateMessageForeignKeyNumbers()
+local function ValidateMessageForeignKeyNumbers()
     if not Config.DatabaseChecker.AutoFix then
         return
     end
@@ -350,7 +350,7 @@ local function validateMessageForeignKeyNumbers()
 end
 
 -- V2 update
-local function validateV2()
+local function ValidateV2()
     if tables.phone_marketplace_posts.id.type ~= "INT" then
         MySQL.rawExecute.await([[
             ALTER TABLE `phone_marketplace_posts`
@@ -487,7 +487,7 @@ local function validateV2()
     end
 end
 
-local function validateAutoIncrementUpdate()
+local function ValidateAutoIncrementUpdate()
     if tables.phone_notes.id.type ~= "INT" then
         MySQL.rawExecute.await([[
             ALTER TABLE phone_notes
@@ -755,20 +755,20 @@ local function validateAutoIncrementUpdate()
 end
 
 if Config.DatabaseChecker.AutoFix then
-    validatePhotoAlbums()
-    validateNotificationsId()
-    validateMessages()
-    validateDeleteMail()
-    validateMessageForeignKeyNumbers()
-    validateV2()
-    validateAutoIncrementUpdate()
+    ValidatePhotoAlbums()
+    ValidateNotificationsId()
+    ValidateMessages()
+    ValidateDeleteMail()
+    ValidateMessageForeignKeyNumbers()
+    ValidateV2()
+    ValidateAutoIncrementUpdate()
 end
 
 if updateChanges then
-    fetchTables()
+    FetchTables()
 end
 
-local function getLastArg(column)
+local function GetLastArg(column)
     local lastArg = column.type
 
     if column.length and column.type ~= "LONGTEXT" and column.type ~= "TEXT" then
@@ -805,7 +805,7 @@ for tableName, columns in pairs(defaultTables) do
             infoprint("error", ("Missing column ^5%s^7 in the table ^5%s^7."):format(defaultColumn.column, tableName))
 
             if not defaultColumn.isKey then
-                fixQueries[#fixQueries+1] = ("ALTER TABLE `%s` ADD COLUMN `%s` %s"):format(tableName, defaultColumn.column, getLastArg(defaultColumn))
+                fixQueries[#fixQueries+1] = ("ALTER TABLE `%s` ADD COLUMN `%s` %s"):format(tableName, defaultColumn.column, GetLastArg(defaultColumn))
             else
                 infoprint("warning", ("Column ^5%s^7 in the table ^5%s^7 is a key and cannot be added automatically. Check the #updates channel for a query to run, or ask in #customer-support"):format(defaultColumn.column, tableName))
             end
@@ -817,7 +817,7 @@ for tableName, columns in pairs(defaultTables) do
             infoprint("warning", ("Column ^5%s^7 in the table ^5%s^7 has the wrong data type."):format(defaultColumn.column, tableName))
 
             if not defaultColumn.isKey and not column.isKey then
-                fixQueries[#fixQueries+1] = ("ALTER TABLE `%s` MODIFY COLUMN `%s` %s"):format(tableName, defaultColumn.column, getLastArg(defaultColumn))
+                fixQueries[#fixQueries+1] = ("ALTER TABLE `%s` MODIFY COLUMN `%s` %s"):format(tableName, defaultColumn.column, GetLastArg(defaultColumn))
             else
                 infoprint("warning", ("Column ^5%s^7 in the table ^5%s^7 is a key and cannot be modified automatically. Check the #updates channel for a query to run, or ask in #customer-support"):format(defaultColumn.column, tableName))
             end
@@ -829,7 +829,7 @@ for tableName, columns in pairs(defaultTables) do
             infoprint("warning", ("Column ^5%s^7 in the table ^5%s^7 has the wrong length."):format(defaultColumn.column, tableName))
 
             if not defaultColumn.isKey and not column.isKey then
-                fixQueries[#fixQueries+1] = ("ALTER TABLE `%s` MODIFY COLUMN `%s` %s"):format(tableName, defaultColumn.column, getLastArg(defaultColumn))
+                fixQueries[#fixQueries+1] = ("ALTER TABLE `%s` MODIFY COLUMN `%s` %s"):format(tableName, defaultColumn.column, GetLastArg(defaultColumn))
             else
                 infoprint("warning", ("Column ^5%s^7 in the table ^5%s^7 is a key and cannot be modified automatically. Check the #updates channel for a query to run, or ask in #customer-support"):format(defaultColumn.column, tableName))
             end
@@ -873,7 +873,7 @@ if changes > 0 then
     end
 end
 
-local function notifyChanges()
+local function NotifyChanges()
     if changes > 0 and not Config.DatabaseChecker.AutoFix then
         infoprint("warning", ("Database has %i changes that need to be fixed. Try running lb-phone/fix.sql"):format(changes))
     end
@@ -884,6 +884,6 @@ local function notifyChanges()
 end
 
 while changes > 0 or missingAnyTables do
-    notifyChanges()
+    NotifyChanges()
     Wait(5000)
 end

@@ -521,7 +521,7 @@ AddEventHandler("QBCore:Server:OnJobUpdate", function(src, job)
     OnPlayerJobUpdate(src, job)
 end)
 
-local function unloadJob(src)
+local function UnloadJob(src)
     local lastJob = playerJobs[src]
 
     if not lastJob then
@@ -540,14 +540,14 @@ AddEventHandler("QBCore:Server:OnPlayerUnload", function(src)
     Wait(0)
     debugprint("qb jobs: player unload", src)
 
-    unloadJob(src)
+    UnloadJob(src)
 end)
 
 AddEventHandler("playerDropped", function()
     local src = source
 
     debugprint("qb jobs: player dropped", src)
-    unloadJob(src)
+    UnloadJob(src)
 end)
 
 RegisterCallback("services:getPlayerData", function (source, player)

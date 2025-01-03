@@ -22,7 +22,7 @@ end)
 
 TriggerServerEvent("qb-houses:server:setHouses")
 
-local function formatKeyHolders(keyholders)
+local function FormatKeyHolders(keyholders)
     local formatted = {}
     for i = 1, #keyholders do
         formatted[i] = {
@@ -34,7 +34,7 @@ local function formatKeyHolders(keyholders)
     return formatted
 end
 
-local function formatHouses(houses)
+local function FormatHouses(houses)
     local formatted = {}
     for i = 1, #houses do
         local houseData = houses[i]
@@ -44,7 +44,7 @@ local function formatHouses(houses)
             id = i,
             uniqueId = houseData.name,
             locked = allHouses[houseData.name]?.locked or false,
-            keyholders = formatKeyHolders(houseData.keyholders)
+            keyholders = FormatKeyHolders(houseData.keyholders)
         }
     end
 
@@ -53,7 +53,7 @@ end
 
 RegisterNUICallback("Home", function(data, cb)
     local action = data.action
-    debugprint("Home:" .. (action or ""))
+    debugprint("qb-houses - Home:" .. (action or ""))
 
     if action == "getHomes" then
         QB.Functions.TriggerCallback("qb-phone:server:GetPlayerHouses", function(houses)
@@ -61,7 +61,7 @@ RegisterNUICallback("Home", function(data, cb)
                 return cb({})
             end
 
-            cb(formatHouses(houses))
+            cb(FormatHouses(houses))
         end)
     elseif action == "removeKeyholder" then
         local houseData = data.houseData
@@ -72,7 +72,7 @@ RegisterNUICallback("Home", function(data, cb)
                 return cb({})
             end
 
-            cb(formatKeyHolders(houses[data.id].keyholders))
+            cb(FormatKeyHolders(houses[data.id].keyholders))
         end)
     elseif action == "addKeyholder" then
         local houseData = data.houseData
@@ -83,7 +83,7 @@ RegisterNUICallback("Home", function(data, cb)
                 return cb({})
             end
 
-            cb(formatKeyHolders(houses[data.id].keyholders))
+            cb(FormatKeyHolders(houses[data.id].keyholders))
         end)
     elseif action == "toggleLocked" then
         local houseData = data.houseData

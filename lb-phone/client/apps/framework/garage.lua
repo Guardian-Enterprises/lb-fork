@@ -151,23 +151,13 @@ local function FindCar(plate)
         end
     end
 
-    return AwaitCallback("garage:findCar", plate)
+    local location = AwaitCallback("garage:findCar", plate)
+
+    return location
 end
 
 function GetVehicleLabel(model)
-    local vehicleLabel = GetDisplayNameFromVehicleModel(model):lower()
-
-    if not vehicleLabel or vehicleLabel == "null" or vehicleLabel == "carnotfound" then
-        return "Unknown"
-    end
-
-    local text = GetLabelText(vehicleLabel)
-
-    if text and text:lower() ~= "null" then
-        vehicleLabel = text
-    end
-
-    return vehicleLabel
+    return vSERVER.getVehicleName(model)
 end
 
 RegisterNUICallback("Garage", function(data, cb)

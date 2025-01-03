@@ -16,6 +16,11 @@ end
 function TriggerCallback(event, cb, ...)
     local requestId = GenerateRequestId()
 
+    if not cb then
+        debugprint(("Callback '%s' was triggered without a callback function^7"):format(event))
+        cb = function() end
+    end
+
     waitingCallbacks[requestId] = { cb = cb, event = event }
 
     SetTimeout(CALLBACK_TIMEOUT * 1000, function()

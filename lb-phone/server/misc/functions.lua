@@ -9,7 +9,7 @@ local cachedUsers = {}
 
 ---@param id string
 ---@return { username: string, avatar: string } | nil
-local function getForumUserFromId(id)
+local function GetForumUserFromId(id)
     if cachedUsers[id] then
         return cachedUsers[id]
     end
@@ -45,7 +45,7 @@ end
 ---@param message string
 ---@param avatar? string
 ---@param image? string
-local function log(app, source, type, title, message, avatar, image)
+local function PerformLog(app, source, type, title, message, avatar, image)
     local discordWebhook = LOGS[app]
     local cleanedUpIdentifiers = {}
     local accounts = {}
@@ -68,7 +68,7 @@ local function log(app, source, type, title, message, avatar, image)
             accountsCount += 1
             accounts[accountsCount] = "- Steam: https://steamcommunity.com/profiles/" .. tonumber(identifier, 16)
         elseif identifierType == "fivem" then
-            local user = getForumUserFromId(identifier)
+            local user = GetForumUserFromId(identifier)
 
             if user then
                 avatar = avatar or user.avatar
@@ -149,7 +149,7 @@ function Log(app, source, type, title, message, avatar, image)
     end
 
     CreateThread(function()
-        log(app, source, type, title, message, avatar, image)
+        PerformLog(app, source, type, title, message, avatar, image)
     end)
 end
 

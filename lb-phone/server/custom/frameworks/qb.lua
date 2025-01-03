@@ -507,7 +507,7 @@ AddEventHandler("QBCore:Server:OnJobUpdate", function(src, job)
     debugprint(playerJobs, jobCounts, jobDutyCounts)
 end)
 
-local function unloadJob(src)
+local function UnloadJob(src)
     local lastJob = playerJobs[src]
 
     if not lastJob then
@@ -526,14 +526,14 @@ AddEventHandler("QBCore:Server:OnPlayerUnload", function(src)
     Wait(0)
     debugprint("qb jobs: player unload", src)
 
-    unloadJob(src)
+    UnloadJob(src)
 end)
 
 AddEventHandler("playerDropped", function()
     local src = source
 
     debugprint("qb jobs: player dropped", src)
-    unloadJob(src)
+    UnloadJob(src)
 end)
 
 RegisterLegacyCallback("services:getPlayerData", function(_, cb, player)
@@ -545,7 +545,7 @@ RegisterLegacyCallback("services:getPlayerData", function(_, cb, player)
     })
 end)
 
-local function getSocietyMoney(job)
+local function GetSocietyMoney(job)
     local success, res = pcall(function()
         return exports["qb-management"]:GetAccount(job)
     end)
@@ -560,7 +560,7 @@ end
 RegisterLegacyCallback("services:getAccount", function(source, cb)
     local job = GetJob(source)
 
-    cb(getSocietyMoney(job))
+    cb(GetSocietyMoney(job))
 end)
 
 RegisterLegacyCallback("services:addMoney", function(source, cb, amount)
@@ -578,13 +578,13 @@ RegisterLegacyCallback("services:addMoney", function(source, cb, amount)
         RemoveMoney(source, amount)
     end
 
-    cb(getSocietyMoney(job))
+    cb(GetSocietyMoney(job))
 end)
 
 RegisterLegacyCallback("services:removeMoney", function(source, cb, amount)
     local job = GetJob(source)
 
-    if amount < 0 or getSocietyMoney(job) < amount then
+    if amount < 0 or GetSocietyMoney(job) < amount then
         return
     end
 
@@ -600,11 +600,11 @@ RegisterLegacyCallback("services:removeMoney", function(source, cb, amount)
         AddMoney(source, amount)
     end
 
-    cb(getSocietyMoney(job))
+    cb(GetSocietyMoney(job))
 end)
 
 if Config.QBMailEvent then
-    local function sendQBMail(phoneNumber, data)
+    local function SendQBMail(phoneNumber, data)
         if not phoneNumber then
             return
         end
@@ -644,19 +644,19 @@ if Config.QBMailEvent then
     RegisterNetEvent("qb-phone:server:sendNewMail", function(data)
         local phoneNumber = GetEquippedPhoneNumber(source)
 
-        sendQBMail(phoneNumber, data)
+        SendQBMail(phoneNumber, data)
     end)
 
     RegisterNetEvent("qb-phone:server:sendNewMailToOffline", function(citizenid, data)
         local phoneNumber = GetEquippedPhoneNumber(citizenid)
 
-        sendQBMail(phoneNumber, data)
+        SendQBMail(phoneNumber, data)
     end)
 
     AddEventHandler("__cfx_export_qb-phone_sendNewMailToOffline", function(citizenid, data)
         local phoneNumber = GetEquippedPhoneNumber(citizenid)
 
-        sendQBMail(phoneNumber, data)
+        SendQBMail(phoneNumber, data)
     end)
 end
 

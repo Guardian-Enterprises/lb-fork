@@ -18,7 +18,7 @@ for i = 1, #Config.Companies.Services do
 end
 
 -- Messages
-local function getChannel(company, phoneNumber)
+local function GetChannel(company, phoneNumber)
     local channel = MySQL.scalar.await("SELECT id FROM phone_services_channels WHERE company = ? AND phone_number = ?", { company, phoneNumber })
 
     if channel then
@@ -30,7 +30,7 @@ end
 
 ---@param job string
 BaseCallback("services:getChannelId", function (source, phoneNumber, job)
-    return getChannel(job, phoneNumber)
+    return GetChannel(job, phoneNumber)
 end)
 
 ---@param channelId string
@@ -45,13 +45,13 @@ BaseCallback("services:sendMessage", function(source, phoneNumber, channelId, co
 
     if anonymous then
         phoneNumber = L("BACKEND.SERVICES.ANONYMOUS")
-        channelId = getChannel(company, phoneNumber)
+        channelId = GetChannel(company, phoneNumber)
     end
 
     debugprint("phone:services:sendMessage, company:", company, " message:", message)
 
     if not channelId then
-        channelId = getChannel(company, phoneNumber)
+        channelId = GetChannel(company, phoneNumber)
     end
 
     local contacter = MySQL.scalar.await("SELECT phone_number FROM phone_services_channels WHERE id = ?", { channelId })

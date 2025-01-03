@@ -26,7 +26,7 @@ end
 BaseCallback("garage:findCar", function(source, phoneNumber, plate)
     local out, vehicle = IsVehicleOut(plate)
 
-    if out and vehicle and not exports["guardian-garages"]:Signal(vehPlate) then
+    if out and vehicle then
         return GetEntityCoords(vehicle)
     end
 

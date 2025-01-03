@@ -327,7 +327,14 @@ function HireEmployee(source, cb)
         hirePromise:resolve(true)
     end, player.identifier, ESX.PlayerData.job.name, 0, "hire")
 
-    return Citizen.Await(hirePromise)
+    if not Citizen.Await(hirePromise) then
+        return
+    end
+
+    return {
+        id = player.identifier,
+        name = player.name,
+    }
 end
 
 function FireEmployee(identifier, cb)

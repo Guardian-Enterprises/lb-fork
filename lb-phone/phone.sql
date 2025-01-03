@@ -13,6 +13,8 @@ CREATE TABLE IF NOT EXISTS `phone_phones` (
     `assigned` BOOLEAN DEFAULT FALSE, -- if the phone is assigned to a phone item (metadata)
     `battery` INT NOT NULL DEFAULT 100, -- battery percentage
 
+    `last_seen` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
     PRIMARY KEY (`id`),
     UNIQUE KEY (`phone_number`)
 ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

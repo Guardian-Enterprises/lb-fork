@@ -137,3 +137,19 @@ exports("SetServiceBars", function(bars)
 
     staticService = bars
 end)
+
+function ReloadPhone()
+    local wasOpen = phoneOpen
+
+    debugprint("ReloadPhone triggered")
+
+    LogOut()
+    Wait(1000)
+    FetchPhone()
+
+    if wasOpen then
+        ToggleOpen(true)
+    end
+end
+
+exports("ReloadPhone", ReloadPhone)

@@ -14,7 +14,7 @@ if GetCurrentResourceName() == "vrp" then
 
     local hasSpawned = false
 
-    local function firstSpawn()
+    local function FirstSpawn()
         hasSpawned = true
 
         TriggerEvent("lb-phone:vrp:firstSpawn")
@@ -25,7 +25,7 @@ if GetCurrentResourceName() == "vrp" then
             return
         end
 
-        firstSpawn()
+        FirstSpawn()
     end
 
     function lbphone.tunnel:setCharacterId(id)
@@ -33,7 +33,7 @@ if GetCurrentResourceName() == "vrp" then
     end
 
     if vRP.EXT.Base.cid then
-        firstSpawn()
+        FirstSpawn()
     end
 
     function lbphone.proxy:spawnVehicle(vehicleData, coords)

@@ -12,7 +12,7 @@ end
 
 RegisterNUICallback("Home", function(data, cb)
     local action, houseData = data.action, data.houseData
-    debugprint("Home:" .. (action or ""))
+    debugprint("qs-housing - Home:" .. (action or ""))
 
     if action == "getHomes" then
         TriggerCallback("home:getOwnedHouses", cb)

@@ -18,7 +18,7 @@ Config.Framework = "standalone"
         * standalone: no framework. note that framework specific apps will not work unless you implement the functions
 ]]
 Config.CustomFramework = true -- if set to true and you use standalone, you will be able to use framework specific apps
-Config.QBMailEvent = true -- if you want this script to listen for qb email events, enable this.
+Config.QBMailEvent = false -- if you want this script to listen for qb email events, enable this.
 Config.QBOldJobMethod = false -- use the old method to check job in qb-core? this is slower, and only needed if you use an outdated version of qb-core.
 
 Config.Item = {}
@@ -171,7 +171,7 @@ Config.Locations = { -- Locations that'll appear in the maps app.
     },
 }
 
-Config.Locales = { -- languages that the player can choose from when setting up a phone [Check the docs to see which languages the phone supports]
+Config.Locales = { -- If your desired language isn't here, you may contribute at https://github.com/lbphone/lb-phone-locales
     {
         locale = "en",
         name = "English"
@@ -247,6 +247,10 @@ Config.Locales = { -- languages that the player can choose from when setting up 
     {
         locale = "ua",
         name = "Українська"
+    },
+    {
+        locale = "ba",
+        name = "Bosanski"
     }
 }
 
