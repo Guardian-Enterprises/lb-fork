@@ -41,18 +41,9 @@ function GetIdentifier(source)
 end
 
 ---@param source number
----@param number string
----@return boolean
-function HasPhoneItem(source, number)
-    if not Config.Item.Require then
-        return true
-    end
-
-    if Config.Item.Unique then
-        return HasPhoneNumber(source, number)
-    end
-
-    return (exports.ox_inventory:Search(source, "count", Config.Item.Name) or 0) > 0
+---@param itemName string
+function HasItem(source, itemName)
+    return (exports.ox_inventory:Search(source, "count", itemName) or 0) > 0
 end
 
 ---@param source number

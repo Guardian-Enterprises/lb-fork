@@ -40,18 +40,10 @@ end
 
 loaded = true
 
----@param number? string
+---@param itemName string
 ---@return boolean
-function HasPhoneItem(number)
-    if not Config.Item.Require then
-        return true
-    end
-
-    if Config.Item.Unique then
-        return HasPhoneNumber(number)
-    end
-
-    return (exports.ox_inventory:Search("count", Config.Item.Name) or 0) > 0
+function HasItem(itemName)
+    return (exports.ox_inventory:Search("count", itemName) or 0) > 0
 end
 
 AddEventHandler("ox_inventory:updateInventory", function(changes)

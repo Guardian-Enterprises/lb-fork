@@ -155,7 +155,7 @@ function table.deep_clone(og)
     return copy
 end
 
-function contains(t, v)
+function table.contains(t, v)
     for i = 1, #t do
         if t[i] == v then
             return true, i
@@ -183,7 +183,7 @@ function table.compare(t1, t2)
     return true
 end
 
-function clamp(value, min, max)
+function math.clamp(value, min, max)
     if value < min then
         return min
     elseif value > max then

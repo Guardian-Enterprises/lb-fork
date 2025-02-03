@@ -97,11 +97,9 @@ local lbphone = proxy.getInterface("vRP.EXT." .. name)
 
 -- TODO: check if has phone item
 
----@param number? string
+---@param itemName string
 ---@return boolean
-function HasPhoneItem(number)
-    print("HAS PHONE ITEM??", number)
-
+function HasItem(itemName)
     return true
 end
 

@@ -1,20 +1,32 @@
 if (!globalThis.componentsLoaded) {
     globalThis.componentsLoaded = true;
 
-    function fetchNui(event, data, scriptName) {
-        const options = {
-            method: 'POST',
-            body: JSON.stringify(data ?? {})
-        };
+    globalThis.fetchNui = async (event, data, scriptName) => {
+        scriptName = scriptName || globalThis.resourceName;
 
-        return new Promise((resolve, reject) => {
-            fetch(`https://${scriptName ?? globalThis.resourceName}/${event}`, options)
-                .then((res) => res.json())
-                .then(resolve)
-                .catch((err) => {
-                    console.log(err);
-                    return;
-                });
+        if (scriptName !== globalThis.resourceName) {
+            console.warn(`The app ${appName} (${globalThis.resourceName}) is fetching from another resource (${scriptName}), this will soon be blocked by FiveM. Read more: https://forum.cfx.re/t/5261145`);
+        }
+
+        try {
+            const response = await fetch(`https://${scriptName}/${event}`, {
+                method: 'post',
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) throw new Error(`${response.status} - ${response.statusText}`);
+
+            return await response.json();
+        } catch (err) {
+            console.error(`Error fetching ${event} from ${scriptName}`, err);
+        }
+    };
+
+    function useNuiEvent(eventName, cb) {
+        window.addEventListener('message', (event) => {
+            if (event.data?.action === eventName) {
+                cb(event.data.data);
+            }
         });
     }
 
@@ -34,7 +46,7 @@ if (!globalThis.componentsLoaded) {
             data.input.onChange = true;
         }
 
-        fetchNui('SetPopUp', data, 'lb-phone').then((buttonId) => {
+        globalThis.components.fetchPhone('SetPopUp', data).then((buttonId) => {
             if (!data.buttons[buttonId]?.cb) return;
             data.buttons[buttonId].cb();
         });
@@ -47,7 +59,7 @@ if (!globalThis.componentsLoaded) {
             if (data.buttons[i].cb) data.buttons[i].callbackId = i;
         }
 
-        fetchNui('SetContextMenu', data, 'lb-phone').then((buttonId) => {
+        globalThis.components.fetchPhone('SetContextMenu', data).then((buttonId) => {
             if (!data.buttons[buttonId]?.cb) return;
             data.buttons[buttonId].cb();
         });
@@ -56,13 +68,14 @@ if (!globalThis.componentsLoaded) {
     function setContactModal(number) {
         if (!number) return;
 
-        fetchNui('SetContactModal', number, 'lb-phone');
+        globalThis.components.fetchPhone('SetContactModal', number);
     }
 
     function useComponent(cb, data) {
         if (!cb || !data?.component) return;
 
-        fetchNui('ShowComponent', data, 'lb-phone')
+        globalThis.components
+            .fetchPhone('ShowComponent', data)
             .then((data) => {
                 cb(data);
             })
@@ -97,29 +110,25 @@ if (!globalThis.componentsLoaded) {
     }
 
     function getSettings() {
-        return new Promise((resolve, reject) => {
-            fetchNui('GetSettings', {}, 'lb-phone').then(resolve).catch(reject);
-        });
+        return globalThis.components.fetchPhone('GetSettings');
     }
 
     function getLocale(path, format) {
-        return new Promise((resolve, reject) => {
-            fetchNui('GetLocale', { path, format }, 'lb-phone').then(resolve).catch(reject);
-        });
+        return globalThis.components.fetchPhone('GetLocale', { path, format });
     }
 
     function sendNotification(data) {
         data.app = globalThis.appName;
         if (!data?.title && !data?.content) return console.log('Invalid notification data');
-        fetchNui('SendNotification', data, 'lb-phone');
+        globalThis.components.fetchPhone('SendNotification', data);
     }
 
-    let settingListeners = [];
+    let settingsListeners = [];
 
     function onSettingsChange(cb) {
         if (!cb) return;
 
-        settingListeners.push(cb);
+        settingsListeners.push(cb);
     }
 
     globalThis.addEventListener('message', (event) => {
@@ -127,14 +136,14 @@ if (!globalThis.componentsLoaded) {
         const type = data.type;
 
         if (type === 'settingsUpdated') {
-            settingListeners.forEach((cb) => cb(data.settings));
+            settingsListeners.forEach((cb) => cb(data.settings));
         } else if (type === 'popUpInputChanged') {
             if (currentPopUpInputCb) currentPopUpInputCb(data.value);
         }
     });
 
     function toggleInput(toggle) {
-        fetchNui('toggleInput', toggle, 'lb-phone');
+        globalThis.components.fetchPhone('toggleInput', toggle);
     }
 
     let addedHandlers = [];
@@ -162,7 +171,7 @@ if (!globalThis.componentsLoaded) {
     observer.observe(document.body, { childList: true, subtree: true });
 
     function createCall(data) {
-        fetchNui('CreateCall', data, 'lb-phone');
+        globalThis.components.fetchPhone('CreateCall', data);
     }
 
     globalThis.SetPopUp = setPopUp;

@@ -552,14 +552,14 @@
             "ADD_LOCATION_POPUP": {
                 "TITLE": "Legg til lokasjon",
                 "DESCRIPTION": "Skriv inn navnet på stedet du vil legge til",
-                "PLACEHOLDER": "Navn",
+                "PLACEHOLDER": "Navn", 
                 "CANCEL": "Avbryt",
                 "PROCEED": "Fortsett"
             },
             "CHANGE_NAME_POPUP": {
                 "TITLE": "Endre Navn",
                 "DESCRIPTION": "Skriv inn det nye navnet på stedet",
-                "PLACEHOLDER": "Navn",
+                "PLACEHOLDER": "Navn", 
                 "CANCEL": "Avbryt",
                 "PROCEED": "Fortsett"
             }
@@ -596,7 +596,7 @@
             }
         },
         "TINDER": {
-            "TITLE": "Spark",
+            "TITLE": "Tinder",
             "LIKES_YOU_TOO": "liker deg også!",
             "KEEP_SWIPING": "Fortsett å sveipe",
             "SAY_SOMETHING_NICE": "Si noe hyggelig",
@@ -631,7 +631,7 @@
             "SEARCH_MATCHES": "Søk Matches"
         },
         "INSTAGRAM": {
-            "TITLE": "InstaPic",
+            "TITLE": "Instagram",
             "SEND": "Send",
             "POST": "Post",
             "MESSAGE_PLACEHOLDER": "Melding...",
@@ -716,7 +716,7 @@
             "SEND_A_MESSAGE": "Send en melding..."
         },
         "TWITTER": {
-            "TITLE": "Birdy",
+            "TITLE": "Twitter",
             "SEARCH_FOR": "Søk etter '{search}'",
             "START_SEARCHING": "Begynn å søke for å utforske Twitter",
             "TRENDING_HASHTAGS": "Trending hashtags",
@@ -727,7 +727,7 @@
             "MEDIA": "Media",
             "LIKES": "Likes",
             "CANCEL": "Avbryt",
-            "TWEET": "Post",
+            "TWEET": "Tweet",
             "TWEET_REPLY": "Tweet svaret ditt",
             "TWEET_GENERAL": "Hva skjer?",
             "EDIT_PROFILE": "Rediger profil",

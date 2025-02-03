@@ -12,7 +12,9 @@ function GetIdentifier(source)
     return QB.Functions.GetPlayer(source)?.PlayerData.citizenid
 end
 
-local function HasItem(source, itemName)
+---@param source number
+---@param itemName string
+function HasItem(source, itemName)
     if GetResourceState("ox_inventory") == "started" then
         return (exports.ox_inventory:Search(source, "count", itemName) or 0) > 0
     elseif GetResourceState("qs-inventory") == "started" then
@@ -22,49 +24,6 @@ local function HasItem(source, itemName)
     local qPlayer = QB.Functions.GetPlayer(source)
 
     return (qPlayer.Functions.GetItemByName(itemName)?.amount or 0) > 0
-end
-
----Check if a player has a phone with a specific number
----@param source any
----@param number string
----@return boolean
-function HasPhoneItem(source, number)
-    if not Config.Item.Require then
-        return true
-    end
-
-    if Config.Item.Unique then
-        return HasPhoneNumber(source, number)
-    end
-
-    if GetResourceState("ox_inventory") == "started" then
-        return (exports.ox_inventory:Search(source, "count", Config.Item.Name) or 0) > 0
-    elseif GetResourceState("qs-inventory") == "started" then
-        return (exports["qs-inventory"]:GetItemTotalAmount(source, Config.Item.Name) or 0) > 0
-    end
-
-    local hasItem
-
-    if Config.Item.Name then
-        hasItem = HasItem(source, Config.Item.Name)
-    elseif Config.Item.Names then
-        for i = 1, #Config.Item.Names do
-            if HasItem(source, Config.Item.Names[i].name) then
-                hasItem = true
-                break
-            end
-        end
-    end
-
-    if not hasItem then
-        return false
-    end
-
-    if not number then
-        return true
-    end
-
-    return MySQL.scalar.await("SELECT 1 FROM phone_phones WHERE id=? AND phone_number=?", { GetIdentifier(source), number }) ~= nil
 end
 
 ---Register an item as usable

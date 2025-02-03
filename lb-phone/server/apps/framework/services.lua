@@ -182,7 +182,7 @@ BaseCallback("services:getEmployees", function(source, phoneNumber, company)
     for i = 1, #employees do
         local employee = employees[i]
 
-        employee.online = employee.number and GetSourceFromNumber(employee.number) ~= nil or false
+        employee.online = employee.number and GetSourceFromNumber(employee.number) ~= false or false
     end
 
     return employees

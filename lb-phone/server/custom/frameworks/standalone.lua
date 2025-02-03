@@ -32,7 +32,7 @@ end
 ---@param source any
 ---@param number string
 ---@return boolean
-function HasPhoneItem(source, number)
+function HasItem(source, number)
     if not Config.Item.Require then
         return true
     end

@@ -7,6 +7,7 @@
     "H": "h",
     "M": "m",
     "S": "s",
+
     "APP_NAMES": {
         "Phone": "Téléphone",
         "Messages": "Messages",
@@ -35,6 +36,7 @@
         "Tinder": "Spark",
         "TikTok": "Trendy"
     },
+
     "APPS": {
         "SETTINGS": {
             "TITLE": "Réglages",
@@ -149,13 +151,13 @@
             "CLOUD_BACKUP": "Sauvegarde sur le cloud",
             "YOUR_PROFILE": "Votre profil",
             "CREATE_BACKUP": "Créer une sauvegarde",
+            "BACKUPS": "Sauvegardes",
             "SAVE_BACKUP_POPUP": {
                 "TITLE": "Enregistrer la sauvegarde",
                 "TEXT": "Voulez-vous vraiment enregistrer une sauvegarde de vos données ? (Enregistrera vos contacts, photos et paramètres)",
                 "CANCEL": "Annuler",
                 "CONFIRM": "Confirmer"
             },
-            "BACKUPS": "Sauvegardes",
             "APPLY_BACKUP_POPUP": {
                 "TITLE": "Appliquer la sauvegarde",
                 "TEXT": "Voulez-vous vraiment appliquer cette sauvegarde ? (Écrasera vos contacts, photos et paramètres)",
@@ -276,15 +278,18 @@
             "NO_CHATS_TEXT": "Vous n'avez pas encore rejoint un canal. Créez/Rejoignez-en un en appuyant sur le signe plus dans le coin supérieur droit.",
             "MEMBER": "Membre",
             "MEMBERS": "Membres",
+
             "USERNAME": "Nom d'utilisateur",
             "PASSWORD": "Mot de passe",
             "LOGIN": "Connexion",
             "SIGN_UP": "Inscription",
             "NO_ACCOUNT": "Vous n'avez pas de compte ?",
             "ALREADY_HAVE": "Vous avez déjà un compte ?",
+
             "CHANGE_ACCOUNT": "Changer de compte",
             "CHANGE_PASSWORD": "Changer de mot de passe",
             "DELETE_ACCOUNT": "Supprimer le compte",
+
             "ERROR": "Erreur",
             "INVALID_LENGTH": "Le mot de passe doit comporter au moins 3 caractères",
             "USERNAME_TAKEN": "Nom d'utilisateur est déjà pris",
@@ -292,12 +297,14 @@
             "INVALID_USERNAME": "Nom d'utilisateur inexistant",
             "INCORRECT_PASSWORD": "Mot de passe incorrect",
             "OK": "OK",
+
             "LEAVE_CHANNEL": {
                 "TITLE": "Quitter le canal",
                 "DESCRIPTION": "Êtes vous sûr de vouloir quitter le canal?",
                 "CANCEL": "Annuler",
                 "PROCEED": "Quitter"
             },
+
             "SET_PASSWORD_POPUP": {
                 "TITLE": "Définir le mot de passe",
                 "DESCRIPTION": "Vous devez définir un mot de passe pour votre compte",
@@ -338,6 +345,7 @@
             "DELETE": "Supprimer",
             "SELECT_ITEMS": "Sélectionnez les éléments",
             "SELECTED_COUNT": "{count} éléments sélectionnés",
+
             "PHOTOS": "Photos",
             "ALBUMS": "Albums",
             "LIBRARY": "Galerie",
@@ -377,10 +385,12 @@
                 "PROCEED": "Importer",
                 "PLACEHOLDER": "URL de l'Image"
             },
+
             "NO_PHOTOS": "Pas de photos ou vidéos",
             "NO_PHOTOS_INSTRUCTIONS": "Vous pouvez prendre des images et photos avec l'appareil photo",
             "PHOTO_COUNT": "{amount} Photos",
             "VIDEO_COUNT": "{amount} Vidéos",
+
             "DELETE_CONTEXT_TITLE": "Voulez vous supprimer {type} ou les retirer de cet album",
             "THESE_PHOTOS": "ces photos",
             "THIS_PHOTO": "cette photo",
@@ -397,6 +407,7 @@
             "MONTHS": "Mois",
             "DAYS": "Jours",
             "ALL_PHOTOS": "Toutes les photos",
+
             "FAVOURITES": "Favoris",
             "RECENTS": "Récents"
         },
@@ -652,6 +663,7 @@
             "SELECT_CONTACT": "Sélectionner un contact",
             "TODAY": "Aujourd'hui",
             "YESTERDAY": "Hier",
+
             "INSUFFICIENT_FUNDS": {
                 "TITLE": "Solde insuffisant",
                 "DESCRIPTION": "Vous n'avez pas assez d'argent pour envoyer ce document amount"
@@ -684,6 +696,7 @@
                 "TITLE": "Échec de l'ajout",
                 "DESCRIPTION": "Échec de l'ajout d'argent sur le compte spécifié"
             },
+
             "OK": "OK"
         },
         "GARAGE": {
@@ -707,6 +720,7 @@
             "LOCK": "Verrouiller",
             "UNLOCKED": "Déverrouillé",
             "UNLOCK": "Déverrouiller",
+
             "WAYPOINT_POPUP": {
                 "TITLE": "Définir un point GPS",
                 "TEXT": "Voulez-vous définir une destination pour votre {model} ?",
@@ -778,15 +792,16 @@
             "TITLE": "Titre",
             "SEARCH": "Rechercher des listes ou des numéros",
             "HOME": "Accueil",
-            "YOUR_POSTS": "Vos Posts",
+            "YOUR_POSTS": "Vos Publications",
             "PRICE": "Prix",
             "DESCRIPTION": "Description",
             "IMAGES": "Images",
-            "POST": "Poster",
+            "POST": "Publier",
             "AMOUNT_OF_TOTAL": "{amount} sur {total}",
             "MESSAGE": "Message",
             "CALL": "Appeler",
             "REMOVE": "Supprimer",
+
             "ERROR_POPUP": {
                 "TITLE": "Erreur",
                 "NO_TITLE": "Vous devez entrer un titre",
@@ -807,7 +822,7 @@
             "SEARCH": "Rechercher des messages ou des numéros",
             "FROM": "De",
             "CANCEL": "Annuler",
-            "NEW_POST": "Nouveau post",
+            "NEW_POST": "Nouvelle publication",
             "TITLE": "Titre",
             "DESCRIPTION": "Description",
             "PRICE": "Prix",
@@ -875,6 +890,7 @@
             "DELETE": "Supprimer",
             "SET_WAYPOINT": "Définir un point GPS",
             "SHARE": "Partager",
+
             "ADD_LOCATION_POPUP": {
                 "TITLE": "Ajouter emplacement",
                 "DESCRIPTION": "Entrez le nom de l'emplacement que vous souhaitez ajouter",
@@ -996,8 +1012,8 @@
                 "PROCEED": "Suivant"
             },
             "DELETE_POST_POPUP": {
-                "TITLE": "Supprimer ce post",
-                "DESCRIPTION": "Êtes-vous sûr de vouloir supprimer ce post ?",
+                "TITLE": "Supprimer cette publication",
+                "DESCRIPTION": "Êtes-vous sûr de vouloir supprimer cette publication ?",
                 "CANCEL": "Annuler",
                 "PROCEED": "Suivant"
             },
@@ -1039,7 +1055,7 @@
             "EMPTY_FEED": "Commencez par suivre des gens pour voir leurs photos et vidéos ici",
             "COMMENTS": "Commentaires",
             "ADD_COMMENT_AS": "Ajouter des commentaires en tant que {name}",
-            "NEW_POST": "Nouveau post",
+            "NEW_POST": "Nouvelle publication",
             "NEXT": "Suivant",
             "CAPTION_PLACEHOLDER": "Écrivez une description...",
             "ACTIVITY": "Activité",
@@ -1061,7 +1077,7 @@
             "HAVE_ACCOUNT": "Vous avez déjà un compte ?",
             "LIKED_PHOTO": "a liké votre photo.",
             "LIKED_COMMENT": "a liké votre commentaire: {comment}",
-            "COMMENTED": "a commenté votre post: {comment}",
+            "COMMENTED": "a commenté votre publication: {comment}",
             "FOLLOWED": "a commencé à vous suivre",
             "DONE": "Fait",
             "EDIT_PROFILE": "Modifier votre profil",
@@ -1101,7 +1117,7 @@
             "LOCATION": "Lieux",
             "CHOOSE_LOCATION": {
                 "TITLE": "Choisir un lieu",
-                "DESCRIPTION": "Choisissez un lieu pour ce post",
+                "DESCRIPTION": "Choisissez un lieu pour cette publication",
                 "CANCEL": "Annuler",
                 "PROCEED": "Valider"
             }
@@ -1209,27 +1225,34 @@
             "PROMOTED": "Sponsorisé",
             "ADD_ACCOUNT": "Ajouter un compte",
             "FOLLOWER_REQUESTS": "Demandes de suivi",
-            "NEW_POSTS": "Nouveaux Posts",
-            "NEW_POST": "Nouvveau Post",
-            "PROTECTED_TWEETS_TITLE": "Ces posts sont privés.",
-            "PROTECTED_TWEETS_DESCRIPTION": "Seuls les abonnés confirmés peuvent voir les posts et le profil de @{username}."
+            "NEW_POSTS": "Nouvelles publications",
+            "NEW_POST": "Nouvvelle publication",
+            "PROTECTED_TWEETS_TITLE": "Ces publications sont privés.",
+            "PROTECTED_TWEETS_DESCRIPTION": "Seuls les abonnés confirmés peuvent voir les publications et le profil de @{username}.",
+            "INVALID_ACCOUNT": "Compte Invalid",
+            "INVALID_PASSWORD": "Mot de Passe Invalid",
+            "USERNAME_TAKEN": "Ce nom d'utilisateur est déjà pris"
         },
         "SERVICES": {
             "ACTIONS": "Actions",
             "COMPANIES": "Entreprises",
             "MESSAGES": "Messages",
             "SETTINGS": "Paramètres",
+
             "CLOSED": "Fermé",
             "YOUR_MESSAGES": "Vos messages",
             "JOB_MESSAGES": "SMS Job",
+
             "DUTY": "Service",
             "DUTY_DESCRIPTION": "Basculer votre statut de service",
             "GO_ON_DUTY": "En service",
             "GO_OFF_DUTY": "Hors Service",
             "JOB_CALLS": "Appels job",
             "JOB_CALLS_DESCRIPTION": "{toggle} recevoir des appels de clients.",
+
             "ENABLE": "Activer",
             "DISABLE": "Désactiver",
+
             "DISABLE_CALLS": "Désactiver les appels",
             "ENABLE_CALLS": "Activer les appels",
             "BALANCE": "Solde",
@@ -1237,11 +1260,14 @@
             "HIRE": "Embaucher",
             "SET_GRADE": "Définir le grade",
             "UNEMPLOYED": "Vous n'avez pas de travail",
+
             "ALL": "Tout",
             "AVAILABLE": "Disponible",
             "SEARCH_EMPLOYEES": "Recherche d'employés",
+
             "PERSONAL": "Personnel",
             "JOB": "Emplois",
+
             "DEPOSIT_POPUP": {
                 "TITLE": "Dépôt",
                 "DESCRIPTION": "Déposer de l'argent sur le compte de l'entreprise",
@@ -1324,10 +1350,12 @@
         },
         "TIKTOK": {
             "TITLE": "Trendy",
+
             "HOME": "Accueil",
             "DISCOVER": "Découvrir",
             "INBOX": "Boîte de réception",
             "PROFILE": "Profil",
+
             "COMMENTS_TITLE": "{count} commentaires",
             "REPLY": "Répondre",
             "VIEW_REPLIES": "Voir les réponses",
@@ -1347,6 +1375,7 @@
             "OK": "OK",
             "CREATOR": "Créateur",
             "LIKED_BY_CREATOR": "Aimé par le créateur",
+
             "PIN_VIDEO_POPUP": {
                 "TITLE": "Épingler la vidéo",
                 "DESCRIPTION": "Voulez-vous vraiment {action} cette vidéo ?",
@@ -1365,6 +1394,7 @@
                 "CANCEL": "Annuler",
                 "PROCEED": "Suivant"
             },
+
             "SHARE_TITLE": "Partager à",
             "SHARE": "Partager",
             "REPORT": "Signaler",
@@ -1372,6 +1402,7 @@
             "ADD_FAVOURITE": "Ajouter aux favoris",
             "CANCEL": "Annuler",
             "GO_BACK": "Retour",
+
             "FOLLOWING": "Suivis",
             "FOLLOWERS": "Followers",
             "UNFOLLOW": "Ne plus suivre",
@@ -1379,12 +1410,14 @@
             "FOR_YOU": "Pour vous",
             "VIDEOS": "Vidéos",
             "LIKES": "Likes",
+
             "UNFOLLOW_POPUP": {
                 "TITLE": "Ne plus suivre",
                 "DESCRIPTION": "Voulez-vous vraiment ne plus suivre {name} ?",
                 "CANCEL": "Annuler",
                 "PROCEED": "Suivant"
             },
+
             "LOGIN_TITLE": "Se connecter à Trendy",
             "LOGIN_SUBTITLE": "Connectez-vous pour gérer votre profil, activer les notifications, commenter des vidéos, et plus encore.",
             "SIGNUP_TITLE": "Créer un compte Trendy",
@@ -1394,17 +1427,20 @@
             "PASSWORD": "Mot de passe",
             "BIO": "Biographie",
             "SHOW_LIKES": "Voir les likes",
+
             "LOGIN": "Se connecter",
             "SIGNUP": "Créer un compte",
             "NO_ACCOUNT": "Vous n'avez pas de compte ?",
             "ALREADY_ACCOUNT": "Vous avez déja un compte ?",
             "SEARCH_PLACEHOLDER": "Recherchez des utilisateurs",
+
             "STARTED_FOLLOWING": "a commencé à vous suivre.",
             "LIKED_VIDEO": "a aimé votre vidéo.",
             "LIKED_COMMENT": "a aimé votre commentaire.",
             "SAVED_VIDEO": "a ajouté votre vidéo aux favoris.",
             "COMMENTED": "a commenté: {comment}",
             "REPLIED": "a répondu à votre commentaire: {comment}",
+
             "EDIT_PROFILE": "Modifier le profil",
             "MESSAGE": "Envoyer un message",
             "CHANGE_PHOTO": "Changer la photo",
@@ -1414,6 +1450,7 @@
             "ADD_TO_YOUR_PROFILE": "Ajouter à votre profil",
             "LIKED_HIDDEN_TITLE": "Les vidéos aimées par cet utilisateur sont actuellement cachées",
             "LIKED_HIDDEN_SUBTITLE": "Les vidéos aimées par {name} sont actuellement cachées",
+
             "INVALID_ACCOUNT_POPUP": {
                 "TITLE": "Invalide {name}",
                 "DESCRIPTION": "Vous n'êtes pas connecté au compte {name} que vous avez entré, veuillez vous connecter pour continuer.",
@@ -1425,6 +1462,7 @@
                 "CANCEL": "Annuler",
                 "PROCEED": "Suivant"
             },
+
             "ADD_ACCOUNT_TITLE": "Ajouter un compte",
             "ADD_ACCOUNT": "Ajouter {name} à votre profil",
             "UPLOAD_VIDEO": "Publier une vidéo",
@@ -1437,6 +1475,7 @@
             "MUSIC": "Musique",
             "SELECT_MUSIC": "Sélectionnez une musique",
             "OPTIONAL": "Optionnel",
+
             "DIRECT_MESSAGES": "Messages privés",
             "ALL_ACTIVITY": "Toute l'activité",
             "NO_NOTIFICATIONS": "Les notifications ne sont pas disponibles",
@@ -1668,7 +1707,7 @@
             "RETWEET": "Republié par {displayName}:",
             "REPLY": "{displayName} a répondu:",
             "FOLLOW": "{username} a commencé à vous suivre",
-            "TWEET": "{username} vient de poster",
+            "TWEET": "{username} vient de publier",
             "FOLLOW_REQUEST_ACCEPTED_DESCRIPTION": "@{username} a accepté votre demande de suivi.",
             "NEW_FOLLOW_REQUEST": "@{username} a demandé à vous suivre!"
         },
@@ -1684,10 +1723,12 @@
         "MISC": {
             "VERIFIED": "Votre compte a été vérifié",
             "X_PHONE": "Téléphone de {name}",
+
             "LOGGED_OUT_PASSWORD": {
                 "TITLE": "Vous avez été déconnecté",
                 "DESCRIPTION": "Vous avez été déconnecté de votre compte suite à la modification de votre mot de passe."
             },
+
             "DELETED_NOTIFICATION": {
                 "TITLE": "Compte supprimé",
                 "DESCRIPTION": "Votre compte a été supprimé."
@@ -1707,46 +1748,59 @@
         "LOGS": {
             "MAIL_TITLE": "Email",
             "NEW_MAIL": "{sender} a envoyé un mail à {recipient}",
+
             "MESSAGE_TITLE": "Message",
             "NEW_MESSAGE": "{sender} a envoyé un message à {recipient}: {message}",
+
             "CALL_ENDED": "Appel terminé",
             "CALL_DESCRIPTION": "Un appel entre `{caller}` et `{callee}` qui a duré {duration}s s'est terminé. Répondu: `{answered}`",
+
             "NEW_SERVICE_TITLE": "Nouveau message",
             "NEW_SERVICE_CONTENT": "{sender} a envoyé un message à {channel}: {message}",
+
             "RECEIVED_TITLE": "A reçu ${amount}",
             "PAID_TITLE": "A payé ${amount}",
             "TRANSACTION": "{number} a fait une transaction de ${amount} à {company}",
+
             "BOUGHT_CRYPTO": "A acheté de la crypto",
             "SOLD_CRYPTO": "A vendu de la crypto",
             "CRYPTO_DETAILS": "**Actif**: {coin}\n**Montant**: {amount}\n**Valeur**: ${price}\n",
             "TRANSFERRED_CRYPTO": "Transfert de crypto",
             "TRANSFERRED_CRYPTO_DETAILS": "**Actif**: {coin}\n**Montant**: {amount}\n**A**: {to}\n**De**: {from}",
+
             "DARKCHAT_CREATED_TITLE": "A créé un salon",
             "DARKCHAT_CREATED_DESCRIPTION": "{creator} a créé un salon appelé : {channel}",
             "DARKCHAT_MESSAGE_TITLE": "Nouveau message",
             "DARKCHAT_MESSAGE_DESCRIPTION": "{sender} a envoyé un message dans {channel}: {message}",
-            "MARKETPLACE_NEW_TITLE": "Nouveau post",
+
+            "MARKETPLACE_NEW_TITLE": "Nouvelle publication",
             "MARKETPLACE_NEW_DESCRIPTION": "**Vendeur**: {seller}\n**Titre**: {title}\n**Prix**: ${price}\n**Description**: {description}\n**Pièces-jointes**: {attachments}\n**ID:** {id}",
-            "MARKETPLACE_DELETED": "Post supprimé",
-            "YELLOWPAGES_NEW_TITLE": "Nouveau post",
+            "MARKETPLACE_DELETED": "Publication supprimé",
+
+            "YELLOWPAGES_NEW_TITLE": "Nouvelle publication",
             "YELLOWPAGES_NEW_DESCRIPTION": "**Titre**: {title}\n**Description**: {description}\n**Pièces-jointes**: {attachment}\n**ID:** {id}",
-            "YELLOWPAGES_DELETED": "Post supprimé",
+            "YELLOWPAGES_DELETED": "Publication supprimé",
+
             "LIVE_TITLE": "Live",
             "STARTED_LIVE": "{username} a commencé un live",
             "ENDED_LIVE": "{username} a terminé un live",
             "ADDED_STORY": "{username} a ajouté une photo à sa story",
+
             "TRENDY_UPLOAD_TITLE": "Nouvelle vidéo",
             "TRENDY_UPLOAD_DESCRIPTION": "{username} a publié une nouvelle vidéo. Description : {caption} et id {id}",
             "TRENDY_DELETE_TITLE": "Vidéo supprimée",
             "TRENDY_DELETE_DESCRIPTION": "{username} a supprimé une vidéo (ID : {id})",
+
             "UPLOADED_MEDIA": "Médias téléchargés",
             "UPLOADED_MEDIA_DESCRIPTION": "Pris un(e) {type} avec id {id}\n{link}",
             "VIDEO": "vidéo",
             "PHOTO": "photo",
+
             "CHANGED_PASSWORD": {
                 "TITLE": "Mot de passe changé",
                 "DESCRIPTION": "{number} a modifié le mot de passe du compte {username} sur {app}."
             },
+
             "DELETED_ACCOUNT": {
                 "TITLE": "Compte supprimé",
                 "DESCRIPTION": "{number} a supprimé le compte {username} sur {app}."

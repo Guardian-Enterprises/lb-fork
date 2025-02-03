@@ -7,6 +7,7 @@
     "H": "h",
     "M": "m",
     "S": "s",
+
     "APP_NAMES": {
         "Phone": "Телефон",
         "Messages": "Повідомлення",
@@ -35,6 +36,7 @@
         "Tinder": "Знайомства",
         "TikTok": "ТікТут"
     },
+
     "APPS": {
         "SETTINGS": {
             "TITLE": "Налаштунки",
@@ -259,15 +261,18 @@
             "NO_CHATS_TEXT": "Ви ще не приєдналися до каналу. Приєднайтеся/створіть, натиснувши знак плюс у верхньому правому куті.",
             "MEMBER": "Учасник",
             "MEMBERS": "Учасники",
+
             "USERNAME": "Ім'я користувача",
             "PASSWORD": "Пароль",
             "LOGIN": "Увійти",
             "SIGN_UP": "Зареєструватися",
             "NO_ACCOUNT": "Немає облікового запису?",
             "ALREADY_HAVE": "Вже маєте акаунт?",
+
             "CHANGE_ACCOUNT": "Змінити обліковий запис",
             "CHANGE_PASSWORD": "Змінити пароль",
             "DELETE_ACCOUNT": "Видалити акаунт",
+
             "ERROR": "Помилка",
             "INVALID_LENGTH": "Пароль повинен містити мінімум 3 символи",
             "USERNAME_TAKEN": "Ім'я користувача вже зайнято",
@@ -275,12 +280,14 @@
             "INVALID_USERNAME": "Ім'я користувача не існує",
             "INCORRECT_PASSWORD": "Невірний пароль",
             "OK": "OK",
+
             "LEAVE_CHANNEL": {
                 "TITLE": "Вийти з каналу",
                 "DESCRIPTION": "Ви впевнені, що бажаєте залишити цей канал?",
                 "CANCEL": "Скасувати",
                 "PROCEED": "Вийти"
             },
+
             "SET_PASSWORD_POPUP": {
                 "TITLE": "Встановити пароль",
                 "DESCRIPTION": "Вам потрібно встановити пароль для свого облікового запису",
@@ -321,6 +328,7 @@
             "DELETE": "Видалити",
             "SELECT_ITEMS": "Оберіть елементи",
             "SELECTED_COUNT": "{count} елементів вибрано",
+
             "PHOTOS": "Фотографії",
             "ALBUMS": "Альбоми",
             "LIBRARY": "Бібліотека",
@@ -360,10 +368,12 @@
                 "PROCEED": "Імпортувати",
                 "PLACEHOLDER": "URL зображення"
             },
+
             "NO_PHOTOS": "Немає фото чи відео",
             "NO_PHOTOS_INSTRUCTIONS": "За допомогою камери можна знімати фотографії та відео",
             "PHOTO_COUNT": "{amount} Фотографій",
             "VIDEO_COUNT": "{amount} Відео",
+
             "DELETE_CONTEXT_TITLE": "Ви хочете видалити {type} із цього альбому?",
             "THESE_PHOTOS": "ці фотографії",
             "THIS_PHOTO": "це фото",
@@ -379,6 +389,7 @@
             "MONTHS": "Місяців",
             "DAYS": "Днів",
             "ALL_PHOTOS": "Всі фото",
+
             "FAVOURITES": "Улюблені",
             "RECENTS": "Нещодавні"
         },
@@ -631,6 +642,7 @@
             "SELECT_CONTACT": "Обрати контакт",
             "TODAY": "Сьогодні",
             "YESTERDAY": "Вчора",
+
             "INSUFFICIENT_FUNDS": {
                 "TITLE": "Недостатньо грошей",
                 "DESCRIPTION": "У вас недостатньо грошей, щоб надіслати цю суму"
@@ -663,6 +675,7 @@
                 "TITLE": "Не вдалося додати гроші",
                 "DESCRIPTION": "Не вдалося додати гроші на вказаний рахунок"
             },
+
             "OK": "OK"
         },
         "GARAGE": {
@@ -686,6 +699,7 @@
             "LOCK": "Заблокувати",
             "UNLOCKED": "Розблоковано",
             "UNLOCK": "Розблокувати",
+
             "WAYPOINT_POPUP": {
                 "TITLE": "Встановити маршрут",
                 "TEXT": "Ви хочете встановити маршрут до свого {model}?",
@@ -766,6 +780,7 @@
             "MESSAGE": "Повідомлення",
             "CALL": "Дзвінок",
             "REMOVE": "Видалити",
+
             "ERROR_POPUP": {
                 "TITLE": "Помилка",
                 "NO_TITLE": "Потрібно ввести назву",
@@ -854,6 +869,7 @@
             "DELETE": "Видалити",
             "SET_WAYPOINT": "Встановити маршрут",
             "SHARE": "Поділитись",
+
             "ADD_LOCATION_POPUP": {
                 "TITLE": "Додати місцезнаходження",
                 "DESCRIPTION": "Введіть назву місця, яке потрібно додати",
@@ -1189,17 +1205,21 @@
             "ACTIONS": "Події",
             "COMPANIES": "Компанії",
             "MESSAGES": "Повідомлення",
+
             "CLOSED": "Недоступно",
             "YOUR_MESSAGES": "Ваші повідомлення",
             "JOB_MESSAGES": "Робочі повідомлення",
+
             "DUTY": "Чергування",
             "DUTY_DESCRIPTION": "Перемкніть свій статус чергування",
             "GO_ON_DUTY": "Стати на чергування",
             "GO_OFF_DUTY": "Знятись з чергування",
             "JOB_CALLS": "Вакансії",
             "JOB_CALLS_DESCRIPTION": "{toggle} прийом дзвінків від клієнтів.",
+
             "ENABLE": "Увімкнути",
             "DISABLE": "Вимкнути",
+
             "DISABLE_CALLS": "Вимкнути вхідні дзвінки",
             "ENABLE_CALLS": "Увімкнути вхідні дзвінки",
             "BALANCE": "Баланс",
@@ -1207,11 +1227,14 @@
             "HIRE": "Найняти",
             "SET_GRADE": "Встановити ранг",
             "UNEMPLOYED": "Ти безробітний",
+
             "ALL": "Всі",
             "AVAILABLE": "Доступні",
             "SEARCH_EMPLOYEES": "Пошук співробітників",
+
             "PERSONAL": "Особисті",
             "JOB": "Робота",
+
             "DEPOSIT_POPUP": {
                 "TITLE": "Покласти",
                 "DESCRIPTION": "Покласти гроші на рахунок компанії",
@@ -1294,10 +1317,12 @@
         },
         "TIKTOK": {
             "TITLE": "Тренди",
+
             "HOME": "Головна",
             "DISCOVER": "Пошук",
             "INBOX": "Вхідні",
             "PROFILE": "Профіль",
+
             "COMMENTS_TITLE": "{count} коментарів",
             "REPLY": "Відповісти",
             "VIEW_REPLIES": "Переглянути відповіді",
@@ -1317,6 +1342,7 @@
             "OK": "OK",
             "CREATOR": "Автор",
             "LIKED_BY_CREATOR": "Подобається автору",
+
             "PIN_VIDEO_POPUP": {
                 "TITLE": "Закріпити відео",
                 "DESCRIPTION": "Ви впевнені, що хочете {action} це відео?",
@@ -1335,6 +1361,7 @@
                 "CANCEL": "Скасувати",
                 "PROCEED": "Ігнорувати"
             },
+
             "SHARE_TITLE": "Поділитися з",
             "SHARE": "Поділіться",
             "REPORT": "Скарга",
@@ -1342,6 +1369,7 @@
             "ADD_FAVOURITE": "Додати в обране",
             "CANCEL": "Скасувати",
             "GO_BACK": "Назад",
+
             "FOLLOWING": "Відстежує",
             "FOLLOWERS": "Читачі",
             "UNFOLLOW": "Відписатися",
@@ -1349,12 +1377,14 @@
             "FOR_YOU": "Для Вас",
             "VIDEOS": "Відео",
             "LIKES": "Вподобайки",
+
             "UNFOLLOW_POPUP": {
                 "TITLE": "Відписатися",
                 "DESCRIPTION": "Ви впевнені, що хочете відписатися від {name}?",
                 "CANCEL": "Скасувати",
                 "PROCEED": "Підтвердити"
             },
+
             "LOGIN_TITLE": "Увійдіть у Тренди",
             "LOGIN_SUBTITLE": "Керуйте сповіщеннями про перевірку облікового запису, коментуйте відео тощо.",
             "SIGNUP_TITLE": "Зареєструватися у Тренди",
@@ -1364,17 +1394,20 @@
             "PASSWORD": "Пароль",
             "BIO": "Біо",
             "SHOW_LIKES": "Показати лайки",
+
             "LOGIN": "Увійти",
             "SIGNUP": "Зареєструватись",
             "NO_ACCOUNT": "Немає облікового запису?",
             "ALREADY_ACCOUNT": "Вже маєте акаунт?",
             "SEARCH_PLACEHOLDER": "Пошук користувачів",
+
             "STARTED_FOLLOWING": "почав стежити за вами.",
             "LIKED_VIDEO": "сподобалося ваше відео.",
             "LIKED_COMMENT": "сподобався ваш коментар.",
             "SAVED_VIDEO": "додав ваше відео до обраного.",
             "COMMENTED": "прокоментував: {comment}",
             "REPLIED": "відповів на ваш коментар: {comment}",
+
             "EDIT_PROFILE": "Редагувати профіль",
             "MESSAGE": "Повідомлення",
             "CHANGE_PHOTO": "Змінити фото",
@@ -1384,6 +1417,7 @@
             "ADD_TO_YOUR_PROFILE": "Додайте до вашого профілю",
             "LIKED_HIDDEN_TITLE": "Відео, які сподобалися цьому користувачу, є приватними.",
             "LIKED_HIDDEN_SUBTITLE": "Відео, які сподобалися {name} наразі приховано.",
+
             "INVALID_ACCOUNT_POPUP": {
                 "TITLE": "Недійсний {name}",
                 "DESCRIPTION": "Ви не ввійшли в обліковий запис {name} який ви ввели, виправте це.",
@@ -1395,6 +1429,7 @@
                 "CANCEL": "Скасувати",
                 "PROCEED": "Підтвердити"
             },
+
             "ADD_ACCOUNT_TITLE": "Додати обліковий запис",
             "ADD_ACCOUNT": "Додайте {name} до свого профілю",
             "UPLOAD_VIDEO": "Завантажити відео",
@@ -1407,6 +1442,7 @@
             "MUSIC": "Музика",
             "SELECT_MUSIC": "Оберіть музику",
             "OPTIONAL": "Додатково",
+
             "DIRECT_MESSAGES": "Приватні повідомлення",
             "ALL_ACTIVITY": "Усі дії",
             "NO_NOTIFICATIONS": "Сповіщення недоступні",
@@ -1651,10 +1687,12 @@
         "MISC": {
             "VERIFIED": "Ваш обліковий запис перевірено",
             "X_PHONE": "Телефон {name}",
+
             "LOGGED_OUT_PASSWORD": {
                 "TITLE": "Ви вийшли з системи",
                 "DESCRIPTION": "Ви вийшли зі свого облікового запису, оскільки ваш пароль було змінено."
             },
+
             "DELETED_NOTIFICATION": {
                 "TITLE": "Обліковий запис видалено",
                 "DESCRIPTION": "Ваш обліковий запис видалено."
@@ -1674,46 +1712,59 @@
         "LOGS": {
             "MAIL_TITLE": "Електронна пошта",
             "NEW_MAIL": "{sender} надіслав електронний лист до {recipient}",
+
             "MESSAGE_TITLE": "Текстове повідомлення",
             "NEW_MESSAGE": "{sender} надіслав повідомлення до {recipient}: {message}",
+
             "CALL_ENDED": "Дзвінок завершено",
             "CALL_DESCRIPTION": "Дзвінок між `{caller}` та `{callee}`, який тривав {duration}с, закінчився. Відповіли: `{answered}`",
+
             "NEW_SERVICE_TITLE": "Нове повідомлення",
             "NEW_SERVICE_CONTENT": "{sender} надіслав повідомлення в {channel}: {message}",
+
             "RECEIVED_TITLE": "Отримано ${amount}",
             "PAID_TITLE": "Сплачено ${amount}",
             "TRANSACTION": "{number} здійснив транзакцію ${amount} в {company}",
+
             "BOUGHT_CRYPTO": "Куплено криптовалюту",
             "SOLD_CRYPTO": "Продано криптовалюту",
             "CRYPTO_DETAILS": "**Монета**: {coin}\n**Кількість**: {amount}\n**Ціна**: ${price}",
             "TRANSFERRED_CRYPTO": "Відправлено криптовалюту",
             "TRANSFERRED_CRYPTO_DETAILS": "**Монета**: {coin}\n**Кількість**: {amount}\n**До**: {to}\n**Від**: {from}",
+
             "DARKCHAT_CREATED_TITLE": "Створений канал",
             "DARKCHAT_CREATED_DESCRIPTION": "{creator} створив канал під назвою {channel}",
             "DARKCHAT_MESSAGE_TITLE": "Нове повідомлення",
             "DARKCHAT_MESSAGE_DESCRIPTION": "{sender} надіслав повідомлення в {channel}: {message}",
+
             "MARKETPLACE_NEW_TITLE": "Нова публікація",
             "MARKETPLACE_NEW_DESCRIPTION": "**Продавець**: {seller}\n**Назва**: {title}\n**Ціна**: ${price}\n**Опис**: {description}\n**Додатково**: {attachments}\n**ID:** {id}",
             "MARKETPLACE_DELETED": "Публікацію видалено",
+
             "YELLOWPAGES_NEW_TITLE": "Нова публікація",
             "YELLOWPAGES_NEW_DESCRIPTION": "**Назва**: {title}\n**Опис**: {description}\n**Додатково**: {attachment}\n**ID:** {id}",
             "YELLOWPAGES_DELETED": "Публікацію видалено",
+
             "LIVE_TITLE": "Прямий етер",
             "STARTED_LIVE": "{username} почав прямий етер",
             "ENDED_LIVE": "{username} завершив прямий етер",
             "ADDED_STORY": "{username} додав фото до своєї історії",
+
             "TRENDY_UPLOAD_TITLE": "Нове відео",
             "TRENDY_UPLOAD_DESCRIPTION": "{username} завантажив нове відео із описом {caption} та {id} ",
             "TRENDY_DELETE_TITLE": "Відео видалено",
             "TRENDY_DELETE_DESCRIPTION": "{username} видалив відео з {id} ID",
+
             "UPLOADED_MEDIA": "Завантажені медіа",
             "UPLOADED_MEDIA_DESCRIPTION": "Взяв {type} з ідентифікатором {id}\n{link}",
             "VIDEO": "відео",
             "PHOTO": "фото",
+
             "CHANGED_PASSWORD": {
                 "TITLE": "Пароль змінено",
                 "DESCRIPTION": "{number} змінив пароль для облікового запису {username} в {app}."
             },
+
             "DELETED_ACCOUNT": {
                 "TITLE": "Акаунт видалено ",
                 "DESCRIPTION": "{number} видалив обліковий запис {username} в {app}."

@@ -221,27 +221,13 @@ function GetCharacterName(source)
 end
 
 ---@param source number
----@param number string
----@return boolean
-function HasPhoneItem(source, number)
-    if not Config.Item.Require then
-        return true
-    end
-
+---@param itemName string
+function HasItem(source, itemName)
     if GetResourceState("ox_inventory") == "started" then
-        return (exports.ox_inventory:Search(source, "count", Config.Item.Name) or 0) > 0
+        return (exports.ox_inventory:Search(source, "count", itemName) or 0) > 0
     end
 
-    local hasItem = lbphone.hasItem(source, Config.Item.Name)
-
-    if not hasItem then
-        return false
-    end
-
-    return MySQL.Sync.fetchScalar("SELECT 1 FROM phone_phones WHERE id=@id AND phone_number=@number", {
-        ["@id"] = GetIdentifier(source),
-        ["@number"] = number
-    }) ~= nil
+    return lbphone.hasItem(source, itemName)
 end
 
 ---@param source number

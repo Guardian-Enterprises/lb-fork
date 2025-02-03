@@ -7,6 +7,7 @@
     "H": "s",
     "M": "m",
     "S": "s",
+
     "APP_NAMES": {
         "Phone": "Telefon",
         "Messages": "Poruke",
@@ -35,6 +36,7 @@
         "Tinder": "Spark",
         "TikTok": "Trendy"
     },
+
     "APPS": {
         "SETTINGS": {
             "TITLE": "Postavke",
@@ -276,15 +278,18 @@
             "NO_CHATS_TEXT": "Niste sudionik ni jedne sobe. Pridruži se/Kreiraj novu sobu klikom na + znak.",
             "MEMBER": "Član",
             "MEMBERS": "Članovi",
+
             "USERNAME": "Korisničko ime",
             "PASSWORD": "Šifra",
             "LOGIN": "Prijava",
             "SIGN_UP": "Kreiraj nalog",
             "NO_ACCOUNT": "Nemate korisnički nalog?",
             "ALREADY_HAVE": "Već imate korisnički nalog?",
+
             "CHANGE_ACCOUNT": "Promjeni nalog",
             "CHANGE_PASSWORD": "Promjeni šifru",
             "DELETE_ACCOUNT": "Obriši nalog",
+
             "ERROR": "Greška",
             "INVALID_LENGTH": "Šifra mora biti najmanje 3 karaktera",
             "USERNAME_TAKEN": "To ime se već koristi",
@@ -292,12 +297,14 @@
             "INVALID_USERNAME": "Korisničko ime ne postoji",
             "INCORRECT_PASSWORD": "Pogrešna šifra",
             "OK": "OK",
+
             "LEAVE_CHANNEL": {
                 "TITLE": "Napusti kanal",
                 "DESCRIPTION": "Da li ste sigurni da želite napustiti ovaj kanal?",
                 "CANCEL": "Odustani",
                 "PROCEED": "Napusti"
             },
+
             "SET_PASSWORD_POPUP": {
                 "TITLE": "Postavi šifru",
                 "DESCRIPTION": "Morate postaviti šifru za Vaš nalog",
@@ -338,6 +345,7 @@
             "DELETE": "Obriši",
             "SELECT_ITEMS": "Odaberi stavke",
             "SELECTED_COUNT": "{count} stavki odabrano",
+
             "PHOTOS": "Slike",
             "ALBUMS": "Albumi",
             "LIBRARY": "Biblioteka",
@@ -377,10 +385,12 @@
                 "PROCEED": "Ubaci",
                 "PLACEHOLDER": "URL fotografije"
             },
+
             "NO_PHOTOS": "Nema fotografija ili videa",
             "NO_PHOTOS_INSTRUCTIONS": "Možete uslikati slike i snimiti videe pomoću kamere",
             "PHOTO_COUNT": "{amount} Slika",
             "VIDEO_COUNT": "{amount} Videa",
+
             "DELETE_CONTEXT_TITLE": "Da li želite obrisati {type} ili maketi ih iz albuma",
             "THESE_PHOTOS": "ove fotografije",
             "THIS_PHOTO": "ovu fotografiju",
@@ -397,6 +407,7 @@
             "MONTHS": "Mjesec",
             "DAYS": "Dan",
             "ALL_PHOTOS": "Sve fotografije",
+
             "FAVOURITES": "Omiljene",
             "RECENTS": "Nedavne"
         },
@@ -652,6 +663,7 @@
             "SELECT_CONTACT": "Odaberi kontakt",
             "TODAY": "Danas",
             "YESTERDAY": "Jučer",
+
             "INSUFFICIENT_FUNDS": {
                 "TITLE": "Nedovoljno sredstava",
                 "DESCRIPTION": "Nemate dovoljno novca da pošaljete ovaj iznos"
@@ -684,6 +696,7 @@
                 "TITLE": "Greška pri dodavanju novca",
                 "DESCRIPTION": "Neuspješno dodavanje novca na navedeni račun"
             },
+
             "OK": "OK"
         },
         "GARAGE": {
@@ -707,6 +720,7 @@
             "LOCK": "Zaključaj",
             "UNLOCKED": "Otključano",
             "UNLOCK": "Otključaj",
+
             "WAYPOINT_POPUP": {
                 "TITLE": "Postavi Waypoint",
                 "TEXT": "Da li želite postaviti waypoint do {model}?",
@@ -787,6 +801,7 @@
             "MESSAGE": "Poruka",
             "CALL": "Poziv",
             "REMOVE": "Obriši",
+
             "ERROR_POPUP": {
                 "TITLE": "Greška",
                 "NO_TITLE": "Morate upisati naslov",
@@ -875,6 +890,7 @@
             "DELETE": "Obriši",
             "SET_WAYPOINT": "Postavi Waypoint",
             "SHARE": "Podijeli",
+
             "ADD_LOCATION_POPUP": {
                 "TITLE": "Dodaj lokaciju",
                 "DESCRIPTION": "Unesite ime lokacije koju želite dodati",
@@ -1212,24 +1228,31 @@
             "NEW_POSTS": "Nove objave",
             "NEW_POST": "Nova objava",
             "PROTECTED_TWEETS_TITLE": "Ove objave su zaštićene.",
-            "PROTECTED_TWEETS_DESCRIPTION": "Samo prihvaćeni pratitelji imaju uvid u @{username} objave. Zaprati da bi mogao vidjeti objave."
+            "PROTECTED_TWEETS_DESCRIPTION": "Samo prihvaćeni pratitelji imaju uvid u @{username} objave. Zaprati da bi mogao vidjeti objave.",
+            "INVALID_ACCOUNT": "Nepostojeći nalog",
+            "INVALID_PASSWORD": "Neispravna lozinka",
+            "USERNAME_TAKEN": "Taj username se već koristi"
         },
         "SERVICES": {
             "ACTIONS": "Mogućnosti",
             "COMPANIES": "Djelatnosti",
             "MESSAGES": "Poruke",
             "SETTINGS": "Postavke",
+
             "CLOSED": "Zatvoreno",
             "YOUR_MESSAGES": "Vaše poruke",
             "JOB_MESSAGES": "Poslovne poruke",
+
             "DUTY": "Dužnost",
             "DUTY_DESCRIPTION": "Izmjeni status dužnosti",
             "GO_ON_DUTY": "Idi na dužnosti",
             "GO_OFF_DUTY": "Siđi sa dužnosti",
             "JOB_CALLS": "Poslovni pozivi",
             "JOB_CALLS_DESCRIPTION": "{toggle} pozive od mušterija.",
+
             "ENABLE": "Uključi",
             "DISABLE": "Isključi",
+
             "DISABLE_CALLS": "Isključi pozive",
             "ENABLE_CALLS": "Uključi pozive",
             "BALANCE": "Stanje",
@@ -1237,11 +1260,14 @@
             "HIRE": "Zaposli",
             "SET_GRADE": "Postavi rank",
             "UNEMPLOYED": "Vi ste nezapošljeni",
+
             "ALL": "Sve",
             "AVAILABLE": "Dostupno",
             "SEARCH_EMPLOYEES": "Pretraži zaposlenike",
+
             "PERSONAL": "Lično",
             "JOB": "Poslovno",
+
             "DEPOSIT_POPUP": {
                 "TITLE": "Uplata",
                 "DESCRIPTION": "Uplatite novac na firmin račun",
@@ -1324,10 +1350,12 @@
         },
         "TIKTOK": {
             "TITLE": "Trendy",
+
             "HOME": "Početna",
             "DISCOVER": "Istraži",
             "INBOX": "Inbox",
             "PROFILE": "Profil",
+
             "COMMENTS_TITLE": "{count} komentara",
             "REPLY": "Odgovori",
             "VIEW_REPLIES": "Vidi odgovore",
@@ -1347,6 +1375,7 @@
             "OK": "OK",
             "CREATOR": "Kreator",
             "LIKED_BY_CREATOR": "Likeovano od strane kreatora",
+
             "PIN_VIDEO_POPUP": {
                 "TITLE": "Prikvači video",
                 "DESCRIPTION": "Da li ste sigurni da želite {action} ovaj video?",
@@ -1365,6 +1394,7 @@
                 "CANCEL": "Odustani",
                 "PROCEED": "Ignoriraj"
             },
+
             "SHARE_TITLE": "Podijeli s",
             "SHARE": "Podijeli",
             "REPORT": "Prijavi",
@@ -1372,6 +1402,7 @@
             "ADD_FAVOURITE": "Dodaj u omiljene",
             "CANCEL": "Odustani",
             "GO_BACK": "Vraćanje nazad",
+
             "FOLLOWING": "Prati",
             "FOLLOWERS": "Pratitelja",
             "UNFOLLOW": "Otprati",
@@ -1379,12 +1410,14 @@
             "FOR_YOU": "Za Vas",
             "VIDEOS": "Videi",
             "LIKES": "Likeovi",
+
             "UNFOLLOW_POPUP": {
                 "TITLE": "Otprati",
                 "DESCRIPTION": "Da li ste sigurni da želite otpratiti {name}?",
                 "CANCEL": "Odustani",
                 "PROCEED": "Nastavi"
             },
+
             "LOGIN_TITLE": "Prijavi se na Trendy",
             "LOGIN_SUBTITLE": "Upravljaj svojim nalogom, upravljaj notifikacijama, komentiraj, likeaj, i još mnogo toga.",
             "SIGNUP_TITLE": "Kreiraj Trendy nalog",
@@ -1394,17 +1427,20 @@
             "PASSWORD": "Šifra",
             "BIO": "Biografija",
             "SHOW_LIKES": "Prikaži likeove",
+
             "LOGIN": "Prijava",
             "SIGNUP": "Pridruži se",
             "NO_ACCOUNT": "Nemate korisnički nalog?",
             "ALREADY_ACCOUNT": "Već imate korisnički nalog?",
             "SEARCH_PLACEHOLDER": "Pretraži korisnike",
+
             "STARTED_FOLLOWING": "Vas je počeo pratiti.",
             "LIKED_VIDEO": "je likeovao Vaš video.",
             "LIKED_COMMENT": "je likeovao Vaš komentar.",
             "SAVED_VIDEO": "je dodao Vaš video u omiljene.",
             "COMMENTED": "komentira: {comment}",
             "REPLIED": "odgovara na Vaš komentar: {comment}",
+
             "EDIT_PROFILE": "Izmjeni profil",
             "MESSAGE": "Poruka",
             "CHANGE_PHOTO": "Izmjeni profilnu",
@@ -1414,6 +1450,7 @@
             "ADD_TO_YOUR_PROFILE": "Dodajte na Vaš profil",
             "LIKED_HIDDEN_TITLE": "Likeovani videi ovog korisnika su privatni.",
             "LIKED_HIDDEN_SUBTITLE": "Videi likeani od {name} su trenutno sakriveni.",
+
             "INVALID_ACCOUNT_POPUP": {
                 "TITLE": "Greška - {name}",
                 "DESCRIPTION": "Niste ulogovani u Vaš {name} nalog, ispravite to.",
@@ -1425,6 +1462,7 @@
                 "CANCEL": "Odustani",
                 "PROCEED": "Nastavi"
             },
+
             "ADD_ACCOUNT_TITLE": "Dodaj nalog",
             "ADD_ACCOUNT": "Dodaj {name} na Vaš nalog",
             "UPLOAD_VIDEO": "Upload video",
@@ -1437,6 +1475,7 @@
             "MUSIC": "Muzika",
             "SELECT_MUSIC": "Odaberite muziku",
             "OPTIONAL": "Neobavezno",
+
             "DIRECT_MESSAGES": "Poruke",
             "ALL_ACTIVITY": "Sva aktivnost",
             "NO_NOTIFICATIONS": "Notifikacije nisu dostupne",
@@ -1656,7 +1695,7 @@
             "TOGGLE_FLASH": "Stisni {key} da ugasite blic",
             "TOGGLE_CURSOR": "Stisni {key} da maknete kursor, i da gledate uokolo",
             "CHANGE_MODE": "Stisni {key} {key2} da promjenite mod kamere",
-            "ROLL": "Stisni {key} {key2} da okrenete kameru",
+			"ROLL": "Stisni {key} {key2} da okrenete kameru",
             "FREEZE": "Stisni {key} da zaledite/odledite kameru"
         },
         "SERVICES": {
@@ -1684,10 +1723,12 @@
         "MISC": {
             "VERIFIED": "Vaš nalog je verifikovan",
             "X_PHONE": "Telefon od {name}",
+
             "LOGGED_OUT_PASSWORD": {
                 "TITLE": "Odjavljeni ste",
                 "DESCRIPTION": "Odjavljeni ste, jer je šifra promjenjena."
             },
+
             "DELETED_NOTIFICATION": {
                 "TITLE": "Nalog obrisan",
                 "DESCRIPTION": "Vaš nalog je obrisan."
@@ -1707,46 +1748,59 @@
         "LOGS": {
             "MAIL_TITLE": "Email",
             "NEW_MAIL": "{sender} je poslao Email {recipient}",
+
             "MESSAGE_TITLE": "Poruka",
             "NEW_MESSAGE": "{sender} je poslao poruku {recipient}: {message}",
+
             "CALL_ENDED": "Poziv završen",
             "CALL_DESCRIPTION": "Poziv između `{caller}` i `{callee}` koji je trajao {duration}s je završen. Odgovoreno: `{answered}`",
+
             "NEW_SERVICE_TITLE": "Nova poruka",
             "NEW_SERVICE_CONTENT": "{sender} je poslao poruku u {channel}: {message}",
+
             "RECEIVED_TITLE": "Primljeno ${amount}",
             "PAID_TITLE": "Plaćeno ${amount}",
             "TRANSACTION": "{number} je napravio transakciju od ${amount} u {company}",
+
             "BOUGHT_CRYPTO": "Kupljen crypto",
             "SOLD_CRYPTO": "Prodan crypto",
             "CRYPTO_DETAILS": "**Coin**: {coin}\n**Količina**: {amount}\n**Vrijednost**: ${price}",
             "TRANSFERRED_CRYPTO": "Transfer crypto",
             "TRANSFERRED_CRYPTO_DETAILS": "**Coin**: {coin}\n**Količina**: {amount}\n**Od**: {to}\n**Za**: {from}",
+
             "DARKCHAT_CREATED_TITLE": "Kanal napravljen",
             "DARKCHAT_CREATED_DESCRIPTION": "{creator} je kreirao kanal {channel}",
             "DARKCHAT_MESSAGE_TITLE": "Nova poruka",
             "DARKCHAT_MESSAGE_DESCRIPTION": "{sender} je poslao poruku u {channel}: {message}",
+
             "MARKETPLACE_NEW_TITLE": "Novi artikal",
             "MARKETPLACE_NEW_DESCRIPTION": "**Prodavaoc**: {seller}\n**Naziv**: {title}\n**Cijena**: ${price}\n**Opis**: {description}\n**Dodaci**: {attachments}\n**ID:** {id}",
             "MARKETPLACE_DELETED": "Artikal obrisan",
+
             "YELLOWPAGES_NEW_TITLE": "Novi oglas",
             "YELLOWPAGES_NEW_DESCRIPTION": "**Naziv**: {title}\n**Opis**: {description}\n**Dodaci**: {attachment}\n**ID:** {id}",
             "YELLOWPAGES_DELETED": "Oglas obrisan",
+
             "LIVE_TITLE": "Prijenos uživo",
             "STARTED_LIVE": "{username} je pokrenuo prijenos uživo",
             "ENDED_LIVE": "{username} je završio prijenos uživo",
             "ADDED_STORY": "{username} je dodao sliku na svoj story",
+
             "TRENDY_UPLOAD_TITLE": "Novi video",
             "TRENDY_UPLOAD_DESCRIPTION": "{username} je uploadovao video sa nazivom {caption} i IDem {id}",
             "TRENDY_DELETE_TITLE": "Obrisan video",
             "TRENDY_DELETE_DESCRIPTION": "{username} je obrisao video sa IDem {id}",
+
             "UPLOADED_MEDIA": "Uploadovana media",
             "UPLOADED_MEDIA_DESCRIPTION": "snimljen-a {type} sa IDem {id}\n{link}",
             "VIDEO": "video",
             "PHOTO": "fotografija",
+
             "CHANGED_PASSWORD": {
                 "TITLE": "Šifra promjenjena",
                 "DESCRIPTION": "{number} je promjenio šifru od {username} na {app}."
             },
+
             "DELETED_ACCOUNT": {
                 "TITLE": "Nalog obrisan",
                 "DESCRIPTION": "{number} je obrisao nalog {username} na {app}."

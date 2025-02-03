@@ -22,7 +22,9 @@ function GetIdentifier(source)
     return ESX.GetPlayerFromId(source)?.identifier
 end
 
-local function HasItem(source, itemName)
+---@param source number
+---@param itemName string
+function HasItem(source, itemName)
     if GetResourceState("ox_inventory") == "started" then
         return (exports.ox_inventory:Search(source, "count", itemName) or 0) > 0
     elseif GetResourceState("qs-inventory") == "started" then
@@ -30,46 +32,8 @@ local function HasItem(source, itemName)
     end
 
     local xPlayer = ESX.GetPlayerFromId(source)
-    local hasItem = xPlayer.getInventoryItem(itemName).count > 0
 
-    return hasItem
-end
-
----Check if a player has a phone with a specific number
----@param source any
----@param number string
----@return boolean
-function HasPhoneItem(source, number)
-    if not Config.Item.Require then
-        return true
-    end
-
-    if Config.Item.Unique then
-        return HasPhoneNumber(source, number)
-    end
-
-    local hasItem
-
-    if Config.Item.Name then
-        hasItem = HasItem(source, Config.Item.Name)
-    elseif Config.Item.Names then
-        for i = 1, #Config.Item.Names do
-            if HasItem(source, Config.Item.Names[i].name) then
-                hasItem = true
-                break
-            end
-        end
-    end
-
-    if not hasItem then
-        return false
-    end
-
-    if not number then
-        return hasItem
-    end
-
-    return MySQL.scalar.await("SELECT 1 FROM phone_phones WHERE id=? AND phone_number=?", { GetIdentifier(source), number }) ~= nil
+    return xPlayer.getInventoryItem(itemName).count > 0
 end
 
 ---Register an item as usable
@@ -498,7 +462,7 @@ function GetJob(source)
 end
 
 function RefreshCompanies()
-    if ESX.JobsPlayerCount then
+    if ESX.JobsPlayerCount or ESX.GetNumPlayers then
         for i = 1, #Config.Companies.Services do
             local jobData = Config.Companies.Services[i]
             local jobKey = ("%s:count"):format(jobData.job)

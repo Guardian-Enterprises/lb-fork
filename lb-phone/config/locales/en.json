@@ -1228,7 +1228,10 @@
             "NEW_POSTS": "New Posts",
             "NEW_POST": "New Post",
             "PROTECTED_TWEETS_TITLE": "These posts are protected.",
-            "PROTECTED_TWEETS_DESCRIPTION": "Only confirmed followers have access to @{username}'s posts and complete profile. Tap the 'Follow' button to send a follow request."
+            "PROTECTED_TWEETS_DESCRIPTION": "Only confirmed followers have access to @{username}'s posts and complete profile. Tap the 'Follow' button to send a follow request.",
+            "INVALID_ACCOUNT": "Invalid account",
+            "INVALID_PASSWORD": "Invalid password",
+            "USERNAME_TAKEN": "Username is already taken"
         },
         "SERVICES": {
             "ACTIONS": "Actions",

@@ -84,6 +84,7 @@ CREATE TABLE IF NOT EXISTS `phone_notifications` (
     `thumbnail` VARCHAR(500) DEFAULT NULL,
     `avatar` VARCHAR(500) DEFAULT NULL,
     `show_avatar` BOOLEAN DEFAULT FALSE,
+    `custom_data` TEXT DEFAULT NULL,
 
     `timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 

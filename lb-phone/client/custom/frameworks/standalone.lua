@@ -22,7 +22,7 @@ end
 
 loaded = true
 
-function HasPhoneItem(number)
+function HasItem(number)
     local Ped = PlayerPedId()
     if GetEntityHealth(Ped) <= 101 then
         return false

@@ -53,9 +53,9 @@ end)
 debugprint("ESX loaded")
 loaded = true
 
-local phoneVariation
-
-local function HasItem(itemName)
+---@param itemName string
+---@return boolean
+function HasItem(itemName)
     if GetResourceState("ox_inventory") == "started" then
         return (exports.ox_inventory:Search("count", itemName) or 0) > 0
     elseif GetResourceState("qs-inventory") == "started" then
@@ -79,48 +79,6 @@ local function HasItem(itemName)
         local item = inventory[i]
 
         if item.name == itemName and item.count > 0 then
-            return true
-        end
-    end
-
-    return false
-end
-
----Check if the player has a phone
----@return boolean
-function HasPhoneItem(number)
-    if not Config.Item.Require then
-        return true
-    end
-
-    if Config.Item.Unique then
-        return HasPhoneNumber(number)
-    end
-
-    if Config.Item.Name then
-        return HasItem(Config.Item.Name)
-    end
-
-    if not phoneVariation then
-        local storedVariation = GetResourceKvpInt("phone_variation")
-
-        if storedVariation and Config.Item.Names[storedVariation] and HasItem(Config.Item.Names[storedVariation].name) then
-            phoneVariation = storedVariation
-            SetPhoneVariation(storedVariation)
-            return true
-        end
-    end
-
-    if phoneVariation and HasItem(Config.Item.Names[phoneVariation].name) then
-        return true
-    end
-
-    for i = 1, #Config.Item.Names do
-        local item = Config.Item.Names[i]
-
-        if HasItem(item.name) then
-            phoneVariation = i
-            SetPhoneVariation(i)
             return true
         end
     end
@@ -217,7 +175,7 @@ function GetCompanyData()
                     break
                 end
 
-                companyData.isBoss = contains(company.bossRanks, ESX.PlayerData.job.grade_name)
+                companyData.isBoss = table.contains(company.bossRanks, ESX.PlayerData.job.grade_name)
 
                 break
             end

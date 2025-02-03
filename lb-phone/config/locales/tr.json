@@ -520,29 +520,29 @@
             },
             "WITHDRAW_POPUP": {
                 "TITLE": "Para Çek",
-                "DESCRIPTION": "Şirket hesabından para çek",
-                "AMOUNT": "Tutar",
-                "CANCEL": "İptal",
+                 "DESCRIPTION": "Şirket hesabından para çek",
+                  "AMOUNT": "Tutar",
+                   "CANCEL": "İptal",
                 "PROCEED": "Onayla"
             },
             "HIRE_POPUP": {
                 "TITLE": "İşe Al",
-                "DESCRIPTION": "Yeni bir çalışan işe alın",
+                 "DESCRIPTION": "Yeni bir çalışan işe alın",
                 "PLACEHOLDER": "ID",
                 "CANCEL": "İptal",
                 "PROCEED": "Onayla"
             },
             "FIRE_POPUP": {
                 "TITLE": "Çalışan Kov",
-                "DESCRIPTION": "{name}'i kovmak istediğinizden emin misiniz?",
+                 "DESCRIPTION": "{name}'i kovmak istediğinizden emin misiniz?",
                 "PLACEHOLDER": "ID",
                 "İPTAL": "İptal",
                 "PROCEED": "Onayla"
             },
             "CALL_POPUP": {
                 "TITLE": "Çağrı",
-                "DESCRIPTION": "{name}'i aramak istediğinizden emin misiniz?",
-                "CANCEL": "İptal",
+                 "DESCRIPTION": "{name}'i aramak istediğinizden emin misiniz?",
+                  "CANCEL": "İptal",
                 "PROCEED": "Onayla"
             }
         },
@@ -555,15 +555,15 @@
             "SET_WAYPOINT": "İşaretle",
             "ADD_LOCATION_POPUP": {
                 "TITLE": "Konum Ekle",
-                "DESCRIPTION": "Eklemek istediğiniz konumun adını girin",
-                "PLACEHOLDER": "İsim",
+                 "DESCRIPTION": "Eklemek istediğiniz konumun adını girin",
+                "PLACEHOLDER": "İsim", 
                 "CANCEL": "İptal",
                 "PROCEED": "Onayla"
             },
             "CHANGE_NAME_POPUP": {
                 "TITLE": "Konum İsmini Değiştir",
                 "DESCRIPTION": "Konumun yeni adını girin",
-                "PLACEHOLDER": "İsim",
+                "PLACEHOLDER": "İsim", 
                 "CANCEL": "İptal",
                 "PROCEED": "Onayla"
             }
@@ -629,7 +629,7 @@
             }
         },
         "TINDER": {
-            "TITLE": "Spark",
+            "TITLE": "Tinder",
             "LIKES_YOU_TOO": "'da seni beğeniyor!",
             "KEEP_SWIPING": "Kaydırmaya devam et",
             "SAY_SOMETHING_NICE": "Güzel bir şey söyle",
@@ -664,7 +664,7 @@
             "SEARCH_MATCHES": "Eşleşme Ara"
         },
         "INSTAGRAM": {
-            "TITLE": "InstaPic",
+            "TITLE": "Instagram",
             "SEND": "Gönder",
             "POST": "Paylaş",
             "MESSAGE_PLACEHOLDER": "Mesaj...",
@@ -757,7 +757,7 @@
             "SEEN_BY": "{count} Kişi Gördü"
         },
         "TWITTER": {
-            "TITLE": "Birdy",
+            "TITLE": "Twitter",
             "SEARCH_FOR": "Ara: '{search}'",
             "START_SEARCHING": "Twitter'ı keşfetmek için aramaya başla",
             "TRENDING_HASHTAGS": "Trend hashtag'ler",
@@ -768,7 +768,7 @@
             "MEDIA": "Medya",
             "LIKES": "Beğeniler",
             "CANCEL": "İptal",
-            "TWEET": "Post",
+            "TWEET": "Tweet",
             "TWEET_REPLY": "Cevabını tweet at",
             "TWEET_GENERAL": "Neler oluyor?",
             "EDIT_PROFILE": "Profili Düzenle",
@@ -885,7 +885,7 @@
             "BUY_POPUP": {
                 "TITLE": "{coin} Satın Al",
                 "DESCRIPTION": "{coin} Miktarı ($ Cinsinden) giriniz.",
-                "PLACEHOLDER": "$1000",
+                "PLACEHOLDER": "$1000", 
                 "CANCEL": "İptal",
                 "PROCEED": "Satın Al"
             },
@@ -905,11 +905,13 @@
         }
     },
     "TIKTOK": {
-        "TITLE": "Trendy",
+        "TITLE": "TikTok",
+
         "HOME": "Anasayfa",
         "DISCOVER": "Keşfet",
         "INBOX": "Gelen Kutusu",
         "PROFILE": "Profil",
+    
         "COMMENTS_TITLE": "{count} yorum",
         "REPLY": "Yanıtla",
         "VIEW_REPLIES": "Yanıtları görüntüle",
@@ -929,6 +931,7 @@
         "OK": "Tamam",
         "CREATOR": "Oluşturan",
         "LIKED_BY_CREATOR": "Oluşturan tarafından beğenildi",
+    
         "PIN_VIDEO_POPUP": {
             "TITLE": "Videoyu Sabitle",
             "DESCRIPTION": "Bu videoyu {action}mek istediğinize emin misiniz?",
@@ -941,6 +944,7 @@
             "CANCEL": "İptal",
             "PROCEED": "Devam et"
         },
+    
         "SHARE_TITLE": "Paylaş",
         "SHARE": "Paylaş",
         "REPORT": "Şikayet Et",
@@ -948,6 +952,7 @@
         "ADD_FAVOURITE": "Favorilere Ekle",
         "CANCEL": "İptal",
         "GO_BACK": "Geri Dön",
+    
         "FOLLOWING": "Takip Ediliyor",
         "FOLLOWERS": "Takipçiler",
         "UNFOLLOW": "Takibi Bırak",
@@ -955,32 +960,37 @@
         "FOR_YOU": "Sana Özel",
         "VIDEOS": "Videolar",
         "LIKES": "Beğeniler",
+    
         "UNFOLLOW_POPUP": {
             "TITLE": "Takibi Bırak",
             "DESCRIPTION": "{name}'ı takip etmeyi bırakmak istediğinize emin misiniz?",
             "CANCEL": "İptal",
             "PROCEED": "Devam et"
         },
+
         "LOGIN_TITLE": "TikTok'a Giriş Yapın",
         "LOGIN_SUBTITLE": "Hesabınızı yönetin, bildirimleri kontrol edin, videolara yorum yapın ve daha fazlasını yapın.",
         "SIGNUP_TITLE": "TikTok'a Kaydolun",
-        "SIGNUP_SUBTITLE": "Profil oluşturun",
+        "SIGNUP_SUBTITLE": "Profil oluşturun",    
         "NAME": "Ad",
         "USERNAME": "Kullanıcı Adı",
         "PASSWORD": "Parola",
         "BIO": "Hakkında",
         "SHOW_LIKES": "Beğenileri Göster",
+    
         "LOGIN": "Giriş Yap",
         "SIGNUP": "Kaydol",
         "NO_ACCOUNT": "Hesabınız yok mu?",
         "ALREADY_ACCOUNT": "Zaten bir hesabınız var mı?",
         "SEARCH_PLACEHOLDER": "Kullanıcı ara",
+    
         "STARTED_FOLLOWING": "sizi takip etmeye başladı.",
         "LIKED_VIDEO": "videonuzu beğendi.",
         "LIKED_COMMENT": "yorumunuzu beğendi.",
         "SAVED_VIDEO": "videonuzu Favorilerine ekledi.",
         "COMMENTED": "yorum yaptı: {comment}",
         "REPLIED": "yorumunuza yanıt verdi: {comment}",
+    
         "EDIT_PROFILE": "Profili Düzenle",
         "MESSAGE": "Mesaj",
         "CHANGE_PHOTO": "Fotoğrafı Değiştir",
@@ -988,6 +998,7 @@
         "ADD_TO_YOUR_PROFILE": "Profilinize ekle",
         "LIKED_HIDDEN_TITLE": "Bu kullanıcının beğendiği videolar gizli.",
         "LIKED_HIDDEN_SUBTITLE": "{name} tarafından beğenilen videolar şu anda gizli.",
+    
         "INVALID_ACCOUNT_POPUP": {
             "TITLE": "Geçersiz {name}",
             "DESCRIPTION": "Girdiğiniz {name} hesabına giriş yapmamışsınız, lütfen düzeltin.",
@@ -1001,6 +1012,7 @@
         },
         "ADD_ACCOUNT_TITLE": "Hesap ekle",
         "ADD_ACCOUNT": "Profilinize {name} ekle",
+      
         "UPLOAD_VIDEO": "Video Yükle",
         "PREVIEW": "Önizleme",
         "CAPTION": "Açıklama",
@@ -1010,6 +1022,7 @@
         "MUSIC": "Müzik",
         "SELECT_MUSIC": "Müzik Seç",
         "OPTIONAL": "İsteğe bağlı",
+
         "DIRECT_MESSAGES": "Doğrudan Mesajlar",
         "ALL_ACTIVITY": "Tüm Aktiviteler",
         "NO_NOTIFICATIONS": "Bildirimler mevcut değil",

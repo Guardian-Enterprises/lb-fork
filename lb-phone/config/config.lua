@@ -5,6 +5,25 @@ Config.DatabaseChecker = {}
 Config.DatabaseChecker.Enabled = true -- if true, the phone will check the database for any issues and fix them if possible
 Config.DatabaseChecker.AutoFix = true
 
+Config.Logs = {}
+Config.Logs.Enabled = true
+Config.Logs.Service = "discord" -- fivemanage, discord or ox_lib. if discord, set your webhook in server/apiKeys.lua
+Config.Logs.Actions = {
+    Calls = true,
+    Messages = true,
+    InstaPic = true,
+    Birdy = true,
+    YellowPages = true,
+    Marketplace = true,
+    Mail = true,
+    Wallet = true,
+    DarkChat = true,
+    Services = true,
+    Crypto = true,
+    Trendy = true,
+    Uploads = true
+}
+
 --[[ FRAMEWORK OPTIONS ]] --
 Config.Framework = "standalone"
 --[[
