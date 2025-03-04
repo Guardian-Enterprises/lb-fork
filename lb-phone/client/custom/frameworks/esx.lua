@@ -39,7 +39,15 @@ while not ESX.PlayerLoaded do
 end
 
 RegisterNetEvent("esx:setJob", function(job)
+    local oldJob = ESX.PlayerData.job
+
     ESX.PlayerData.job = job
+
+    if oldJob.name ~= job.name or oldJob.grade ~= job.grade then
+        SendReactMessage("services:setCompany", GetCompanyData())
+    else
+        SendReactMessage("services:setDuty", job.onDuty)
+    end
 end)
 
 RegisterNetEvent("esx:setAccountMoney", function(account)

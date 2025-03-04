@@ -14,7 +14,7 @@ local function IsVehicleOut(plate, vehicles)
 
     for i = 1, #vehicles do
         local vehicle = vehicles[i]
-        if DoesEntityExist(vehicle) and GetVehicleNumberPlateText(vehicle):gsub("%s+", "") == plate:gsub("%s+", "") then
+        if DoesEntityExist(vehicle) and GetVehicleNumberPlateText(vehicle):gsub("%s+", "") == plate:gsub("%s+", "") and not exports["guardian-garages"]:Signal(plate) then
             return true, vehicle
         end
     end

@@ -22,7 +22,7 @@ end
 
 loaded = true
 
-function HasItem(number)
+function HasItem()
     local Ped = PlayerPedId()
     if GetEntityHealth(Ped) <= 101 then
         return false

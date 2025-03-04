@@ -64,8 +64,24 @@ local function GetAvatar(source)
     return avatar or ("https://cdn.discordapp.com/embed/avatars/" .. math.random(0, 5) .. ".png")
 end
 
+---Get the current timestamp in ISO 8601 format
+---@return string?
 function GetTimestampISO()
-    return os.date("!%Y-%m-%dT%H:%M:%S.000Z")
+    local timestamp = os.date("!%Y-%m-%dT%H:%M:%S.000Z") --[[@as string]]
+
+    -- This is needed for newer FiveM artifacts
+    if #timestamp < 24 then
+        return
+    elseif #timestamp > 24 then
+        timestamp = timestamp:sub(1, 24)
+    end
+
+    if not timestamp:match("%d%d%d%d%-%d%d%-%d%dT%d%d%:%d%d%:%d%d%.%d%d%dZ") then
+        debugprint("Invalid timestamp")
+        return
+    end
+
+    return timestamp
 end
 
 ---@param source? number
@@ -145,14 +161,14 @@ local function LogToDiscord(source, action, level, title, metadata, image)
             icon_url = GetAvatar(source)
 		},
 		footer = {
-			text = "LB Tablet",
+			text = "LB Phone",
 			icon_url = "https://docs.lbscripts.com/images/icons/icon.png"
 		}
 	}
 
     ---@diagnostic disable-next-line: param-type-mismatch
 	PerformHttpRequest(LOGS[action], function() end, "POST", json.encode({
-		username = "LB Tablet",
+		username = "LB Phone",
         avatar_url = "https://docs.lbscripts.com/images/icons/icon.png",
 		embeds = { embed }
 	}), { ["Content-Type"] = "application/json" })

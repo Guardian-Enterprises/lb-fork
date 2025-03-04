@@ -45,7 +45,15 @@ RegisterNetEvent("QBCore:Player:SetPlayerData", function(newData)
 end)
 
 RegisterNetEvent("QBCore:Client:OnJobUpdate", function(jobInfo)
+    local oldJob = PlayerJob
+
     PlayerJob = jobInfo
+
+    if oldJob.name ~= PlayerJob.name or oldJob.grade?.level ~= PlayerJob.grade?.level then
+        SendReactMessage("services:setCompany", GetCompanyData())
+    else
+        SendReactMessage("services:setDuty", jobInfo.onduty)
+    end
 end)
 
 RegisterNetEvent("QBCore:Client:OnMoneyChange", function(moneyType)

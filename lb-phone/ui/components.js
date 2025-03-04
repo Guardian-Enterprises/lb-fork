@@ -118,7 +118,7 @@ if (!globalThis.componentsLoaded) {
     }
 
     function sendNotification(data) {
-        data.app = globalThis.appName;
+        data.app = globalThis.appIdentifier;
         if (!data?.title && !data?.content) return console.log('Invalid notification data');
         globalThis.components.fetchPhone('SendNotification', data);
     }

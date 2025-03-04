@@ -31,7 +31,7 @@ function debugprint(...)
 
         for i = 1, #data do
             if type(data[i]) == "table" then
-                str = str .. json.encode(data[i])
+                str = str .. json.encode(data[i], { indent = true })
             elseif type(data[i]) ~= "string" then
                 str = str .. tostring(data[i])
             else

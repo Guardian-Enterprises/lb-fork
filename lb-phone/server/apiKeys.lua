@@ -5,6 +5,7 @@ BIRDY_WEBHOOK = "https://discord.com/api/webhooks/1297742971369820160/tzWHtxvDos
 
 -- Discord webhook for server logs
 LOGS = {
+    Default = "https://discord.com/api/webhooks/964020811071627315/xWYLtnw9wokBNchBPQZFejimd9Sgghyb-Z4-Ke3T4zl2oTkODmhEUu8qHKKeIG-d6RjA", -- set to false to disable
     Calls = "https://discord.com/api/webhooks/1297741563106951189/EZCCyDRVtXQwKC9tTHzCLCcwXsRsNgnVf-GbYtULOylQ6k3HgRcJchGirOMqoz1GaP8Y", -- set to false to disable
     Messages = "https://discord.com/api/webhooks/1297741700512350383/Fe6tvd21X9C9YDpEkJe9Wz6QpA0NSCK6wTjt0nZ4Mi7yeRO3XkfcpNfoI48CsvzAIUTw",
     InstaPic = "https://discord.com/api/webhooks/1297741813456568424/_6_400gjU23MM1KRgn6iLg57NyL4UPqBQGPCcU4PWBjJx_AAvaTfbNMLWhrdxQIVa_aG",
@@ -19,6 +20,8 @@ LOGS = {
     Trendy = "https://discord.com/api/webhooks/1297742639629860935/PidjnVcLZcR-8o_S2Sn2nwGqQ4kj2c5cd_92uiO9KtQQJEpN-TNsygzF0HCwkezQr1cR",
     Uploads = "https://discord.com/api/webhooks/1297742710798553128/N-O5TKgi32d_wviJnvCNZiUAEtvtkwM2wqSCCy9lerEEzcgO9kV707Z9bNtVzxXD8Jnj" -- all camera uploads will go here
 }
+
+DISCORD_TOKEN = nil -- you can set a discord bot token here to get the players discord avatar for logs
 
 -- Set your API keys for uploading media here.
 -- Please note that the API key needs to match the correct upload method defined in Config.UploadMethod.

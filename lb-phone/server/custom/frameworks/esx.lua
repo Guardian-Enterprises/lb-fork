@@ -74,8 +74,10 @@ function GetEmployees(job)
         local xPlayers = ESX.GetExtendedPlayers("job", job)
 
         for _, xPlayer in pairs(xPlayers) do
-            employeesCount += 1
-            employees[employeesCount] = xPlayer.source
+            if xPlayer.job.onDuty == true or xPlayer.job.onDuty == nil then
+                employeesCount += 1
+                employees[employeesCount] = xPlayer.source
+            end
         end
     else
         infoprint("warning", "You are running an extremely old version of ESX. The script will still work, but you should consider updating. (you can remove this warning in server/custom/frameworks/esx.lua)")

@@ -1,10 +1,6 @@
 Config = {}
 Config.Debug = false -- Set to true to enable debug mode
 
-Config.DatabaseChecker = {}
-Config.DatabaseChecker.Enabled = true -- if true, the phone will check the database for any issues and fix them if possible
-Config.DatabaseChecker.AutoFix = true
-
 Config.Logs = {}
 Config.Logs.Enabled = true
 Config.Logs.Service = "discord" -- fivemanage, discord or ox_lib. if discord, set your webhook in server/apiKeys.lua
@@ -24,6 +20,10 @@ Config.Logs.Actions = {
     Uploads = true
 }
 
+Config.DatabaseChecker = {}
+Config.DatabaseChecker.Enabled = true -- if true, the phone will check the database for any issues and fix them if possible
+Config.DatabaseChecker.AutoFix = true
+
 --[[ FRAMEWORK OPTIONS ]] --
 Config.Framework = "standalone"
 --[[
@@ -41,7 +41,8 @@ Config.QBMailEvent = false -- if you want this script to listen for qb email eve
 Config.QBOldJobMethod = false -- use the old method to check job in qb-core? this is slower, and only needed if you use an outdated version of qb-core.
 
 Config.Item = {}
-Config.Item.Require = true -- require a phone item to use the phone
+-- If you want to set up multiple items & frame colours, see https://docs.lbscripts.com/phone/configuration/#multiple-items--colored-phones
+Config.Item.Require = false -- require a phone item to use the phone
 Config.Item.Name = "cellphone" -- name of the phone item
 
 Config.Item.Unique = false -- should each phone be unique? https://docs.lbscripts.com/phone/configuration/#unique-phones
@@ -69,8 +70,8 @@ Config.DisableOpenNUI = true -- disable the phone from opening if another script
 Config.DynamicIsland = true -- if enabled, the phone will have a Iphone 14 Pro inspired Dynamic Island.
 Config.SetupScreen = true -- if enabled, the phone will have a setup screen when the player first uses the phone.
 
-Config.AutoDeleteNotifications = false -- notifications that are more than X hours old, will be deleted. set to false to disable. if set to true, it will delete 1 week old notifications.
-Config.MaxNotifications = 100 -- the maximum amount of notifications a player can have. if they have more than this, the oldest notifications will be deleted. set to false to disable
+Config.AutoDeleteNotifications = true -- notifications that are more than X hours old, will be deleted. set to false to disable. if set to true, it will delete 1 week old notifications.
+Config.MaxNotifications = 50 -- the maximum amount of notifications a player can have. if they have more than this, the oldest notifications will be deleted. set to false to disable
 Config.DisabledNotifications = { -- an array of apps that should not send notifications, note that you should use the app identifier, found in config.json
     -- "DarkChat",
 }
@@ -102,11 +103,11 @@ Config.DeleteAccount = {
 
 Config.Companies = {}
 Config.Companies.Enabled = false -- allow players to call companies?
-Config.Companies.MessageOffline = true -- if true, players can message companies even if no one in the company is online
+Config.Companies.MessageOffline = false -- if true, players can message companies even if no one in the company is online
 Config.Companies.DefaultCallsDisabled = false -- should receiving company calls be disabled by default?
 Config.Companies.AllowAnonymous = false -- allow players to call companies with "hide caller id" enabled?
 Config.Companies.SeeEmployees = "everyone" -- who should be able to see employees? they will see name, online status & phone number. options are: "everyone", "employees" or "none"
-Config.Companies.DeleteConversations = true -- allow employees to delete conversations?
+Config.Companies.DeleteConversations = false -- allow employees to delete conversations?
 Config.Companies.Services = {}
 
 Config.Companies.Contacts = { -- not needed if you use the services app, this will add the contact to the contacts app
@@ -138,7 +139,7 @@ Config.Valet.Drive = true -- should a ped bring the car, or should it just spawn
 Config.Valet.DisableDamages = false -- disable vehicle damages (engine & body health) on esx
 Config.Valet.FixTakeOut = false -- repair the vehicle after taking it out?
 
-Config.HouseScript = "guardian-houses" --[[
+Config.HouseScript = "guardian" --[[
     The housing script you use on your server
     Supported:
         * loaf_housing - https://store.loaf-scripts.com/package/4310850
@@ -270,7 +271,15 @@ Config.Locales = { -- If your desired language isn't here, you may contribute at
     {
         locale = "ba",
         name = "Bosanski"
-    }
+    },
+    {
+        locale = "zh-cn",
+        name = "简体中文 (Chinese Simplified)"
+    },
+    {
+        locale = "ro",
+        name = "Romana"
+    },
 }
 
 Config.DefaultLocale = "pt-br"
@@ -312,6 +321,7 @@ Config.CustomTime = false -- NOTE: disable Config.RealTime if using this. you ca
 Config.EmailDomain = "r2rp.com"
 Config.AutoCreateEmail = false -- should the phone automatically create an email for the player when they set up the phone?
 Config.DeleteMail = true -- allow players to delete mails in the mail app?
+Config.ConvertMailToMarkdown = false -- convert mails from html to markdown?
 
 Config.DeleteMessages = true -- allow players to delete messages in the messages app?
 
@@ -320,7 +330,7 @@ Config.EndLiveClose = false -- should InstaPic live end when you close the phone
 
 Config.AllowExternal = { -- allow people to upload external images? (note: this means they can upload nsfw / gore etc)
     Gallery = true, -- allow importing external links to the gallery?
-    Birdy = true, -- set to true to enable external images on that specific app, set to false to disable it.
+    Birdy = true, -- set to true to enable external images on that specific app, set to true to disable it.
     InstaPic = true,
     Spark = true,
     Trendy = true,
@@ -402,12 +412,18 @@ Config.BirdyTrending = {}
 Config.BirdyTrending.Enabled = true -- show trending hashtags?
 Config.BirdyTrending.Reset = 7 * 24 -- How often should trending hashtags be reset on birdy? (in hours)
 
-Config.BirdyNotifications = false -- should everyone get a notification when someone posts?
+Config.BirdyNotifications = false -- should everyone get a notification when someone posts? (if set to false, only followers will get a notification)
+Config.InstaPicLiveNotifications = false -- should everyone get a notification when someone goes live on InstaPic? (if set to false, only followers will get a notification)
 
 Config.PromoteBirdy = {}
 Config.PromoteBirdy.Enabled = true -- should you be able to promote post?
 Config.PromoteBirdy.Cost = 2500 -- how much does it cost to promote a post?
 Config.PromoteBirdy.Views = 100 -- how many views does a promoted post get?
+
+Config.UsernameFilter = {
+    Regex = "[a-zA-Z0-9]+", -- This regex is used to clean up usernames in mentions & account creation
+    LuaPattern = "^[%w]+$", -- This pattern is used to ensure the username doesn't contain any special characters when creating an account
+}
 
 Config.TrendyTTS = {
     {"English (US) - Female", "en_us_001"},
@@ -478,6 +494,9 @@ Config.Crypto.Coins = {"bitcoin","ethereum","tether","binancecoin","usd-coin","r
 Config.Crypto.Currency = "usd" -- currency to use for crypto prices. https://api.coingecko.com/api/v3/simple/supported_vs_currencies
 Config.Crypto.Refresh = 5 * 60 * 1000 -- how often should the crypto prices be refreshed (client cache)? (Default 5 minutes)
 Config.Crypto.QBit = true -- support QBit? (requires qb-crypto & qb-core)
+Config.Crypto.Limits = {}
+Config.Crypto.Limits.Buy = 1000000 -- how much ($) you can buy for at once
+Config.Crypto.Limits.Sell = 1000000 -- how much ($) you can sell at once
 
 Config.KeyBinds = {
     -- Find keybinds here: https://docs.fivem.net/docs/game-references/input-mapper-parameter-ids/keyboard/
@@ -489,7 +508,7 @@ Config.KeyBinds = {
     Focus = { -- keybind to toggle the mouse cursor.
         Command = "togglePhoneFocus",
         Bind = "LMENU",
-        Description = "Ativar cursor do celular"
+        Description = "Toggle cursor on your phone"
     },
     StopSounds = { -- in case the sound would bug out, you can use this command to stop all sounds.
         Command = "stopSounds",

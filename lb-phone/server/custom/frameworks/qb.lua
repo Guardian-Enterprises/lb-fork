@@ -7,13 +7,21 @@ QB = exports["qb-core"]:GetCoreObject()
 debugprint("QB loaded")
 
 ---@param source number
----@return string|nil
+---@return string | nil
 function GetIdentifier(source)
-    return QB.Functions.GetPlayer(source)?.PlayerData.citizenid
+    local qPlayer = QB.Functions.GetPlayer(tonumber(source))
+
+    if not qPlayer?.PlayerData?.citizenid then
+        debugprint("GetIdentifier: Failed to get player for source:", source)
+        return
+    end
+
+    return qPlayer.PlayerData.citizenid
 end
 
 ---@param source number
 ---@param itemName string
+---@return boolean
 function HasItem(source, itemName)
     if GetResourceState("ox_inventory") == "started" then
         return (exports.ox_inventory:Search(source, "count", itemName) or 0) > 0
@@ -21,7 +29,12 @@ function HasItem(source, itemName)
         return (exports["qs-inventory"]:GetItemTotalAmount(source, itemName) or 0) > 0
     end
 
-    local qPlayer = QB.Functions.GetPlayer(source)
+    local qPlayer = QB.Functions.GetPlayer(tonumber(source))
+
+    if not qPlayer then
+        debugprint("HasItem: Failed to get player for source:", source)
+        return false
+    end
 
     return (qPlayer.Functions.GetItemByName(itemName)?.amount or 0) > 0
 end
@@ -38,8 +51,16 @@ end
 ---@return string # Firstname
 ---@return string # Lastname
 function GetCharacterName(source)
-    local ch = QB.Functions.GetPlayer(source).PlayerData.charinfo
-    return ch.firstname, ch.lastname
+    local qPlayer = QB.Functions.GetPlayer(tonumber(source))
+
+    if not qPlayer then
+        debugprint("GetCharacterName: Failed to get player for source:", source)
+        return GetPlayerName(source), ""
+    end
+
+    local characterInfo = qPlayer.PlayerData.charinfo
+
+    return characterInfo.firstname, characterInfo.lastname
 end
 
 ---Get an array of player sources with a specific job
@@ -78,7 +99,14 @@ end
 ---@param source any
 ---@return integer
 function GetBalance(source)
-    return QB.Functions.GetPlayer(source)?.Functions.GetMoney("bank") or 0
+    local qPlayer = QB.Functions.GetPlayer(tonumber(source))
+
+    if not qPlayer then
+        debugprint("GetBalance: Failed to get player for source:", source)
+        return 0
+    end
+
+    return qPlayer.Functions.GetMoney("bank") or 0
 end
 
 ---Add money to a player's bank account
@@ -86,7 +114,8 @@ end
 ---@param amount integer
 ---@return boolean
 function AddMoney(source, amount)
-    local qPlayer = QB.Functions.GetPlayer(source)
+    local qPlayer = QB.Functions.GetPlayer(tonumber(source))
+
     if not qPlayer or amount < 0 then
         return false
     end
@@ -117,7 +146,15 @@ function RemoveMoney(source, amount)
         return false
     end
 
-    QB.Functions.GetPlayer(source)?.Functions.RemoveMoney("bank", math.floor(amount + 0.5), "lb-phone")
+    local qPlayer = QB.Functions.GetPlayer(tonumber(source))
+
+    if not qPlayer then
+        debugprint("RemoveMoney: Failed to get player for source:", source)
+        return false
+    end
+
+    qPlayer.Functions.RemoveMoney("bank", math.floor(amount + 0.5), "lb-phone")
+
     return true
 end
 
@@ -330,7 +367,14 @@ end)
 ---@param source number
 ---@return string
 function GetJob(source)
-    return QB.Functions.GetPlayer(source)?.PlayerData.job.name or "unemployed"
+    local qPlayer = QB.Functions.GetPlayer(tonumber(source))
+
+    if not qPlayer then
+        debugprint("GetJob: Failed to get player for source:", source)
+        return "unemployed"
+    end
+
+    return qPlayer.PlayerData.job.name
 end
 
 local playerJobs = {}
@@ -622,12 +666,15 @@ end
 if Config.Crypto.QBit then
     RegisterLegacyCallback("crypto:getOtherQBitWallet", function(source, cb, otherNumber)
         local otherSrc = GetSourceFromNumber(otherNumber)
+
         if not otherSrc then
             return cb(false)
         end
 
-        local otherPlayer = QB.Functions.GetPlayer(otherSrc)
+        local otherPlayer = QB.Functions.GetPlayer(tonumber(otherSrc))
+
         if not otherPlayer then
+            debugprint("crypto:getOtherQBitWallet: Failed to get player for source:", otherSrc)
             return cb(false)
         end
 
