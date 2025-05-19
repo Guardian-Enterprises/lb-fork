@@ -132,7 +132,7 @@ function GetPlayerVehicles(source)
     local source = source
     local user_id = vRP.getUserId(source)
     if user_id then
-        local vehicles = exports["oxmysql"]:executeSync("SELECT * FROM player_vehicles WHERE user_id = ? AND work = 'false'",{ user_id })
+        local vehicles = exports["oxmysql"]:executeSync("SELECT * FROM player_vehicles WHERE user_id = ? AND work = 0",{ user_id })
 
         for k,v in pairs(vehicles) do
             local state = ""
