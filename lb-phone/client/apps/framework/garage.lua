@@ -74,11 +74,17 @@ local function BringCar(data, cb)
             local model = LoadModel(Config.Valet.Model)
 
             ped = CreatePedInsideVehicle(vehicle, 4, model, -1, true, false)
+
+            SetModelAsNoLongerNeeded(model)
+        end
+
+        if vehicle then
+            Entity(vehicle).state.plate = plate
         end
     end
 
-    if not vehicle or not DoesEntityExist(vehicle) or not ped or not DoesEntityExist(ped) then
-        debugprint("BringCar: vehicle/ped does not exist")
+    if not vehicle or not DoesEntityExist(vehicle) then
+        debugprint("BringCar: vehicle does not exist")
         return cb(false)
     end
 
@@ -88,6 +94,7 @@ local function BringCar(data, cb)
 
     SetEntityHeading(vehicle, heading)
 
+    GiveVehicleKey(vehicle, plate)
     SetVehicleNeedsToBeHotwired(vehicle, false)
     SetVehRadioStation(vehicle, "OFF")
     SetVehicleDirtLevel(vehicle, 0.0)
@@ -95,6 +102,11 @@ local function BringCar(data, cb)
     SetEntityAsMissionEntity(vehicle, true, true)
 
     cb(true)
+
+    if not ped or not DoesEntityExist(ped) then
+        debugprint("BringCar: ped does not exist")
+        return
+    end
 
     if not Config.Valet.Drive then
         return
@@ -117,11 +129,11 @@ local function BringCar(data, cb)
     SetBlipColour(blip, 5)
 
     BeginTextCommandSetBlipName("STRING")
-    AddTextComponentSubstringPlayerName("Valet")
+    AddTextComponentSubstringPlayerName(plate)
     EndTextCommandSetBlipName(blip)
 
     -- wait for the ped to arrive
-    while #(GetEntityCoords(ped) - GetEntityCoords(PlayerPedId())) > 10.0 do
+    while #(GetEntityCoords(vehicle) - GetEntityCoords(PlayerPedId())) > 10.0 do
         Wait(1000)
     end
 
@@ -157,11 +169,24 @@ local function FindCar(plate)
 end
 
 function GetVehicleLabel(model)
-    return vSERVER.getVehicleName(model)
+    local vehicleLabel = GetDisplayNameFromVehicleModel(model):lower()
+
+    if not vehicleLabel or vehicleLabel == "null" or vehicleLabel == "carnotfound" then
+        return "Unknown"
+    end
+
+    local text = GetLabelText(vehicleLabel)
+
+    if text and text:lower() ~= "null" then
+        vehicleLabel = text
+    end
+
+    return vehicleLabel
 end
 
 RegisterNUICallback("Garage", function(data, cb)
     local action = data.action
+
     debugprint("Garage:" .. (action or ""))
 
     if action == "getVehicles" then
@@ -169,7 +194,7 @@ RegisterNUICallback("Garage", function(data, cb)
 
         for i = 1, #cars do
             cars[i].model = GetVehicleLabel(cars[i].model)
-            --If you're implementing your own lock system, you can use this to set the locked state
+            -- If you're implementing your own lock system, you can use this to set the locked state
             -- cars[i].locked = true
         end
 

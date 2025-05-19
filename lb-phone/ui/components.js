@@ -22,13 +22,15 @@ if (!globalThis.componentsLoaded) {
         }
     };
 
-    function useNuiEvent(eventName, cb) {
+    function onNuiEvent(eventName, cb) {
         window.addEventListener('message', (event) => {
             if (event.data?.action === eventName) {
                 cb(event.data.data);
             }
         });
     }
+
+    globalThis.useNuiEvent = onNuiEvent;
 
     let currentPopUpInputCb = null;
 
@@ -131,6 +133,10 @@ if (!globalThis.componentsLoaded) {
         settingsListeners.push(cb);
     }
 
+    function removeSettingsChangeListener(cb) {
+        settingsListeners = settingsListeners.filter((listener) => listener !== cb);
+    }
+
     globalThis.addEventListener('message', (event) => {
         const data = event.data;
         const type = data.type;
@@ -150,6 +156,7 @@ if (!globalThis.componentsLoaded) {
 
     function refreshInputs(inputs) {
         inputs.forEach((input) => {
+            if (input.type === 'range') return;
             if (addedHandlers.includes(input)) return console.log('already added handler for', input);
 
             input.addEventListener('focus', () => toggleInput(true));

@@ -4,6 +4,7 @@ Config.Debug = false -- Set to true to enable debug mode
 Config.Logs = {}
 Config.Logs.Enabled = true
 Config.Logs.Service = "discord" -- fivemanage, discord or ox_lib. if discord, set your webhook in server/apiKeys.lua
+Config.Logs.Avatar = false -- attempt to get the player's avatar for discord logging?
 Config.Logs.Actions = {
     Calls = true,
     Messages = true,
@@ -36,14 +37,39 @@ Config.Framework = "standalone"
         * vrp2: vrp 2.0 (ONLY THE OFFICIAL vRP 2.0, NOT CUSTOM VERSIONS)
         * standalone: no framework. note that framework specific apps will not work unless you implement the functions
 ]]
-Config.CustomFramework = true -- if set to true and you use standalone, you will be able to use framework specific apps
+Config.CustomFramework = false -- if set to true and you use standalone, you will be able to use framework specific apps
 Config.QBMailEvent = false -- if you want this script to listen for qb email events, enable this.
 Config.QBOldJobMethod = false -- use the old method to check job in qb-core? this is slower, and only needed if you use an outdated version of qb-core.
 
 Config.Item = {}
 -- If you want to set up multiple items & frame colours, see https://docs.lbscripts.com/phone/configuration/#multiple-items--colored-phones
-Config.Item.Require = false -- require a phone item to use the phone
+Config.Item.Require = true -- require a phone item to use the phone
 Config.Item.Name = "cellphone" -- name of the phone item
+-- Config.Item.Names = {
+--     {
+--         name = "phone",
+--         model = `lb_phone_prop`,
+--         textureVariation = 0,
+--         rotation = vector3(0.0, 0.0, 180.0),
+--         offset = vector3(0.0, -0.005, 0.0)
+--     },
+--     {
+--         name = "phone_green",
+--         model = `prop_phone_cs_frank`,
+--         frameColor = "#3cff00",
+--         textureVariation = 0,
+--         rotation = vector3(0.0, 0.0, 0.0),
+--         offset = vector3(0.0, -0.005, 0.0)
+--     },
+--     {
+--         name = "phone_orange",
+--         model = `prop_phone_cs_frank`,
+--         frameColor = "#ffa142",
+--         textureVariation = 2,
+--         rotation = vector3(0.0, 0.0, 0.0),
+--         offset = vector3(0.0, -0.005, 0.0)
+--     }
+-- }
 
 Config.Item.Unique = false -- should each phone be unique? https://docs.lbscripts.com/phone/configuration/#unique-phones
 Config.Item.Inventory = "auto" --[[
@@ -70,18 +96,31 @@ Config.DisableOpenNUI = true -- disable the phone from opening if another script
 Config.DynamicIsland = true -- if enabled, the phone will have a Iphone 14 Pro inspired Dynamic Island.
 Config.SetupScreen = true -- if enabled, the phone will have a setup screen when the player first uses the phone.
 
+Config.AutoDisableSparkAccounts = true -- automatically disable inactive spark accounts? This can be set to the amount of days the account needs to be inactive to disable it, or true to disable after 7 days.
 Config.AutoDeleteNotifications = true -- notifications that are more than X hours old, will be deleted. set to false to disable. if set to true, it will delete 1 week old notifications.
 Config.MaxNotifications = 50 -- the maximum amount of notifications a player can have. if they have more than this, the oldest notifications will be deleted. set to false to disable
 Config.DisabledNotifications = { -- an array of apps that should not send notifications, note that you should use the app identifier, found in config.json
     -- "DarkChat",
 }
 
+--[[
+    Here you can whitelist/blacklist apps for certain jobs. There are two formats:
+
+    an array of jobs that are allowed/blacklisted
+    e.g.: { "police", "ambulance" }
+
+    a key-value pair of jobs that are allowed/blacklisted, where the key is the job name and the value is the minimum grade required to access the app
+    e.g.: { ["police"] = 1, ["ambulance"] = 1 }
+
+    The key is the app identifier. The default app identifiers can be found in config/config.json. For custom apps, ask the creator of the app.
+--]]
+
 Config.WhitelistApps = {
-    -- ["test-app"] = {"police", "ambulance"}
+    -- ["Weather"] = { "police", "ambulance" }
 }
 
 Config.BlacklistApps = {
-    -- ["DarkChat"] = {"police"}
+    -- ["Maps"] = { "police" }
 }
 
 Config.ChangePassword = {
@@ -103,13 +142,12 @@ Config.DeleteAccount = {
 
 Config.Companies = {}
 Config.Companies.Enabled = false -- allow players to call companies?
-Config.Companies.MessageOffline = false -- if true, players can message companies even if no one in the company is online
+Config.Companies.MessageOffline = true -- if true, players can message companies even if no one in the company is online
 Config.Companies.DefaultCallsDisabled = false -- should receiving company calls be disabled by default?
 Config.Companies.AllowAnonymous = false -- allow players to call companies with "hide caller id" enabled?
 Config.Companies.SeeEmployees = "everyone" -- who should be able to see employees? they will see name, online status & phone number. options are: "everyone", "employees" or "none"
-Config.Companies.DeleteConversations = false -- allow employees to delete conversations?
+Config.Companies.DeleteConversations = true -- allow employees to delete conversations?
 Config.Companies.Services = {}
-
 Config.Companies.Contacts = { -- not needed if you use the services app, this will add the contact to the contacts app
     -- ["police"] = {
     --     name = "Police",
@@ -118,7 +156,7 @@ Config.Companies.Contacts = { -- not needed if you use the services app, this wi
 }
 
 Config.Companies.Management = {
-    Enabled = true, -- if true, employees & the boss can manage the company
+    Enabled = false, -- if true, employees & the boss can manage the company
 
     Duty = true, -- if true, employees can go on/off duty
     -- Boss actions
@@ -133,13 +171,14 @@ Config.CustomApps = {} -- https://docs.lbscripts.com/phone/custom-apps/
 
 Config.Valet = {}
 Config.Valet.Enabled = false -- allow players to get their vehicles from the phone
+Config.Valet.VehicleTypes = { "car", "vehicle" }
 Config.Valet.Price = 100 -- price to get your vehicle
 Config.Valet.Model = `S_M_Y_XMech_01`
-Config.Valet.Drive = true -- should a ped bring the car, or should it just spawn in front of the player?
+Config.Valet.Drive = false -- should a ped bring the car, or should it just spawn in front of the player?
 Config.Valet.DisableDamages = false -- disable vehicle damages (engine & body health) on esx
 Config.Valet.FixTakeOut = false -- repair the vehicle after taking it out?
 
-Config.HouseScript = "guardian" --[[
+Config.HouseScript = "auto" --[[
     The housing script you use on your server
     Supported:
         * loaf_housing - https://store.loaf-scripts.com/package/4310850
@@ -284,6 +323,7 @@ Config.Locales = { -- If your desired language isn't here, you may contribute at
 
 Config.DefaultLocale = "pt-br"
 Config.DateLocale = "pt-BR" -- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat
+Config.DateFormat = "auto" -- auto: use the date format from the locale, or set a custom format (e.g. "DDDD, MMMM DD")
 
 Config.FrameColor = "#39334d" -- This is the color of the phone frame. Default (#39334d) is SILVER.
 Config.AllowFrameColorChange = true -- Allow players to change the color of their phone frame?
@@ -292,7 +332,7 @@ Config.PhoneNumber = {}
 Config.PhoneNumber.Format = "{3}-{3}" -- Don't touch unless you know what you're doing. IMPORTANT: The sum of the numbers needs to be equal to the phone number length + prefix length
 Config.PhoneNumber.Length = 6 -- This is the length of the phone number WITHOUT the prefix.
 Config.PhoneNumber.Prefixes = { -- These are the first numbers of the phone number, usually the area code. They all need to be the same length
-"",
+""
 }
 
 Config.Battery = {} -- WITH THESE SETTINGS, A FULL CHARGE WILL LAST AROUND 2 HOURS.
@@ -318,7 +358,7 @@ Config.CityName = "Los Santos" -- The name that's being used in the weather app 
 Config.RealTime = true -- if true, the time will use real life time depending on where the user lives, if false, the time will be the ingame time.
 Config.CustomTime = false -- NOTE: disable Config.RealTime if using this. you can set this to a function that returns custom time, as a table: { hour = 0-24, minute = 0-60 }
 
-Config.EmailDomain = "r2rp.com"
+Config.EmailDomain = "rua2rp.com"
 Config.AutoCreateEmail = false -- should the phone automatically create an email for the player when they set up the phone?
 Config.DeleteMail = true -- allow players to delete mails in the mail app?
 Config.ConvertMailToMarkdown = false -- convert mails from html to markdown?
@@ -329,16 +369,16 @@ Config.SyncFlash = true -- should flashlights be synced across all players? May 
 Config.EndLiveClose = false -- should InstaPic live end when you close the phone?
 
 Config.AllowExternal = { -- allow people to upload external images? (note: this means they can upload nsfw / gore etc)
-    Gallery = true, -- allow importing external links to the gallery?
-    Birdy = true, -- set to true to enable external images on that specific app, set to true to disable it.
-    InstaPic = true,
-    Spark = true,
-    Trendy = true,
-    Pages = true,
-    MarketPlace = true,
-    Mail = true,
-    Messages = true,
-    Other = true, -- other apps that don't have a specific setting (ex: setting a profile picture for a contact, backgrounds for the phone etc)
+    Gallery = false, -- allow importing external links to the gallery?
+    Birdy = false, -- set to true to enable external images on that specific app, set to false to disable it.
+    InstaPic = false,
+    Spark = false,
+    Trendy = false,
+    Pages = false,
+    MarketPlace = false,
+    Mail = false,
+    Messages = false,
+    Other = false, -- other apps that don't have a specific setting (ex: setting a profile picture for a contact, backgrounds for the phone etc)
 }
 
 -- Blacklisted domains for external images. You will not be able to upload from these domains.
@@ -356,6 +396,7 @@ Config.ExternalWhitelistedDomains = {
 -- Set to false/empty to disable
 Config.UploadWhitelistedDomains = { -- domains that are allowed to upload images to the phone (prevent using devtools to upload images)
     "fivemanage.com",
+    "fmfile.com",
     "cfx.re" -- lb-upload
 }
 
@@ -480,6 +521,12 @@ Config.TrendyTTS = {
     {"Singing - Dramatic", "en_female_ht_f08_wonderful_world"}
 }
 
+-- You can customize the function in lb-phone/server/custom/functions/webrtc.lua
+-- You can set your api key in lb-phone/server/apiKeys.lua
+Config.DynamicWebRTC = {}
+Config.DynamicWebRTC.Enabled = false -- enable dynamic WebRTC? (this will allow you to generate new WebRTC credentials for each user)
+Config.DynamicWebRTC.Service = "cloudflare" -- supported by default: cloudflare
+
 -- ICE Servers for WebRTC (ig live, live video). If you don't know what you're doing, leave this as it is.
 -- see https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/RTCPeerConnection
 -- Config.RTCConfig = {
@@ -489,7 +536,7 @@ Config.TrendyTTS = {
 -- }
 
 Config.Crypto = {}
-Config.Crypto.Enabled = false
+Config.Crypto.Enabled = true
 Config.Crypto.Coins = {"bitcoin","ethereum","tether","binancecoin","usd-coin","ripple","binance-usd","cardano","dogecoin","solana","shiba-inu","polkadot","litecoin","bitcoin-cash"}
 Config.Crypto.Currency = "usd" -- currency to use for crypto prices. https://api.coingecko.com/api/v3/simple/supported_vs_currencies
 Config.Crypto.Refresh = 5 * 60 * 1000 -- how often should the crypto prices be refreshed (client cache)? (Default 5 minutes)
@@ -502,8 +549,8 @@ Config.KeyBinds = {
     -- Find keybinds here: https://docs.fivem.net/docs/game-references/input-mapper-parameter-ids/keyboard/
     Open = { -- toggle the phone
         Command = "phone",
-        Bind = "K",
-        Description = "Abrir celular"
+        Bind = "F1",
+        Description = "Open your phone"
     },
     Focus = { -- keybind to toggle the mouse cursor.
         Command = "togglePhoneFocus",
@@ -577,6 +624,7 @@ Config.KeepInput = true -- keep input when nui is focused (meaning you can walk 
 
 --[[ PHOTO / VIDEO OPTIONS ]] --
 Config.Camera = {}
+Config.Camera.ShowTip = true -- show a tip in the top-left of key binds for the camera?
 Config.Camera.Enabled = true -- use a custom camera that allows you to walk around while taking photos?
 Config.Camera.Roll = true -- allow rolling the camera to the left & right?
 Config.Camera.AllowRunning = true

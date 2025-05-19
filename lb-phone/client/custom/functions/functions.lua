@@ -154,52 +154,89 @@ end
 
 exports("ReloadPhone", ReloadPhone)
 
-local phoneVariation
-
----Check if the player has a phone
----@return boolean
-function HasPhoneItem(number)
-    if not Config.Item.Require then
+---@param appIdentifier string
+---@param jobName? string
+---@param jobGrade? number
+function HasAccessToApp(appIdentifier, jobName, jobGrade)
+    if not GetJob then
+        debugprint("GetJob is not defined in framework functions")
         return true
     end
 
-    if Config.Item.Unique then
-        return HasPhoneNumber(number)
-    end
-
-    if Config.Item.Name then
-        return HasItem(Config.Item.Name)
-    end
-
-    if phoneVariation and HasItem(Config.Item.Names[phoneVariation].name) then
+    if not GetJobGrade then
+        debugprint("GetJobGrade is not defined in framework functions")
         return true
     end
 
-    if not phoneVariation then
-        local storedVariation = GetResourceKvpInt("phone_variation")
+    if not Config.WhitelistApps and not Config.BlacklistApps then
+        return true
+    end
 
-        if storedVariation and Config.Item.Names[storedVariation] and HasItem(Config.Item.Names[storedVariation].name) then
-            phoneVariation = storedVariation
+    jobName = jobName or GetJob()
+    jobGrade = jobGrade or GetJobGrade()
 
-            SetPhoneVariation(storedVariation)
+    local blacklistedJobs = Config.BlacklistApps and Config.BlacklistApps[appIdentifier]
 
-            return true
+    if blacklistedJobs then
+        if table.type(blacklistedJobs) == "array" then
+            if table.contains(blacklistedJobs, jobName) then
+                debugprint("Player's job is blacklisted from app", appIdentifier)
+                return false
+            end
+        else
+            if blacklistedJobs[jobName] and jobGrade >= blacklistedJobs[jobName] then
+                debugprint("Player's job is blacklisted from app", appIdentifier)
+                return false
+            end
         end
     end
 
-    for i = 1, #Config.Item.Names do
-        local item = Config.Item.Names[i]
+    local allowedJobs = Config.WhitelistApps and Config.WhitelistApps[appIdentifier]
 
-        if HasItem(item.name) then
-            phoneVariation = i
+    if allowedJobs then
+        if table.type(allowedJobs) == "array" then
+            if table.contains(allowedJobs, jobName) then
+                return true
+            end
 
-            SetPhoneVariation(i)
+            debugprint("Player is not whitelisted for app", appIdentifier)
+            return false
+        else
+            if allowedJobs[jobName] and jobGrade >= allowedJobs[jobName] then
+                return true
+            end
 
-            return true
+            debugprint("Player is not whitelisted for app", appIdentifier)
+            return false
         end
     end
 
-    return false
+    return true
 end
 
-exports("HasPhoneItem", HasPhoneItem)
+---@param vehicle number
+---@param plate string
+function GiveVehicleKey(vehicle, plate)
+    TriggerEvent("vehiclekeys:client:SetOwner", plate)
+end
+
+-- ---@param uploadType "Video" | "Image" | "Audio"
+-- ---@return UploadMethod?
+-- function CustomGetUploadMethod(uploadType)
+--     local methods = UploadMethods[Config.UploadMethod[uploadType]]
+
+--     if not methods then
+--         infoprint("error", "Upload methods not found for ", uploadType)
+--         return
+--     end
+
+--     ---@type UploadMethod?
+--     local method = methods[uploadType] or methods.Default
+
+--     if not method then
+--         infoprint("error", "Upload method not found for ", uploadType)
+--         return
+--     end
+
+--     return method
+-- end

@@ -14,7 +14,7 @@ local function IsVehicleOut(plate, vehicles)
 
     for i = 1, #vehicles do
         local vehicle = vehicles[i]
-        if DoesEntityExist(vehicle) and GetVehicleNumberPlateText(vehicle):gsub("%s+", "") == plate:gsub("%s+", "") and not exports["guardian-garages"]:Signal(plate) then
+        if DoesEntityExist(vehicle) and GetVehicleNumberPlateText(vehicle):gsub("%s+", "") == plate:gsub("%s+", "") then
             return true, vehicle
         end
     end
@@ -100,6 +100,8 @@ BaseCallback("garage:valetVehicle", function(source, phoneNumber, plate, coords,
     })
 
     if not Config.ServerSideSpawn then
+        GiveVehicleKey(source, plate)
+
         return vehicleData
     end
 
@@ -127,6 +129,10 @@ BaseCallback("garage:valetVehicle", function(source, phoneNumber, plate, coords,
 
         vehicleData.pedNetId = NetworkGetNetworkIdFromEntity(ped)
     end
+
+    Entity(vehicle).state.plate = plate
+
+    GiveVehicleKey(source, plate, vehicle)
 
     return vehicleData
 end)
